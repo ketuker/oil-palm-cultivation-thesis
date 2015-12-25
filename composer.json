@@ -19,7 +19,7 @@
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
-	"dektrium/yii2-rbac": "*"
+        "dektrium/yii2-rbac": "v0.2.0"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
