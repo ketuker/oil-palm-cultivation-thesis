@@ -5,7 +5,7 @@ $params = require(__DIR__ . '/params.php');
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    //'bootstrap' => ['log'],
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -14,9 +14,9 @@ $config = [
             'cost' => 12,
             'admins' => ['ketuker']
         ],
-        'rbac' => [
+        /*'rbac' => [
             'class' => 'dektrium\rbac\Module',
-        ],
+        ],*/
     ],
     'components' => [
         'request' => [

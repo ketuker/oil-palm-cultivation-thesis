@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0c55a3f887343f551befadcf792aa43a",
-    "content-hash": "c6201bb7ebea7b95352701c07f103511",
+    "hash": "6ff18e8d77f8f61285e13edfea405317",
+    "content-hash": "cb90511cbd09df687aa832ba82526e35",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -503,16 +503,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.0.4",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "ffc59cef18864d773c79f3b2da2f34c948ff5648"
+                "reference": "f8475c5b895726e082a1614993c1aff64f77e367"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/ffc59cef18864d773c79f3b2da2f34c948ff5648",
-                "reference": "ffc59cef18864d773c79f3b2da2f34c948ff5648",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/f8475c5b895726e082a1614993c1aff64f77e367",
+                "reference": "f8475c5b895726e082a1614993c1aff64f77e367",
                 "shasum": ""
             },
             "require": {
@@ -547,7 +547,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-12-16 19:38:06"
+            "time": "2015-12-22 17:42:57"
         },
         {
             "name": "swiftmailer/swiftmailer",
