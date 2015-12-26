@@ -1,8 +1,8 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @link http://www.-.com/
+ * @copyright Copyright (c) 2015 MIT
+ * @license http://www.-.com/license/
  */
 
 namespace app\widgets;
@@ -12,14 +12,14 @@ use yii\web\View;
 use app\widgets\AssetBundle;
 
 /**
- * KetukerIntersects
+ * KetukerMap
  *  :
  *
  * How to use:
- * <?= app\widget\KetukerIntersects::widget();?>
+ * <?= app\widgets\KetukerMap::widget();?>
  *
  * or Call with assign params
- * <?= app\widget\KetukerIntersects::widget([
+ * <?= app\widgets\KetukerMap::widget([
  *      'options' => [
  *          'library-js' => 'leaflet',
  *          'width' => '100',

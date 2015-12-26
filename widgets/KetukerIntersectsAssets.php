@@ -15,30 +15,32 @@ class KetukerIntersectsAssets extends AssetBundle
         $this->setSourcePath('@app/widgets/assets');
 
         $this->setupAssets('css', [
-            'css/MapCanvas/leaflet',
-            'css/MapCanvas/L.Control.OpenCageData.Search.min',
-            'css/MapCanvas/easyPrint',
-            'css/MapCanvas/leaflet.fullscreen',
-            'css/MapCanvas/opencage',
-            'css/MapCanvas/minimap',
-            'css/MapCanvas/measure',
+            'css/Map/leaflet',
+            'css/Map/L.Control.OpenCageData.Search.min',
+            'css/Map/easyPrint',
+            'css/Map/leaflet.fullscreen',
+            'css/Map/opencage',
+            'css/Map/minimap',
+            'css/Map/measure',
+            'css/Intersects/leaflet.draw',
             //'css/MarkerCluster',
             //'css/MarkerCluster.Default'
             //'css/sidebar',
         ]);
 
         $this->setupAssets('js', [
-            'js/MapCanvas/leaflet',
-            'js/MapCanvas/leaflet-src',
-            'js/MapCanvas/Leaflet-fullscreen',
-            'js/MapCanvas/geocoder',
-            'js/MapCanvas/geocoder.min',
-            'js/MapCanvas/jQuery.print',
-            'js/MapCanvas/leaflet.easyPrint',
-            'js/MapCanvas/utf',
-            'js/MapCanvas/minimap',
-            'js/MapCanvas/measure',
-            'js/MapCanvas/base',
+            'js/Map/leaflet',
+            'js/Map/leaflet-src',
+            'js/Map/Leaflet-fullscreen',
+            'js/Map/geocoder',
+            'js/Map/geocoder.min',
+            'js/Map/jQuery.print',
+            'js/Map/leaflet.easyPrint',
+            'js/Map/utf',
+            'js/Map/minimap',
+            'js/Map/measure',
+            'js/Intersects/leaflet.draw',
+            'js/Intersects/base',
         ]);
 
         parent::init();
