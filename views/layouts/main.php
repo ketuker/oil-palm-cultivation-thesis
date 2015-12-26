@@ -47,7 +47,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Dashboard', 'url' => ['/dashboard/index']];
         $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                'url' => ['/'.$this->context->module->id.'/site/logout'],
+                'url' => ['site/logout'],
                 'linkOptions' => ['data-method' => 'post']
         ];
     }
