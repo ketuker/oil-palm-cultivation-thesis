@@ -32,6 +32,7 @@ class Compare extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['title', 'geom'], 'required'],
             [['title', 'description', 'data', 'geom'], 'string'],
             [['dates'], 'safe'],
             [['id_user'], 'integer'],

@@ -65,11 +65,13 @@ class KetukerIntersects extends \yii\base\Widget
         $zoom               = $this->options['setZoom'];
         $lat                = $setView[0];
         $lon                = $setView[1];
+        $column             = $this->options['column'];
 
         $options ="
-            var KetukerIntersects_lat   = $lat;
-            var KetukerIntersects_lon   = $lon;
-            var KetukerIntersects_zoom  = $zoom;
+            var KetukerIntersects_lat       = $lat;
+            var KetukerIntersects_lon       = $lon;
+            var KetukerIntersects_zoom      = $zoom;
+            var KetukerIntersects_column    = '$column';
         ";
 
         $view = $this->getView();
