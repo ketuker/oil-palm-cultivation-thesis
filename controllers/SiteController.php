@@ -101,4 +101,8 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    public function actionChart()
+    {
+        return $this->render('chart');
+    }
 }
