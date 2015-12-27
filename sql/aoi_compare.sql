@@ -22,11 +22,11 @@ CREATE TABLE aoi_compare (
     id bigint NOT NULL,
     title character varying,
     description character varying,
-    dates timestamp with time zone,
+    dates timestamp with time zone DEFAULT now(),
     id_user integer,
     data text,
     st_area double precision,
-    geom geometry(MultiPolygon,4326)
+    geom geometry(Polygon,4326)
 );
 
 

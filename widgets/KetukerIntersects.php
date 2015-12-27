@@ -1,8 +1,8 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * @link http://www.-.com/
+ * @copyright Copyright (c) 2015 MIT
+ * @license http://www.-.com/license/
  */
 
 namespace app\widgets;
@@ -16,10 +16,10 @@ use app\widgets\AssetBundle;
  *  :
  *
  * How to use:
- * <?= app\widget\KetukerIntersects::widget();?>
+ * <?= app\widgets\KetukerIntersects::widget();?>
  *
  * or Call with assign params
- * <?= app\widget\KetukerIntersects::widget([
+ * <?= app\widgets\KetukerIntersects::widget([
  *      'options' => [
  *          'library-js' => 'leaflet',
  *          'width' => '100',
@@ -46,8 +46,6 @@ class KetukerIntersects extends \yii\base\Widget
         }
         echo "<div id='map' style='width: ".$this->options['width']."%; height: ".$this->options['height']."px;'></div>";
 
-        echo " /* Widgets KetukerIntersects */ ";
-
     }
 
     public function init()
@@ -67,11 +65,13 @@ class KetukerIntersects extends \yii\base\Widget
         $zoom               = $this->options['setZoom'];
         $lat                = $setView[0];
         $lon                = $setView[1];
+        $column             = $this->options['column'];
 
         $options ="
-            var KetukerIntersects_lat   = $lat;
-            var KetukerIntersects_lon   = $lon;
-            var KetukerIntersects_zoom  = $zoom;
+            var KetukerIntersects_lat       = $lat;
+            var KetukerIntersects_lon       = $lon;
+            var KetukerIntersects_zoom      = $zoom;
+            var KetukerIntersects_column    = '$column';
         ";
 
         $view = $this->getView();
