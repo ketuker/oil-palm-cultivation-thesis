@@ -49,8 +49,15 @@ class CompareController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
+        $query_geom_to_geojson          = "SELECT ST_ASGEOJSON('".$model->geom."')";
+        $query_geom_to_geojson_values   = Yii::$app->db->createCommand($query_geom_to_geojson)->queryColumn();
+        $query_geom_to_geojson_value    = $query_geom_to_geojson_values[0];
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'query_geom_to_geojson_value' => $query_geom_to_geojson_value
         ]);
     }
 
