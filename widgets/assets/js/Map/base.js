@@ -51,4 +51,21 @@
 
         var miniMap = new L.Control.MiniMap(esriMap).addTo(map);
 
-        L.control.scale().addTo(map);
+        //L.control.scale().addTo(map);
+        
+        var graphicScale = L.control.graphicScale({
+            doubleLine: true,
+            fill: 'hollow',
+            showSubunits: true
+        }).addTo(map);
+
+        var scaleText = L.DomUtil.create('div', 'scaleText' );
+        graphicScale._container.insertBefore(scaleText, graphicScale._container.firstChild);
+
+        var styleChoices = scaleText.querySelectorAll('.choice');
+
+        for (var i = 0; i < styleChoices.length; i++) {
+            styleChoices[i].addEventListener('click', function(e) {
+                graphicScale._setStyle( { fill: e.currentTarget.innerHTML } );
+            });
+        }
