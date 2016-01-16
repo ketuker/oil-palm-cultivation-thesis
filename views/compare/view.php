@@ -22,11 +22,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'dates',
             'id_user',
-            //'data:ntext',
+            'data:ntext',
             'st_area',
             //'geom',
         ],
     ]) ?>
+
+    <?= app\widgets\KetukerChart::widget([
+        'options' => [
+            'data' => $data_chart
+        ]
+    ]);?>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

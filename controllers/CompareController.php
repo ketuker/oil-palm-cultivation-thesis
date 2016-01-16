@@ -55,8 +55,28 @@ class CompareController extends Controller
         $query_geom_to_geojson_values   = Yii::$app->db->createCommand($query_geom_to_geojson)->queryColumn();
         $query_geom_to_geojson_value    = $query_geom_to_geojson_values[0];
 
+        $datas_json                     = json_decode($model->data, TRUE);
+        $datas                          = $datas_json['features'];
+        
+        $data_chart                     = '';
+        $data_chart                     .= '[';
+        for ($i=0; $i < count($datas); $i++) { 
+            if ($i === (count($datas) - 1 )) {
+                $data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
+                $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status'] . "}";
+            }else{
+                $data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
+                $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status'] . "},";
+            }
+        }
+
+        $data_chart                     .= ']';
+
         return $this->render('view', [
             'model' => $model,
+            'data_chart' => $data_chart,
             'query_geom_to_geojson_value' => $query_geom_to_geojson_value
         ]);
     }

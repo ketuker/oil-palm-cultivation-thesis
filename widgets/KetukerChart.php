@@ -39,10 +39,10 @@ class KetukerChart extends \yii\base\Widget
     public function run()
     {
         if(empty($this->options['width'])){
-            $this->options['width'] = '100';
+            $this->options['width'] = '50';
         }
         if (empty($this->options['height'])) {
-            $this->options['height'] = '444';
+            $this->options['height'] = '60';
         }
         echo "<div id='canvas-holder'> 
         <canvas id='chart-area' style='width: ".$this->options['width']."%; height: ".$this->options['height']."px;'/>
@@ -62,53 +62,8 @@ class KetukerChart extends \yii\base\Widget
     public function registerAssets()
     {
 
-        // if (empty($this->options['setView'])) {
-        //     $this->options['setView'] = '-2, 117';
-        // }
-
-        // if (empty($this->options['setZoom'])) {
-        //     $this->options['setZoom'] = '5';
-        // }
-
-        // $setView            = explode(",", $this->options['setView']);
-        // $zoom               = $this->options['setZoom'];
-        // $lat                = $setView[0];
-        // $lon                = $setView[1];
-
         $options ="
-            var doughnutData = [
-                {
-                    value: 300,
-                    color:'#F7464A',
-                    highlight: '#FF5A5E',
-                    label: 'Red'
-                },
-                {
-                    value: 50,
-                    color: '#46BFBD',
-                    highlight: '#5AD3D1',
-                    label: 'Green'
-                },
-                {
-                    value: 100,
-                    color: '#FDB45C',
-                    highlight: '#FFC870',
-                    label: 'Yellow'
-                },
-                {
-                    value: 40,
-                    color: '#949FB1',
-                    highlight: '#A8B3C5',
-                    label: 'Grey'
-                },
-                {
-                    value: 120,
-                    color: '#4D5360',
-                    highlight: '#616774',
-                    label: 'Dark Grey'
-                }
-
-            ];
+            var doughnutData = ".$this->options['data'].";
 
             window.onload = function(){
                 var ctx = document.getElementById('chart-area').getContext('2d');
