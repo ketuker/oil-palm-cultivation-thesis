@@ -22,6 +22,7 @@ class KetukerMapAssets extends AssetBundle
             'css/Map/opencage',
             'css/Map/minimap',
             'css/Map/measure',
+            'css/Map/scale',
             //'css/MarkerCluster',
             //'css/MarkerCluster.Default'
             //'css/sidebar',
@@ -38,6 +39,7 @@ class KetukerMapAssets extends AssetBundle
             'js/Map/utf',
             'js/Map/minimap',
             'js/Map/measure',
+            'js/Map/scale',
             'js/Map/base',
         ]);
 

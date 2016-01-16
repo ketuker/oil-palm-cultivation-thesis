@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="compare-view">
 
+    <div class="list-group-item"><h4 class="list-group-item-heading"><b><center><?= $model->title;?></center></b></h4></div>
     <?= app\widgets\KetukerMap::widget();?>
 
     <?= DetailView::widget([

@@ -1,6 +1,6 @@
 /*!
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
- * @version 2.0.6
+ * @version 2.0.7
  *
  * Krajee Theme for Select2 (matches Bootstrap 3 styles)
  *
@@ -292,9 +292,6 @@
     border-color: #66afe9;
     overflow-x: hidden;
     margin-top: -1px;
-}
-.navbar {
-    z-index: 1055;
 }
 
 .select2-container--krajee .select2-dropdown--above {
