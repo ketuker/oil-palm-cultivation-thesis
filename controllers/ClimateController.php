@@ -109,9 +109,40 @@ class ClimateController extends Controller
             $bobot_temp         = $sum_temp / $sum_divided;
             $bobot_dm           = $sum_dm / $sum_divided;
 
-            echo "bobot CH : " . $bobot_ch . ". bobot temp : " . $bobot_temp . ". bobot dm : " . $bobot_dm;
-            echo "<br> Total bobot =" . ($bobot_ch + $bobot_temp + $bobot_dm);
             /* ---- */
+
+            $multiple_ch_ch_bobot      = $ch_ch / $bobot_ch;
+            $multiple_ch_temp_bobot    = $ch_temp / $bobot_ch;
+            $multiple_ch_dm_bobot      = $ch_dm / $bobot_ch;
+
+            $multiple_temp_ch_bobot    = $temp_ch / $bobot_temp;
+            $multiple_temp_temp_bobot  = $temp_temp / $bobot_temp;
+            $multiple_temp_dm_bobot    = $temp_dm / $bobot_temp;
+
+            $multiple_dm_ch_bobot      = $dm_ch / $bobot_dm;
+            $multiple_dm_temp_bobot    = $dm_temp / $bobot_dm;
+            $multiple_dm_dm_bobot      = $dm_dm / $bobot_dm;
+
+            /* ---- */
+
+            $sum_bobot_ch               = $multiple_ch_ch_bobot + $multiple_temp_ch_bobot + $multiple_dm_ch_bobot;
+            $sum_bobot_temp             = $multiple_ch_temp_bobot + $multiple_temp_temp_bobot + $multiple_dm_temp_bobot;
+            $sum_bobot_dm               = $multiple_ch_dm_bobot + $multiple_temp_dm_bobot + $multiple_dm_dm_bobot;
+
+            /* ---- */
+
+            $divided_bobot_ch           = $sum_bobot_ch / $bobot_ch;
+            $divided_bobot_temp         = $sum_bobot_temp / $bobot_temp;
+            $divided_bobot_dm           = $sum_bobot_dm / $bobot_dm;
+
+            /* ---- */
+            $lamda_max                  = ($divided_bobot_ch + $divided_bobot_temp + $divided_bobot_dm) / $sum_divided;
+            $jumlah_factor              = $sum_divided;
+            $consistensi_index          = ($lamda_max-$jumlah_factor)/($jumlah_factor-1);
+            $rasio_index                = 0.58;
+            $consistensi_rasio          = $consistensi_index / $rasio_index;
+
+            echo "Consistensi Rasio = " . $consistensi_rasio;
             die();
 
             //$model->load(Yii::$app->request->post()) && $model->save()
