@@ -68,18 +68,81 @@ class ClimateController extends Controller
             $temp_ch    = 1 / $ch_temp;
             $ch_ch      = 1;
 
-            $ch_dm      = $_POST['Climate']['ch_dm'];
-            $dm_ch      = 1 / $ch_dm;
-            $dm_dm      = 1;
-
             $temp_dm    = $_POST['Climate']['temp_dm'];
             $dm_temp    = 1 / $temp_dm;
             $temp_temp  = 1;
 
-            $sum_column_ch      = $ch_ch + $ch_temp + $temp_ch;
-            $sum_column_dm      = $dm_dm + $temp_dm + $dm_ch;
-            $sum_column_temp    = $temp_temp + $ch_dm + $dm_ch;
+            $ch_dm      = $_POST['Climate']['ch_dm'];
+            $dm_ch      = 1 / $ch_dm;
+            $dm_dm      = 1;
 
+            $sum_column_ch      = $ch_ch + $ch_temp + $ch_dm;
+            $sum_column_temp    = $temp_ch + $temp_temp + $temp_dm;
+            $sum_column_dm      = $dm_ch + $dm_temp + $dm_dm;
+
+            /* ---- */
+
+            $divided_sum_sum        = $sum_column_ch / $sum_column_ch;
+
+            $divided_ch_ch_sum      = $ch_ch / $sum_column_ch;
+            $divided_ch_temp_sum    = $ch_temp / $sum_column_ch;
+            $divided_ch_dm_sum      = $ch_dm / $sum_column_ch;
+
+            $divided_temp_ch_sum    = $temp_ch / $sum_column_temp;
+            $divided_temp_temp_sum  = $temp_temp / $sum_column_temp;
+            $divided_temp_dm_sum    = $temp_dm / $sum_column_temp;
+
+            $divided_dm_ch_sum      = $dm_ch / $sum_column_dm;
+            $divided_dm_temp_sum    = $dm_temp / $sum_column_dm;
+            $divided_dm_dm_sum      = $dm_dm / $sum_column_dm;
+
+            /* ---- */
+
+            $sum_ch             = $divided_ch_ch_sum + $divided_temp_ch_sum + $divided_dm_ch_sum;
+            $sum_temp           = $divided_ch_temp_sum + $divided_temp_temp_sum + $divided_dm_temp_sum;
+            $sum_dm             = $divided_ch_dm_sum + $divided_temp_dm_sum + $divided_dm_dm_sum;
+            $sum_divided        = $divided_sum_sum + $divided_sum_sum + $divided_sum_sum;
+
+            /* ---- */
+
+            $bobot_ch           = $sum_ch / $sum_divided;
+            $bobot_temp         = $sum_temp / $sum_divided;
+            $bobot_dm           = $sum_dm / $sum_divided;
+
+            /* ---- */
+
+            $multiple_ch_ch_bobot      = $ch_ch / $bobot_ch;
+            $multiple_ch_temp_bobot    = $ch_temp / $bobot_ch;
+            $multiple_ch_dm_bobot      = $ch_dm / $bobot_ch;
+
+            $multiple_temp_ch_bobot    = $temp_ch / $bobot_temp;
+            $multiple_temp_temp_bobot  = $temp_temp / $bobot_temp;
+            $multiple_temp_dm_bobot    = $temp_dm / $bobot_temp;
+
+            $multiple_dm_ch_bobot      = $dm_ch / $bobot_dm;
+            $multiple_dm_temp_bobot    = $dm_temp / $bobot_dm;
+            $multiple_dm_dm_bobot      = $dm_dm / $bobot_dm;
+
+            /* ---- */
+
+            $sum_bobot_ch               = $multiple_ch_ch_bobot + $multiple_temp_ch_bobot + $multiple_dm_ch_bobot;
+            $sum_bobot_temp             = $multiple_ch_temp_bobot + $multiple_temp_temp_bobot + $multiple_dm_temp_bobot;
+            $sum_bobot_dm               = $multiple_ch_dm_bobot + $multiple_temp_dm_bobot + $multiple_dm_dm_bobot;
+
+            /* ---- */
+
+            $divided_bobot_ch           = $sum_bobot_ch / $bobot_ch;
+            $divided_bobot_temp         = $sum_bobot_temp / $bobot_temp;
+            $divided_bobot_dm           = $sum_bobot_dm / $bobot_dm;
+
+            /* ---- */
+            $lamda_max                  = ($divided_bobot_ch + $divided_bobot_temp + $divided_bobot_dm) / $sum_divided;
+            $jumlah_factor              = $sum_divided;
+            $consistensi_index          = ($lamda_max-$jumlah_factor)/($jumlah_factor-1);
+            $rasio_index                = 0.58;
+            $consistensi_rasio          = $consistensi_index / $rasio_index;
+
+            echo "Consistensi Rasio = " . $consistensi_rasio;
             die();
 
             //$model->load(Yii::$app->request->post()) && $model->save()
