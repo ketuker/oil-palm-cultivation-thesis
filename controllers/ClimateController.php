@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Climate;
 use app\models\ClimateSearch;
+use app\models\ClimateAG;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -60,6 +61,7 @@ class ClimateController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Climate();
 
         if (Yii::$app->request->post()) {
@@ -158,7 +160,55 @@ class ClimateController extends Controller
 
                 if ($model->load($_POST) && $model->save()) {
 
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    $data_climates                      = Climate::find()->where(['validation'=> TRUE])->AsArray()->All();
+
+                    $ch_temp_ag_base                    = [];
+                    $ch_dm_ag_base                      = [];
+                    $temp_dm_ag_base                    = [];
+                    $bobot_ch_ag_base                   = [];
+                    $bobot_temp_ag_base                 = [];
+                    $bobot_dm_ag_base                   = [];
+                    $consistensi_rasio_ag_base          = [];
+
+                    for ($i=0; $i < count($data_climates); $i++) { 
+                        $ch_temp_ag_base[$i]            = $data_climates[$i]['ch_temp'];
+                        $ch_dm_ag_base[$i]              = $data_climates[$i]['ch_dm'];
+                        $temp_dm_ag_base[$i]            = $data_climates[$i]['temp_dm'];
+                        $bobot_ch_ag_base[$i]           = $data_climates[$i]['bobot_ch'];
+                        $bobot_temp_ag_base[$i]         = $data_climates[$i]['boobt_temp'];
+                        $bobot_dm_ag_base[$i]           = $data_climates[$i]['bobot_dm'];
+                        $consistensi_rasio_ag_base[$i]  = $data_climates[$i]['cr'];
+                    }
+
+                    $ch_temp_ag                         = sqrt (array_product($ch_temp_ag_base));
+                    $ch_dm_ag                           = sqrt (array_product($ch_dm_ag_base));
+                    $temp_dm_ag                         = sqrt (array_product($temp_dm_ag_base));
+                    $bobot_ch_ag                        = sqrt (array_product($bobot_ch_ag_base));
+                    $bobot_temp_ag                      = sqrt (array_product($bobot_temp_ag_base));
+                    $bobot_dm_ag                        = sqrt (array_product($bobot_dm_ag_base));
+                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+
+                    $model_ag                           = new ClimateAG();
+
+                    $_POSTAG['ClimateAG']['ch_temp']      = $ch_temp_ag;
+                    $_POSTAG['ClimateAG']['ch_dm']        = $ch_dm_ag;
+                    $_POSTAG['ClimateAG']['temp_dm']      = $temp_dm_ag;
+                    $_POSTAG['ClimateAG']['bobot_ch']     = $bobot_ch_ag;
+                    $_POSTAG['ClimateAG']['boobt_temp']   = $bobot_temp_ag;
+                    $_POSTAG['ClimateAG']['bobot_dm']     = $bobot_dm_ag;
+                    $_POSTAG['ClimateAG']['cr']           = $consistensi_rasio_ag;
+
+                    if ($model_ag->load($_POSTAG) && $model_ag->save()) {
+                        
+                        return $this->redirect(['view', 'id' => $model->id]);
+
+                    } else {
+
+                        return $this->render('create', [
+                            'model' => $model,
+                        ]);
+
+                    }
 
                 } else {
 
