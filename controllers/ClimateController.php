@@ -82,66 +82,97 @@ class ClimateController extends Controller
             $dm_dm      = 1;
 
             $sum_column_ch      = $ch_ch + $temp_ch + $dm_ch;
+            // echo "Sum CH = " . $sum_column_ch ."</br>";
             $sum_column_temp    = $ch_temp + $temp_temp + $dm_temp;
+            // echo "Sum temp = " . $sum_column_temp."</br>";
             $sum_column_dm      = $ch_dm + $temp_dm + $dm_dm;
-
-            echo $sum_column_ch . " - " . $sum_column_temp . " - " . $sum_column_dm;
-            echo "<br>";
+            // echo "Sum dm = " . $sum_column_dm."</br>";
 
             /* ---- */
 
             $divided_sum_sum        = $sum_column_ch / $sum_column_ch;
 
             $divided_ch_ch_sum      = $ch_ch / $sum_column_ch;
-            $divided_ch_temp_sum    = $ch_temp / $sum_column_temp;
-            $divided_ch_dm_sum      = $ch_dm / $sum_column_dm;
+            // echo $divided_ch_ch_sum."</br>";
+            $divided_ch_temp_sum    = $temp_ch / $sum_column_ch;
+            // echo $divided_ch_temp_sum."</br>";
+            $divided_ch_dm_sum      = $dm_ch / $sum_column_ch;
+            // echo $divided_ch_dm_sum."</br>";
 
-            $divided_temp_ch_sum    = $temp_ch / $sum_column_ch;
+            $divided_temp_ch_sum    = $ch_temp / $sum_column_temp;
+            // echo $divided_temp_ch_sum."</br>";
             $divided_temp_temp_sum  = $temp_temp / $sum_column_temp;
-            $divided_temp_dm_sum    = $temp_dm / $sum_column_dm;
+            // echo $divided_temp_temp_sum."</br>";
+            $divided_temp_dm_sum    = $dm_temp / $sum_column_temp;
+            // echo $divided_temp_dm_sum."</br>";
 
-            $divided_dm_ch_sum      = $dm_ch / $sum_column_ch;
-            $divided_dm_temp_sum    = $dm_temp / $sum_column_temp;
+            $divided_dm_ch_sum      = $ch_dm / $sum_column_dm;
+            // echo $divided_dm_ch_sum."</br>";
+            $divided_dm_temp_sum    = $temp_dm / $sum_column_dm;
+            // echo $divided_dm_temp_sum."</br>";
             $divided_dm_dm_sum      = $dm_dm / $sum_column_dm;
+            // echo $divided_dm_dm_sum."</br>";
 
             /* ---- */
 
             $sum_ch             = $divided_ch_ch_sum + $divided_temp_ch_sum + $divided_dm_ch_sum;
+            // echo $sum_ch."</br>";
             $sum_temp           = $divided_ch_temp_sum + $divided_temp_temp_sum + $divided_dm_temp_sum;
+            // echo $sum_temp."</br>";
             $sum_dm             = $divided_ch_dm_sum + $divided_temp_dm_sum + $divided_dm_dm_sum;
+            // echo $sum_dm."</br>";
             $sum_divided        = $divided_sum_sum + $divided_sum_sum + $divided_sum_sum;
+            // echo $sum_divided."</br>";
 
             /* ---- */
 
             $bobot_ch           = $sum_ch / $sum_divided;
+            // echo $bobot_ch."</br>";
             $bobot_temp         = $sum_temp / $sum_divided;
+            // echo $bobot_temp."</br>";
             $bobot_dm           = $sum_dm / $sum_divided;
+            // echo $bobot_dm."</br>";
 
             /* ---- */
 
-            $multiple_ch_ch_bobot      = $ch_ch / $bobot_ch;
-            $multiple_ch_temp_bobot    = $ch_temp / $bobot_ch;
-            $multiple_ch_dm_bobot      = $ch_dm / $bobot_ch;
+            $multiple_ch_ch_bobot      = $ch_ch * $bobot_ch;
+            // echo $multiple_ch_ch_bobot."</br>";
+            $multiple_ch_temp_bobot    = $temp_ch * $bobot_ch;
+            // echo $multiple_ch_temp_bobot."</br>";
+            $multiple_ch_dm_bobot      = $dm_ch * $bobot_ch;
+            // echo $multiple_ch_dm_bobot."</br>";
 
-            $multiple_temp_ch_bobot    = $temp_ch / $bobot_temp;
-            $multiple_temp_temp_bobot  = $temp_temp / $bobot_temp;
-            $multiple_temp_dm_bobot    = $temp_dm / $bobot_temp;
+            $multiple_temp_ch_bobot    = $ch_temp * $bobot_temp;
+            // echo $multiple_temp_ch_bobot."</br>";
+            $multiple_temp_temp_bobot  = $temp_temp * $bobot_temp;
+            // echo $multiple_temp_temp_bobot."</br>";
+            $multiple_temp_dm_bobot    = $dm_temp * $bobot_temp;
+            // echo $multiple_temp_dm_bobot."</br>";
 
-            $multiple_dm_ch_bobot      = $dm_ch / $bobot_dm;
-            $multiple_dm_temp_bobot    = $dm_temp / $bobot_dm;
-            $multiple_dm_dm_bobot      = $dm_dm / $bobot_dm;
+            $multiple_dm_ch_bobot      = $ch_dm * $bobot_dm;
+            // echo $ch_dm.$multiple_dm_ch_bobot."</br>";
+            $multiple_dm_temp_bobot    = $temp_dm * $bobot_dm;
+            // echo $multiple_dm_temp_bobot."</br>";
+            $multiple_dm_dm_bobot      = $dm_dm * $bobot_dm;
+            // echo $multiple_dm_dm_bobot."</br>";
 
             /* ---- */
 
-            $sum_bobot_ch               = $multiple_ch_ch_bobot + $multiple_ch_temp_bobot + $multiple_ch_dm_bobot;
-            $sum_bobot_temp             = $multiple_temp_ch_bobot + $multiple_temp_temp_bobot + $multiple_temp_dm_bobot;
-            $sum_bobot_dm               = $multiple_dm_ch_bobot + $multiple_dm_temp_bobot + $multiple_dm_dm_bobot;
+            $sum_bobot_ch               = $multiple_ch_ch_bobot + $multiple_temp_ch_bobot + $multiple_dm_ch_bobot;
+            // echo $sum_bobot_ch."</br>";
+            $sum_bobot_temp             = $multiple_ch_temp_bobot + $multiple_temp_temp_bobot + $multiple_dm_temp_bobot;
+            // echo $sum_bobot_temp."</br>";
+            $sum_bobot_dm               = $multiple_ch_dm_bobot + $multiple_temp_dm_bobot + $multiple_dm_dm_bobot;
+            // echo $sum_bobot_dm."</br>";
 
             /* ---- */
 
             $divided_bobot_ch           = $sum_bobot_ch / $bobot_ch;
+            // echo $divided_bobot_ch."</br>";
             $divided_bobot_temp         = $sum_bobot_temp / $bobot_temp;
+            // echo $divided_bobot_temp."</br>";
             $divided_bobot_dm           = $sum_bobot_dm / $bobot_dm;
+            // echo $divided_bobot_dm."</br>";
 
             /* ---- */
             $lamda_max                  = ($divided_bobot_ch + $divided_bobot_temp + $divided_bobot_dm) / $sum_divided;
