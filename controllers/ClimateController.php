@@ -65,14 +65,19 @@ class ClimateController extends Controller
         if (Yii::$app->request->post()) {
 
             $ch_temp    = $_POST['Climate']['ch_temp'];
+            // 0.14285714285714285
             $temp_ch    = 1 / $ch_temp;
             $ch_ch      = 1;
 
             $temp_dm    = $_POST['Climate']['temp_dm'];
+            // 3
+            echo "<br>";
             $dm_temp    = 1 / $temp_dm;
             $temp_temp  = 1;
 
             $ch_dm      = $_POST['Climate']['ch_dm'];
+            // 0.3333333333333333
+            echo "<br>";
             $dm_ch      = 1 / $ch_dm;
             $dm_dm      = 1;
 
@@ -176,7 +181,9 @@ class ClimateController extends Controller
             $rasio_index                = 0.58;
             $consistensi_rasio          = $consistensi_index / $rasio_index;
 
-            echo "Consistensi Rasio = " . $consistensi_rasio;
+            echo "Bobot CH : " . $bobot_ch . "<br>Bobot Temp : " . $bobot_temp .  "<br>Bobot DM : " . $bobot_dm;
+            echo "<br>Total : " . ($bobot_ch + $bobot_temp + $bobot_dm);
+            echo "<br>Consistensi Rasio = " . $consistensi_rasio;
             die();
 
             //$model->load(Yii::$app->request->post()) && $model->save()
