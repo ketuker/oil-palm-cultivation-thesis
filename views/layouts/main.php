@@ -45,7 +45,13 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
-        $menuItems[] = ['label' => 'Pairwise Comparison', 'url' => ['/climate']];
+        $menuItems[] = [
+            'label' => 'Pairwise Comparison',
+            'items' => [
+                 ['label' => 'Climate', 'url' => ['/climate/index']],
+                 ['label' => 'Factor B', 'url' => ['/climate/index']],
+            ],
+        ];
         $menuItems[] = ['label' => 'Dashboard', 'url' => ['/dashboard/index']];
         $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
