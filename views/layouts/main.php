@@ -37,14 +37,15 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Compare', 'url' => ['/compare/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+        // ['label' => 'About', 'url' => ['/site/about']],
+        // ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
+        $menuItems[] = ['label' => 'Pairwise Comparison', 'url' => ['/climate']];
         $menuItems[] = ['label' => 'Dashboard', 'url' => ['/dashboard/index']];
         $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
