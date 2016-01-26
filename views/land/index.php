@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ClimateSearch */
+/* @var $searchModel app\models\LandSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Climates';
+$this->title = 'Lands';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="climate-index">
+<div class="land-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Climate', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Land', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,12 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'ch_temp',
-            'ch_dm',
-            'temp_dm',
-            'bobot_ch',
-            // 'boobt_temp',
-            // 'bobot_dm',
+            'text_slope',
+            'text_thick',
+            'text_ripe',
+            'slope_thick',
+            // 'slope_ripe',
+            // 'thick_ripe',
+            // 'bobot_text',
+            // 'bobot_slope',
+            // 'bobot_thick',
+            // 'bobot_ripe',
             // 'cr',
             // 'validation:boolean',
             // 'id_user',

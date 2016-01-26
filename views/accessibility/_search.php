@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ClimateSearch */
+/* @var $model app\models\AccessibilitySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="climate-search">
+<div class="accessibility-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,17 +17,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'ch_temp') ?>
+    <?= $form->field($model, 'road_mills') ?>
 
-    <?= $form->field($model, 'ch_dm') ?>
+    <?= $form->field($model, 'road_town') ?>
 
-    <?= $form->field($model, 'temp_dm') ?>
+    <?= $form->field($model, 'mills_town') ?>
 
-    <?= $form->field($model, 'bobot_ch') ?>
+    <?= $form->field($model, 'bobot_road') ?>
 
-    <?php // echo $form->field($model, 'boobt_temp') ?>
+    <?php // echo $form->field($model, 'bobot_mills') ?>
 
-    <?php // echo $form->field($model, 'bobot_dm') ?>
+    <?php // echo $form->field($model, 'bobot_town') ?>
 
     <?php // echo $form->field($model, 'cr') ?>
 
@@ -35,7 +35,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'id_user') ?>
 
-    <?php // echo $form->field($model, 'date') ?>
+    <?php // echo $form->field($model, 'dates') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

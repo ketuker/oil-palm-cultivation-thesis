@@ -27,7 +27,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'My Company',
+        'brandLabel' => '<b> <img src= "/logo.jpg" style="width:70px;height:30px;"> Bogor Agricultural University </b>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -36,23 +36,26 @@ AppAsset::register($this);
 
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Compare', 'url' => ['/compare/index']],
+        ['label' => 'Area of Interest', 'url' => ['/compare/index']],
         // ['label' => 'About', 'url' => ['/site/about']],
         // ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
 
     if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
         $menuItems[] = [
             'label' => 'Pairwise Comparison',
             'items' => [
-                 ['label' => 'Climate', 'url' => ['/climate/index']],
-                 ['label' => 'Factor B', 'url' => ['/climate/index']],
+                 ['label' => 'Climate', 'url' => ['/climate/create']],
+                 ['label' => 'Land', 'url' => ['/land/create']],
+                 ['label' => 'Accessibility', 'url' => ['accessibility/create']],
             ],
         ];
-        $menuItems[] = ['label' => 'Dashboard', 'url' => ['/dashboard/index']];
+        $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/dashboard/index']];
+        $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
         $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['site/logout'],
@@ -77,7 +80,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">&copy; Restu Jati S <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

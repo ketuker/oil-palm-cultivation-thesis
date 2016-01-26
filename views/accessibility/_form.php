@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\slider\Slider;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Climate */
+/* @var $model app\models\Accessibility */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <style type="text/css">
@@ -14,46 +14,42 @@ use kartik\slider\Slider;
   height: 30px;
 }
 </style>
-<div class="climate-form">
+<div class="accessibility-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'ch_temp')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'road_mills')->HiddenInput()->label('') ?>
 
 
-
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Rainfall</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
-        'name'=>'CH_TEMP',
+    <?= '<div class="col-md-1">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Road</p> </b> </div>'?>
+    <?= '<div class="col-md-10">'.Slider::widget([
+        'name'=>'road_mills',
         'value'=>10,
-        'handleColor'=>Slider::TYPE_INFO,
+        'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
             'slideStop' => "function(val) { document.getElementById('climate-ch_temp').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
-            // 'handle'=>'square',
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            'tooltip_position'=> 'top',
+            // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Temperature</h6> </b> '; ?>
-	<?=	'</div>' ?>
-    
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Mills</p> </b> '; ?>
+    <?= '</div>' ?>
 
-    <?=	'</br> </br> </br> </br>' ?>
+    <?= '</br> </br> </br> ' ?>
 
-    <?= $form->field($model, 'ch_dm')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'road_town')->HiddenInput()->label('') ?>
 
-
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Rainfall</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
-        'name'=>'CH_DM',
+    <?= '<div class="col-md-1">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Road</p> </b> </div>'?>
+    <?= '<div class="col-md-10">'.Slider::widget([
+        'name'=>'road_town',
         'value'=>10,
-        'handleColor'=>Slider::TYPE_INFO,
+        'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
             'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
         ],
@@ -61,25 +57,22 @@ use kartik\slider\Slider;
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            'tooltip_position'=> 'top',
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month</h6> </b> '; ?>
-	<?=	'</div>' ?>
-    
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Town</p> </b> '; ?>
+    <?= '</div>' ?>
 
-    <?=	'</br> </br> </br> </br>' ?>
+    <?= '</br> </br> </br> ' ?>
 
-    <?= $form->field($model, 'temp_dm')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'mills_town')->HiddenInput()->label('') ?>
 
-
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Temperature</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
-        'name'=>'TEMP_DM',
+    <?= '<div class="col-md-1">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Mills</p> </b> </div>'?>
+    <?= '<div class="col-md-10">'.Slider::widget([
+        'name'=>'mills_town',
         'value'=>10,
-        'handleColor'=>Slider::TYPE_INFO,
+        'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
             'slideStop' => "function(val) { document.getElementById('climate-temp_dm').value = ConvertNumber(val.value); }",
         ],
@@ -90,9 +83,10 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month</h6> </b> '; ?>
-	<?=	'</div>' ?>
-    <?=	'</br> </br> </br> </br>' ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Town</p> </b> '; ?>
+    <?= '</div>' ?>
+
+    <?= '</br> </br> </br> ' ?>
 
     <br><br><div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

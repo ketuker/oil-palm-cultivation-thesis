@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Climate */
 
-$this->title = 'Create Climate';
+$this->title = 'Climate Weight Questionnaire';
 $this->params['breadcrumbs'][] = ['label' => 'Climates', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

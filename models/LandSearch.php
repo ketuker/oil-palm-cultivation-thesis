@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Climate;
+use app\models\Land;
 
 /**
- * ClimateSearch represents the model behind the search form about `app\models\Climate`.
+ * LandSearch represents the model behind the search form about `app\models\Land`.
  */
-class ClimateSearch extends Climate
+class LandSearch extends Land
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class ClimateSearch extends Climate
     {
         return [
             [['id', 'id_user'], 'integer'],
-            [['ch_temp', 'ch_dm', 'temp_dm', 'bobot_ch', 'boobt_temp', 'bobot_dm', 'cr'], 'number'],
+            [['text_slope', 'text_thick', 'text_ripe', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_text', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr'], 'number'],
             [['validation'], 'boolean'],
             [['date'], 'safe'],
         ];
@@ -43,7 +43,7 @@ class ClimateSearch extends Climate
      */
     public function search($params)
     {
-        $query = Climate::find();
+        $query = Land::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,12 +59,16 @@ class ClimateSearch extends Climate
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'ch_temp' => $this->ch_temp,
-            'ch_dm' => $this->ch_dm,
-            'temp_dm' => $this->temp_dm,
-            'bobot_ch' => $this->bobot_ch,
-            'boobt_temp' => $this->boobt_temp,
-            'bobot_dm' => $this->bobot_dm,
+            'text_slope' => $this->text_slope,
+            'text_thick' => $this->text_thick,
+            'text_ripe' => $this->text_ripe,
+            'slope_thick' => $this->slope_thick,
+            'slope_ripe' => $this->slope_ripe,
+            'thick_ripe' => $this->thick_ripe,
+            'bobot_text' => $this->bobot_text,
+            'bobot_slope' => $this->bobot_slope,
+            'bobot_thick' => $this->bobot_thick,
+            'bobot_ripe' => $this->bobot_ripe,
             'cr' => $this->cr,
             'validation' => $this->validation,
             'id_user' => $this->id_user,

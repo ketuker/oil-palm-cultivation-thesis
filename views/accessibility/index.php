@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ClimateSearch */
+/* @var $searchModel app\models\AccessibilitySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Climates';
+$this->title = 'Accessibilities';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="climate-index">
+<div class="accessibility-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Climate', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Accessibility', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,16 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'ch_temp',
-            'ch_dm',
-            'temp_dm',
-            'bobot_ch',
-            // 'boobt_temp',
-            // 'bobot_dm',
+            'road_mills',
+            'road_town',
+            'mills_town',
+            'bobot_road',
+            // 'bobot_mills',
+            // 'bobot_town',
             // 'cr',
             // 'validation:boolean',
             // 'id_user',
-            // 'date',
+            // 'dates',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Compare */
+/* @var $model app\models\Accessibility */
 
-$this->title = 'Create Compare';
-$this->params['breadcrumbs'][] = ['label' => 'Compares', 'url' => ['index']];
+$this->title = 'Accessibility Weight Questionnaire';
+$this->params['breadcrumbs'][] = ['label' => 'Accessibilities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="compare-create">
+<div class="accessibility-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

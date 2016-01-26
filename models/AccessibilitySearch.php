@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Climate;
+use app\models\Accessibility;
 
 /**
- * ClimateSearch represents the model behind the search form about `app\models\Climate`.
+ * AccessibilitySearch represents the model behind the search form about `app\models\Accessibility`.
  */
-class ClimateSearch extends Climate
+class AccessibilitySearch extends Accessibility
 {
     /**
      * @inheritdoc
@@ -19,9 +19,9 @@ class ClimateSearch extends Climate
     {
         return [
             [['id', 'id_user'], 'integer'],
-            [['ch_temp', 'ch_dm', 'temp_dm', 'bobot_ch', 'boobt_temp', 'bobot_dm', 'cr'], 'number'],
+            [['road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr'], 'number'],
             [['validation'], 'boolean'],
-            [['date'], 'safe'],
+            [['dates'], 'safe'],
         ];
     }
 
@@ -43,7 +43,7 @@ class ClimateSearch extends Climate
      */
     public function search($params)
     {
-        $query = Climate::find();
+        $query = Accessibility::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -59,16 +59,16 @@ class ClimateSearch extends Climate
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'ch_temp' => $this->ch_temp,
-            'ch_dm' => $this->ch_dm,
-            'temp_dm' => $this->temp_dm,
-            'bobot_ch' => $this->bobot_ch,
-            'boobt_temp' => $this->boobt_temp,
-            'bobot_dm' => $this->bobot_dm,
+            'road_mills' => $this->road_mills,
+            'road_town' => $this->road_town,
+            'mills_town' => $this->mills_town,
+            'bobot_road' => $this->bobot_road,
+            'bobot_mills' => $this->bobot_mills,
+            'bobot_town' => $this->bobot_town,
             'cr' => $this->cr,
             'validation' => $this->validation,
             'id_user' => $this->id_user,
-            'date' => $this->date,
+            'dates' => $this->dates,
         ]);
 
         return $dataProvider;

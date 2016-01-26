@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ClimateSearch */
+/* @var $model app\models\LandSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="climate-search">
+<div class="land-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,17 +17,25 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'ch_temp') ?>
+    <?= $form->field($model, 'text_slope') ?>
 
-    <?= $form->field($model, 'ch_dm') ?>
+    <?= $form->field($model, 'text_thick') ?>
 
-    <?= $form->field($model, 'temp_dm') ?>
+    <?= $form->field($model, 'text_ripe') ?>
 
-    <?= $form->field($model, 'bobot_ch') ?>
+    <?= $form->field($model, 'slope_thick') ?>
 
-    <?php // echo $form->field($model, 'boobt_temp') ?>
+    <?php // echo $form->field($model, 'slope_ripe') ?>
 
-    <?php // echo $form->field($model, 'bobot_dm') ?>
+    <?php // echo $form->field($model, 'thick_ripe') ?>
+
+    <?php // echo $form->field($model, 'bobot_text') ?>
+
+    <?php // echo $form->field($model, 'bobot_slope') ?>
+
+    <?php // echo $form->field($model, 'bobot_thick') ?>
+
+    <?php // echo $form->field($model, 'bobot_ripe') ?>
 
     <?php // echo $form->field($model, 'cr') ?>
 

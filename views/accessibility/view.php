@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Climate */
+/* @var $model app\models\Accessibility */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Climates', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Accessibilities', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="climate-view">
+<div class="accessibility-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,16 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'ch_temp',
-            'ch_dm',
-            'temp_dm',
-            'bobot_ch',
-            'boobt_temp',
-            'bobot_dm',
+            'road_mills',
+            'road_town',
+            'mills_town',
+            'bobot_road',
+            'bobot_mills',
+            'bobot_town',
             'cr',
             'validation:boolean',
             'id_user',
-            'date',
+            'dates',
         ],
     ]) ?>
 
