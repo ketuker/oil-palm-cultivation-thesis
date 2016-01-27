@@ -17,8 +17,13 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/web/favicon.ico" type="image/x-icon">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title> 
+    <?= "Web GIS Application"
+    // Html::encode($this->title) 
+    ?>
+    </title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -52,6 +57,7 @@ AppAsset::register($this);
                  ['label' => 'Climate', 'url' => ['/climate/create']],
                  ['label' => 'Land', 'url' => ['/land/create']],
                  ['label' => 'Accessibility', 'url' => ['accessibility/create']],
+                 ['label' => 'Factors', 'url' => ['factors/create']],
             ],
         ];
         $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/dashboard/index']];
