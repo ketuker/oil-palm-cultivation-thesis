@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "land".
+ * This is the model class for table "land_average_geometric".
  *
  * @property integer $id
  * @property double $text_slope
@@ -19,18 +19,18 @@ use Yii;
  * @property double $bobot_thick
  * @property double $bobot_ripe
  * @property double $cr
- * @property boolean $validation
- * @property integer $id_user
  * @property string $date
+ * @property integer $sum_land_datas
+ * @property string $note
  */
-class Land extends \yii\db\ActiveRecord
+class LandAG extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'land';
+        return 'land_average_geometric';
     }
 
     /**
@@ -39,11 +39,10 @@ class Land extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text_slope', 'text_thick', 'text_ripe', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_text', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr'], 'required'],
             [['text_slope', 'text_thick', 'text_ripe', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_text', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr'], 'number'],
-            [['validation'], 'boolean'],
-            [['id_user'], 'integer'],
-            [['date'], 'safe']
+            [['date'], 'safe'],
+            [['sum_land_datas'], 'integer'],
+            [['note'], 'string']
         ];
     }
 
@@ -65,9 +64,9 @@ class Land extends \yii\db\ActiveRecord
             'bobot_thick' => 'Bobot Thick',
             'bobot_ripe' => 'Bobot Ripe',
             'cr' => 'Cr',
-            'validation' => 'Validation',
-            'id_user' => 'Id User',
             'date' => 'Date',
+            'sum_land_datas' => 'Sum Land Datas',
+            'note' => 'Note',
         ];
     }
 }

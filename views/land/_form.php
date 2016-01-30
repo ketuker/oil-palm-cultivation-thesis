@@ -27,7 +27,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_temp').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-text_slope').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -52,7 +52,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-text_thick').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -77,7 +77,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-temp_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-text_ripe').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -102,7 +102,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-slope_thick').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -127,7 +127,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-slope_ripe').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -151,7 +151,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_DANGER,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('land-thick_ripe').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
