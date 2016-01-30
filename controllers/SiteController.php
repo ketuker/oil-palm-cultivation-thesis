@@ -101,8 +101,23 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+    
     public function actionChart()
     {
         return $this->render('chart');
+    }
+
+    public function actionLanguage()
+    {
+        if(isset($_POST['lang'])){
+            Yii::$app->language = $_POST['lang'];
+            
+            $cookie = new yii\web\Cookie([
+                'name'=>'lang',
+                'value'=>$_POST['lang']
+            ]);
+
+            Yii::$app->getResponse()->getCookies()->add($cookie);
+        }
     }
 }

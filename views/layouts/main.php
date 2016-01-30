@@ -8,6 +8,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -40,7 +41,7 @@ AppAsset::register($this);
     ]);
 
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        //['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Area of Interest', 'url' => ['/compare/index']],
         // ['label' => 'About', 'url' => ['/site/about']],
         // ['label' => 'Contact', 'url' => ['/site/contact']],
@@ -48,6 +49,27 @@ AppAsset::register($this);
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
+        $menuItems[] = [
+            'label' => Yii::t('app','Language'),
+            'items' => [
+                    [
+                        'label'=>Yii::t('app','English'),
+                        'url'=>'#',
+                        'options'=>[
+                            'class'=>'language',
+                            'id'=>'en'
+                        ],
+                    ],
+                    [
+                        'label'=>Yii::t('app','Indonesian'),
+                        'url'=>'#',
+                        'options'=>[
+                            'class'=>'language',
+                            'id'=>'id'
+                        ],
+                    ]
+            ],
+        ];
         $menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
@@ -63,6 +85,27 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/dashboard/index']];
         $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
         $menuItems[] = [
+            'label' => Yii::t('app','Language'),
+            'items' => [
+                    [
+                        'label'=>Yii::t('app','English'),
+                        'url'=>'#',
+                        'options'=>[
+                            'class'=>'language',
+                            'id'=>'en'
+                        ],
+                    ],
+                    [
+                        'label'=>Yii::t('app','Indonesian'),
+                        'url'=>'#',
+                        'options'=>[
+                            'class'=>'language',
+                            'id'=>'id'
+                        ],
+                    ]
+            ],
+        ];
+        $menuItems[] = [
                 'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
                 'url' => ['site/logout'],
                 'linkOptions' => ['data-method' => 'post']
@@ -70,6 +113,7 @@ AppAsset::register($this);
     }
 
     echo Nav::widget([
+        'encodeLabels' => false,
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
     ]);
@@ -93,6 +137,18 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+<script type="text/javascript">
+    $(function(){
+        $(document).on('click','.language',function(){
+            var lang = $(this).attr('id');
+            $.post('<?php echo Url::to(['/site/language']);?>',{'lang':lang},function(data){
+                location.reload();
+            });
+            console.log(lang);        
+        });
+
+    });
+</script>
 </body>
 </html>
 <?php $this->endPage() ?>
