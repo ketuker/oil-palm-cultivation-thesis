@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "accessibility".
+ * This is the model class for table "accessibility_avarage_geometric".
  *
  * @property integer $id
  * @property double $road_mills
@@ -15,18 +15,18 @@ use Yii;
  * @property double $bobot_mills
  * @property double $bobot_town
  * @property double $cr
- * @property boolean $validation
- * @property integer $id_user
  * @property string $date
+ * @property integer $sum_access_datas
+ * @property string $note
  */
-class Accessibility extends \yii\db\ActiveRecord
+class AccessibilityAG extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'accessibility';
+        return 'accessibility_avarage_geometric';
     }
 
     /**
@@ -35,11 +35,10 @@ class Accessibility extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr'], 'required'],
             [['road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr'], 'number'],
-            [['validation'], 'boolean'],
-            [['id_user'], 'integer'],
-            [['date'], 'safe']
+            [['date'], 'safe'],
+            [['sum_access_datas'], 'integer'],
+            [['note'], 'string']
         ];
     }
 
@@ -57,9 +56,9 @@ class Accessibility extends \yii\db\ActiveRecord
             'bobot_mills' => 'Bobot Mills',
             'bobot_town' => 'Bobot Town',
             'cr' => 'Cr',
-            'validation' => 'Validation',
-            'id_user' => 'Id User',
             'date' => 'Date',
+            'sum_access_datas' => 'Sum Access Datas',
+            'note' => 'Note',
         ];
     }
 }

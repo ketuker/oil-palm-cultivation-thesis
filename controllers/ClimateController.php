@@ -70,6 +70,7 @@ class ClimateController extends Controller
             $temp_ch    = 1 / $ch_temp;
             $ch_ch      = 1;
 
+
             $temp_dm    = $_POST['Climate']['temp_dm'];
             $dm_temp    = 1 / $temp_dm;
             $temp_temp  = 1;
@@ -81,6 +82,7 @@ class ClimateController extends Controller
             $sum_column_ch      = $ch_ch + $temp_ch + $dm_ch;
             $sum_column_temp    = $ch_temp + $temp_temp + $dm_temp;
             $sum_column_dm      = $ch_dm + $temp_dm + $dm_dm;
+
 
             /* ---- */
             $divided_sum_sum        = $sum_column_ch / $sum_column_ch;

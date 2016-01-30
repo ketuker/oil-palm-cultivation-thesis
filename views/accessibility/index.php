@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'cr',
             // 'validation:boolean',
             // 'id_user',
-            // 'dates',
+            // 'date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Factors;
 use app\models\FactorsSearch;
+use app\models\FactorsAG;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -60,10 +61,172 @@ class FactorsController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new Factors();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (Yii::$app->request->post()) {
+
+            $climate_land    = $_POST['Factors']['climate_land'];
+            $land_climate    = 1 / $climate_land;
+            $climate_climate      = 1;
+
+
+            $land_accessibility    = $_POST['Factors']['land_accessibility'];
+            $accessibility_land    = 1 / $land_accessibility;
+            $land_land  = 1;
+
+            $climate_accessibility      = $_POST['Factors']['climate_accessibility'];
+            $accessibility_climate      = 1 / $climate_accessibility;
+            $accessibility_accessibility      = 1;
+
+            $sum_column_climate      = $climate_climate + $land_climate + $accessibility_climate;
+            $sum_column_land    = $climate_land + $land_land + $accessibility_land;
+            $sum_column_accessibility      = $climate_accessibility + $land_accessibility + $accessibility_accessibility;
+
+
+            /* ---- */
+            $divided_sum_sum        = $sum_column_climate / $sum_column_climate;
+
+            $divided_climate_climate_sum      = $climate_climate / $sum_column_climate;
+            $divided_climate_land_sum    = $land_climate / $sum_column_climate;
+            $divided_climate_accessibility_sum      = $accessibility_climate / $sum_column_climate;
+
+            $divided_land_climate_sum    = $climate_land / $sum_column_land;
+            $divided_land_land_sum  = $land_land / $sum_column_land;
+            $divided_land_accessibility_sum    = $accessibility_land / $sum_column_land;
+
+            $divided_accessibility_climate_sum      = $climate_accessibility / $sum_column_accessibility;
+            $divided_accessibility_land_sum    = $land_accessibility / $sum_column_accessibility;
+            $divided_accessibility_accessibility_sum      = $accessibility_accessibility / $sum_column_accessibility;
+            /* ---- */
+
+            $sum_climate             = $divided_climate_climate_sum + $divided_land_climate_sum + $divided_accessibility_climate_sum;
+            $sum_land           = $divided_climate_land_sum + $divided_land_land_sum + $divided_accessibility_land_sum;
+            $sum_accessibility             = $divided_climate_accessibility_sum + $divided_land_accessibility_sum + $divided_accessibility_accessibility_sum;
+            $sum_divided        = $divided_sum_sum + $divided_sum_sum + $divided_sum_sum;
+
+            /* ---- */
+            $bobot_climate           = $sum_climate / $sum_divided;
+            $bobot_land         = $sum_land / $sum_divided;
+            $bobot_accessibility           = $sum_accessibility / $sum_divided;
+            /* ---- */
+
+            /* ---- */
+            $multiple_climate_climate_bobot      = $climate_climate * $bobot_climate;
+            $multiple_climate_land_bobot    = $land_climate * $bobot_climate;
+            $multiple_climate_accessibility_bobot      = $accessibility_climate * $bobot_climate;
+
+            $multiple_land_climate_bobot    = $climate_land * $bobot_land;
+            $multiple_land_land_bobot  = $land_land * $bobot_land;
+            $multiple_land_accessibility_bobot    = $accessibility_land * $bobot_land;
+
+            $multiple_accessibility_climate_bobot      = $climate_accessibility * $bobot_accessibility;
+            $multiple_accessibility_land_bobot    = $land_accessibility * $bobot_accessibility;
+            $multiple_accessibility_accessibility_bobot      = $accessibility_accessibility * $bobot_accessibility;
+            /* ---- */
+
+            /* ---- */
+            $sum_bobot_climate               = $multiple_climate_climate_bobot + $multiple_land_climate_bobot + $multiple_accessibility_climate_bobot;
+            $sum_bobot_land             = $multiple_climate_land_bobot + $multiple_land_land_bobot + $multiple_accessibility_land_bobot;
+            $sum_bobot_accessibility               = $multiple_climate_accessibility_bobot + $multiple_land_accessibility_bobot + $multiple_accessibility_accessibility_bobot;
+            /* ---- */
+
+            $divided_bobot_climate           = $sum_bobot_climate / $bobot_climate;
+            $divided_bobot_land         = $sum_bobot_land / $bobot_land;
+            $divided_bobot_accessibility           = $sum_bobot_accessibility / $bobot_accessibility;
+
+            /* ---- */
+            $lamda_max                  = ($divided_bobot_climate + $divided_bobot_land + $divided_bobot_accessibility) / $sum_divided;
+            $jumlah_factor              = $sum_divided;
+            $consistensi_index          = ($lamda_max-$jumlah_factor)/($jumlah_factor-1);
+            $rasio_index                = 0.58;
+            $consistensi_rasio          = $consistensi_index / $rasio_index;
+            /* ---- */
+
+            if ($consistensi_rasio < 0.1) {
+                $validation             = TRUE;
+            }else{
+                $validation             = FALSE;
+            }
+
+            if (Yii::$app->user->getId()) {
+                $_POST['Factors']['climate_land']    = $climate_land;
+                $_POST['Factors']['climate_accessibility']      = $climate_accessibility;
+                $_POST['Factors']['land_accessibility']    = $land_accessibility;
+                $_POST['Factors']['bobot_climate']   = $bobot_climate;
+                $_POST['Factors']['bobot_land'] = $bobot_land;
+                $_POST['Factors']['bobot_accessibility']   = $bobot_accessibility;
+                $_POST['Factors']['cr']         = $consistensi_rasio;
+                $_POST['Factors']['validation'] = $validation;
+                $_POST['Factors']['id_user']    = Yii::$app->user->getId();
+
+                if ($model->load($_POST) && $model->save()) {
+
+                    $data_factors                      = Factors::find()->where(['validation'=> TRUE])->AsArray()->All();
+
+                    $climate_land_ag_base                    = [];
+                    $climate_accessibility_ag_base                      = [];
+                    $land_accessibility_ag_base                    = [];
+                    $bobot_climate_ag_base                   = [];
+                    $bobot_land_ag_base                 = [];
+                    $bobot_accessibility_ag_base                   = [];
+                    $consistensi_rasio_ag_base          = [];
+
+                    for ($i=0; $i < count($data_factors); $i++) { 
+                        $climate_land_ag_base[$i]            = $data_factors[$i]['climate_land'];
+                        $climate_accessibility_ag_base[$i]              = $data_factors[$i]['climate_accessibility'];
+                        $land_accessibility_ag_base[$i]            = $data_factors[$i]['land_accessibility'];
+                        $bobot_climate_ag_base[$i]           = $data_factors[$i]['bobot_climate'];
+                        $bobot_land_ag_base[$i]         = $data_factors[$i]['bobot_land'];
+                        $bobot_accessibility_ag_base[$i]           = $data_factors[$i]['bobot_accessibility'];
+                        $consistensi_rasio_ag_base[$i]  = $data_factors[$i]['cr'];
+                    }
+
+                    $climate_land_ag                         = sqrt (array_product($climate_land_ag_base));
+                    $climate_accessibility_ag                           = sqrt (array_product($climate_accessibility_ag_base));
+                    $land_accessibility_ag                         = sqrt (array_product($land_accessibility_ag_base));
+                    $bobot_climate_ag                        = sqrt (array_product($bobot_climate_ag_base));
+                    $bobot_land_ag                      = sqrt (array_product($bobot_land_ag_base));
+                    $bobot_accessibility_ag                        = sqrt (array_product($bobot_accessibility_ag_base));
+                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+
+                    $model_ag                           = new FactorsAG();
+
+                    $_POSTAG['FactorsAG']['climate_land']      = $climate_land_ag;
+                    $_POSTAG['FactorsAG']['climate_accessibility']        = $climate_accessibility_ag;
+                    $_POSTAG['FactorsAG']['land_accessibility']      = $land_accessibility_ag;
+                    $_POSTAG['FactorsAG']['bobot_climate']     = $bobot_climate_ag;
+                    $_POSTAG['FactorsAG']['bobot_land']   = $bobot_land_ag;
+                    $_POSTAG['FactorsAG']['bobot_accessibility']     = $bobot_accessibility_ag;
+                    $_POSTAG['FactorsAG']['cr']           = $consistensi_rasio_ag;
+
+                    if ($model_ag->load($_POSTAG) && $model_ag->save()) {
+                        
+                        return $this->redirect(['view', 'id' => $model->id]);
+
+                    } else {
+
+                        return $this->render('create', [
+                            'model' => $model,
+                        ]);
+
+                    }
+
+                } else {
+
+                    return $this->render('create', [
+                        'model' => $model,
+                    ]);
+
+                }
+            } else {
+
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+
+            }
+            
         } else {
             return $this->render('create', [
                 'model' => $model,

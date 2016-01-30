@@ -21,7 +21,7 @@ class AccessibilitySearch extends Accessibility
             [['id', 'id_user'], 'integer'],
             [['road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr'], 'number'],
             [['validation'], 'boolean'],
-            [['dates'], 'safe'],
+            [['date'], 'safe'],
         ];
     }
 
@@ -68,7 +68,7 @@ class AccessibilitySearch extends Accessibility
             'cr' => $this->cr,
             'validation' => $this->validation,
             'id_user' => $this->id_user,
-            'dates' => $this->dates,
+            'date' => $this->date,
         ]);
 
         return $dataProvider;

@@ -28,7 +28,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_temp').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-road_mills').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -51,7 +51,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-road_town').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -74,7 +74,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-temp_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-mills_town').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,

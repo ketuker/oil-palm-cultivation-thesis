@@ -27,7 +27,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_temp').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('factors-climate_land').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             // 'handle'=>'square',
@@ -53,7 +53,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('factors-climate_accessibility').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -78,7 +78,7 @@ use kartik\slider\Slider;
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-temp_dm').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('factors-land_accessibility').value = ConvertNumber(val.value); }",
         ],
         'pluginOptions'=>[
             'min'=>2,
