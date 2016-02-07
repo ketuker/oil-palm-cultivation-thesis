@@ -67,24 +67,15 @@ $config = [
         ],
         'i18n' => [
             'translations' => [
-                'app*' => [
+                'app' => [
                     'class' => 'yii\i18n\PhpMessageSource',
                     // 'basePath'=>'@app/message',
-                    'sourceLanguage'=>'en-US',
-                    'fileMap'=> [
-                        'yii'=> 'yii.php',
-                        // 'app/error'=>'error.php',
-                    ],
-                ],
-                /*'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    // 'basePath'=>'@app/message',
-                    //'sourceLanguage'=>'en-US',
+                    'sourceLanguage'=>'en',
                     'fileMap'=> [
                         'app'=> 'app.php',
                         // 'app/error'=>'error.php',
                     ],
-                ],*/
+                ],
             ]
         ],
         'db' => require(__DIR__ . '/db.php'),
