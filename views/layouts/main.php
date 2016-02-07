@@ -42,13 +42,13 @@ AppAsset::register($this);
 
     $menuItems = [
         //['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'Area of Interest', 'url' => ['/compare/index']],
+        ['label' => Yii::t('app','Area of Interest'), 'url' => ['/compare/index']],
         // ['label' => 'About', 'url' => ['/site/about']],
         // ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
 
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
+        $menuItems[] = ['label' => Yii::t('app','Documentation'), 'url' => ['/documentation/index']];
         $menuItems[] = [
             'label' => Yii::t('app','Language'),
             'items' => [
@@ -74,16 +74,16 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
     } else {
         $menuItems[] = [
-            'label' => 'Pairwise Comparison',
+            'label' => Yii::t('app','Pairwise Comparison'),
             'items' => [
-                 ['label' => 'Climate', 'url' => ['/climate/create']],
-                 ['label' => 'Land', 'url' => ['/land/create']],
-                 ['label' => 'Accessibility', 'url' => ['accessibility/create']],
-                 ['label' => 'Factors', 'url' => ['factors/create']],
+                 ['label' => Yii::t('app','Climate'), 'url' => ['/climate/create']],
+                 ['label' => Yii::t('app','Land'), 'url' => ['/land/create']],
+                 ['label' => Yii::t('app','Accessibility'), 'url' => ['accessibility/create']],
+                 ['label' => Yii::t('app','Factors'), 'url' => ['factors/create']],
             ],
         ];
-        $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/advusr/index']];
-        $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
+        $menuItems[] = ['label' => Yii::t('app','Sensitivity Analysis'), 'url' => ['/advusr/index']];
+        $menuItems[] = ['label' => Yii::t('app','Documentation'), 'url' => ['/documentation/index']];
         $menuItems[] = [
             'label' => Yii::t('app','Language'),
             'items' => [
