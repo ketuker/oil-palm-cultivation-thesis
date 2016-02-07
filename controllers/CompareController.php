@@ -94,7 +94,16 @@ class CompareController extends Controller
 
             ini_set("memory_limit", "-1");
             
-            $get_intersection       = "SELECT *, ST_AsGeoJson(ST_Intersection(the_geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM kesesuaian_4326";
+            //$get_intersection       = "SELECT *, ST_AsGeoJson(ST_Intersection(the_geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM kesesuaian_4326";
+            // S = geom from draw
+            // B = Hasil intersects
+            /***
+             * Langkah 
+             * 1. INTERSECTS (TRUE | FALSE)
+             * 2. INTERSECTION (Kesesuain To Geom from draw)
+             **/
+            $get_intersection       = "select b.*,st_intersection(b.geom,s.geom)as geom from (select kesesuaian_4326.*, st_intersects(s.geom,kesesuaian_4326.geom)as touch from kesesuaian_4326,s where st_intersects(s.geom,kesesuaian_4326.geom) = true) as b, s;";
+
             $json_intersections     = Yii::$app->db->createCommand($get_intersection)->queryAll();
 
             $area_intersection      = "SELECT ST_AsGeoJson(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
