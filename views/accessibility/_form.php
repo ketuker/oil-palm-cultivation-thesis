@@ -21,60 +21,90 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'road_mills')->HiddenInput()->label('') ?>
 
 
-    <?= '<div class="col-md-2">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Mills <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
+    <!-- Label Mills -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span ></span> Distance From Mills 
+    <span id="mills" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_mills',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('accessibility-road_mills').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-road_mills').value = ConvertNumber(val.value); 
+            								document.getElementById('road').innerHTML         = ConvertPlus(val.value);
+                							document.getElementById('mills').innerHTML         = ConvertMin(val.value);
+        }",
         ],
         'pluginOptions'=>[
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Road </h6> </b> '; ?>
-    <?= '</div>' ?>
+    ]) . '</div>'?>
+    <!-- Label Road -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span id="road" class="badge">1</span>
+    <span ></span> Distance From Road 
+    </button></div>
 
     <?= '</br> </br> </br> ' ?>
 
     <?= $form->field($model, 'road_town')->HiddenInput()->label('') ?>
 
-    <?= '<div class="col-md-2">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Town <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
-    <?= '<div class="col-md-7">'.Slider::widget([
+    <!-- Label Town -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span ></span> Distance From Town 
+    <span id="town" class="badge">1</span></button></div>
+   <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_town',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('accessibility-road_town').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-road_town').value = ConvertNumber(val.value); 
+                        					document.getElementById('road2').innerHTML         = ConvertPlus(val.value);
+                							document.getElementById('town').innerHTML         = ConvertMin(val.value);
+        }",
         ],
         'pluginOptions'=>[
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Road </h6> </b> '; ?>
-    <?= '</div>' ?>
+    ]) . '</div>'?>
+    <!-- Label Road -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span id="road2" class="badge">1</span>
+    <span ></span> Distance From Road 
+    </button></div>
 
     <?= '</br> </br> </br> ' ?>
 
     <?= $form->field($model, 'mills_town')->HiddenInput()->label('') ?>
 
-    <?= '<div class="col-md-2">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Town <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
+
+    <!-- Label Town -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span ></span> Distance From Town 
+    <span id="town2" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'mills_town',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('accessibility-mills_town').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('accessibility-mills_town').value = ConvertNumber(val.value); 
+                        					document.getElementById('mills2').innerHTML         = ConvertPlus(val.value);
+                							document.getElementById('town2').innerHTML         = ConvertMin(val.value);
+
+        }",
         ],
         'pluginOptions'=>[
             'min'=>2,
@@ -83,8 +113,13 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Mills </h6> </b> '; ?>
-    <?= '</div>' ?>
+    ]) . '</div>'?>
+    <!-- Label Mills -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-warning" >
+    <span id="mills2" class="badge">1</span>
+    <span ></span> Distance From Mills 
+    </button></div>
 
     <?= '</br> </br> </br> ' ?>
 
@@ -202,6 +237,113 @@ use kartik\slider\Slider;
         }
         if (paramkiriman == 18) {
             return 9/1;
+        }
+    }
+function ConvertPlus(paramkiriman){
+        if (paramkiriman == 2) {
+            return '1/9';
+        }
+        if (paramkiriman == 3) {
+            return '1/8';
+        }
+        if (paramkiriman == 4) {
+            return '1/7';
+        }
+        if (paramkiriman == 5) {
+            return '1/6';
+        }
+        if (paramkiriman == 6) {
+            return '1/5';
+        }
+        if (paramkiriman == 7) {
+            return '1/4';
+        }
+        if (paramkiriman == 8) {
+            return '1/3';
+        }
+        if (paramkiriman == 9) {
+            return '1/2';
+        }
+        if (paramkiriman == 10) {
+            return '1';
+        }
+        if (paramkiriman == 11) {
+            return '2';
+        }
+        if (paramkiriman == 12) {
+            return '3';
+        }
+        if (paramkiriman == 13) {
+            return '4';
+        }
+        if (paramkiriman == 14) {
+            return '5';
+        }
+        if (paramkiriman == 15) {
+            return '6';
+        }
+        if (paramkiriman == 16) {
+            return '7';
+        }
+        if (paramkiriman == 17) {
+            return '8';
+        }
+        if (paramkiriman == 18) {
+            return '9';
+        }
+    }
+
+function ConvertMin(paramkiriman){
+        if (paramkiriman == 2) {
+            return '9';
+        }
+        if (paramkiriman == 3) {
+            return '8';
+        }
+        if (paramkiriman == 4) {
+            return '7';
+        }
+        if (paramkiriman == 5) {
+            return '6';
+        }
+        if (paramkiriman == 6) {
+            return '5';
+        }
+        if (paramkiriman == 7) {
+            return '4';
+        }
+        if (paramkiriman == 8) {
+            return '3';
+        }
+        if (paramkiriman == 9) {
+            return '2';
+        }
+        if (paramkiriman == 10) {
+            return '1';
+        }
+        if (paramkiriman == 11) {
+            return '1/2';
+        }
+        if (paramkiriman == 12) {
+            return '1/3';
+        }
+        if (paramkiriman == 13) {
+            return '1/4';
+        }
+        if (paramkiriman == 14) {
+            return '1/5';
+        }
+        if (paramkiriman == 15) {
+            return '1/6';
+        }
+        if (paramkiriman == 16) {
+            return '1/7';
+        }
+        if (paramkiriman == 17) {
+            return '1/8';
+        }
+        if (paramkiriman == 18) {
+            return '1/9';
         }
     }
 </script>

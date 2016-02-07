@@ -20,14 +20,14 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <?= $form->field($model, 'title')->textInput() ?>
 
             <?= $form->field($model, 'description')->textArea(['rows' => '10']) ?>
 
             <?= $form->field($model, 'geom')->HiddenInput()->label('') ?>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <?= app\widgets\KetukerIntersects::widget([
                 'options' => [
                     'library-js' => 'leaflet',
