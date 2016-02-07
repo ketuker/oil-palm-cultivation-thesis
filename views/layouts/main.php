@@ -82,7 +82,7 @@ AppAsset::register($this);
                  ['label' => 'Factors', 'url' => ['factors/create']],
             ],
         ];
-        $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/dashboard/index']];
+        $menuItems[] = ['label' => 'Sensitivity Analysis', 'url' => ['/advusr/index']];
         $menuItems[] = ['label' => 'Documentation', 'url' => ['/documentation/index']];
         $menuItems[] = [
             'label' => Yii::t('app','Language'),
@@ -106,9 +106,12 @@ AppAsset::register($this);
             ],
         ];
         $menuItems[] = [
-                'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                'url' => ['site/logout'],
-                'linkOptions' => ['data-method' => 'post']
+            'label' => 'User',
+            'items' => [
+                ['label' => 'Manage User', 'url' => ['/user/admin']],
+                ['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
+
+                ],
         ];
     }
 

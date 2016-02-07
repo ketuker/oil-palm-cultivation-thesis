@@ -22,9 +22,9 @@ use kartik\slider\Slider;
 
 
 
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Rainfall</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
+    <?=	'<div class="col-md-2">' ?>
+	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Temperature <span class="badge">'?><?= 4 ?> <?='</span></h6> </b> </div>'?>
+	<?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'CH_TEMP',
         'value'=>10,
         'handleColor'=>Slider::TYPE_INFO,
@@ -37,9 +37,10 @@ use kartik\slider\Slider;
             'max'=>18,
             'step'=>1,
             'tooltip_position'=> 'top',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Temperature</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;"><span class="badge">'?><?= 4 ?> <?='</span> Rainfall</h6> </b> '; ?>
 	<?=	'</div>' ?>
     
 
@@ -48,9 +49,9 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'ch_dm')->HiddenInput()->label('') ?>
 
 
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Rainfall</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
+    <?=	'<div class="col-md-2">' ?>
+	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month <span class="badge">'?><?= 4 ?> <?='</span> </h6> </b> </div>'?>
+	<?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'CH_DM',
         'value'=>10,
         'handleColor'=>Slider::TYPE_INFO,
@@ -62,10 +63,10 @@ use kartik\slider\Slider;
             'max'=>18,
             'step'=>1,
             'tooltip_position'=> 'top',
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;"><span class="badge">'?><?= 4 ?> <?='</span> Rainfall</h6> </b> '; ?>
 	<?=	'</div>' ?>
     
 
@@ -74,9 +75,9 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'temp_dm')->HiddenInput()->label('') ?>
 
 
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Temperature</h6> </b> </div>'?>
-	<?= '<div class="col-md-10">'.Slider::widget([
+    <?=	'<div class="col-md-2">' ?>
+	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month <span class="badge">'?><?= 4 ?> <?='</span> </h6> </b> </div>'?>
+	<?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'TEMP_DM',
         'value'=>10,
         'handleColor'=>Slider::TYPE_INFO,
@@ -87,10 +88,10 @@ use kartik\slider\Slider;
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Dry Month</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;"><span class="badge">'?><?= 4 ?> <?='</span> Temperature</h6> </b> '; ?>
 	<?=	'</div>' ?>
     <?=	'</br> </br> </br> </br>' ?>
 

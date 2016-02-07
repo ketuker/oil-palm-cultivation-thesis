@@ -21,7 +21,7 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'text_slope')->HiddenInput()->label('') ?>
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture</h6> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'text_slope',
         'value'=>10,
@@ -36,7 +36,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture</h6> </b> '; ?>
     <?= '</div>' ?>
     
     <?= $form->field($model, 'text_thick')->HiddenInput()->label('') ?>
@@ -46,7 +46,7 @@ use kartik\slider\Slider;
 
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture</h6> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <p style="font-weight: bold;margin: 0 0 0 ;">Peat</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">Thickness</p> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'text_thick',
         'value'=>10,
@@ -61,7 +61,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Thickness</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture</h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= $form->field($model, 'text_ripe')->HiddenInput()->label('') ?>
@@ -71,7 +71,7 @@ use kartik\slider\Slider;
     
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture </h6> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'text_ripe',
         'value'=>10,
@@ -86,7 +86,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Soil Texture</h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= $form->field($model, 'slope_thick')->HiddenInput()->label('') ?>
@@ -96,7 +96,7 @@ use kartik\slider\Slider;
 
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <p style="font-weight: bold;margin: 0 0 0 ;">Peat</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">Thickness</p> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'slope_thick',
         'value'=>10,
@@ -111,7 +111,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Thickness</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= $form->field($model, 'slope_ripe')->HiddenInput()->label('') ?>
@@ -121,7 +121,7 @@ use kartik\slider\Slider;
 
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'slope_ripe',
         'value'=>10,
@@ -136,7 +136,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Slope</h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= $form->field($model, 'thick_ripe')->HiddenInput()->label('') ?>
@@ -145,7 +145,7 @@ use kartik\slider\Slider;
 
 
     <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#ff7e7e"> <p style="font-weight: bold;margin: 0 0 0 ;">Peat</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">Thickness</p> </b> </div>'?>
+    <?= '<b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> </div>'?>
     <?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'thick_ripe',
         'value'=>10,
@@ -160,7 +160,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <h6 style="font-weight: bold;">Peat Ripening</h6> </b> '; ?>
+    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#ff7e7e"> <p style="font-weight: bold;margin: 0 0 0 ;">Peat</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">Thickness</p> </b> </div>'?>
     <?= '</div>' ?>
    <?= '</br> </br>' ?>
 

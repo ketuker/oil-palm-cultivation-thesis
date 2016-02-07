@@ -7,14 +7,14 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\CompareSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Compares';
+$this->title = 'Area of Interest';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="compare-index">
 
     <p>
-        <?= Html::a('Create Compare Draw', ['createdraw'], ['class' => 'btn btn-primary pull-right']) ?>
-        <?= Html::a('Create Compare Upload', ['createupload'], ['class' => 'btn btn-info pull-right', 'style' => 'margin-right:5px;']) ?>
+        <?= Html::a('Draw AOI', ['createdraw'], ['class' => 'btn btn-primary pull-right']) ?>
+        <?= Html::a('Upload AOI', ['createupload'], ['class' => 'btn btn-info pull-right', 'style' => 'margin-right:5px;']) ?>
     </p><br><br>
 
     <?= GridView::widget([

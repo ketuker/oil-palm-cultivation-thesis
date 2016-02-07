@@ -21,9 +21,9 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'road_mills')->HiddenInput()->label('') ?>
 
 
-    <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Road</p> </b> </div>'?>
-    <?= '<div class="col-md-10">'.Slider::widget([
+    <?= '<div class="col-md-2">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Mills <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
+    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_mills',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
@@ -37,16 +37,16 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Mills</p> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Road </h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= '</br> </br> </br> ' ?>
 
     <?= $form->field($model, 'road_town')->HiddenInput()->label('') ?>
 
-    <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Road</p> </b> </div>'?>
-    <?= '<div class="col-md-10">'.Slider::widget([
+    <?= '<div class="col-md-2">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Town <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
+    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_town',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
@@ -60,16 +60,16 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Town</p> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Road </h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= '</br> </br> </br> ' ?>
 
     <?= $form->field($model, 'mills_town')->HiddenInput()->label('') ?>
 
-    <?= '<div class="col-md-1">' ?>
-    <?= '<b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Mills</p> </b> </div>'?>
-    <?= '<div class="col-md-10">'.Slider::widget([
+    <?= '<div class="col-md-2">' ?>
+    <?= '<b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;">Distance from Town <span class="badge">'?><?= 4 ?> <?='</span></h6>  </b> </div>'?>
+    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'mills_town',
         'value'=>10,
         'handleColor'=>Slider::TYPE_WARNING,
@@ -83,7 +83,7 @@ use kartik\slider\Slider;
             // 'tooltip'=>'always',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-1"> <b class="badge" style="background-color:#f6b800"> <p style="font-weight: bold;margin: 0 0 0 ;">Distance</p> </br> <p style="font-weight: bold;margin: 0 0 0 ;">from Town</p> </b> '; ?>
+    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#f6b800"> <h6 style="font-weight: bold;"> <span class="badge">'?><?= 4 ?> <?='</span> Distance from Mills </h6> </b> '; ?>
     <?= '</div>' ?>
 
     <?= '</br> </br> </br> ' ?>
