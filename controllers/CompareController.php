@@ -92,23 +92,36 @@ class CompareController extends Controller
 
         if (Yii::$app->request->post()) {
 
+            ini_set("memory_limit", "-1");
+            
+            $get_intersection       = "SELECT *, ST_AsGeoJson(ST_Intersection(the_geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM kesesuaian_4326";
+            $json_intersections     = Yii::$app->db->createCommand($get_intersection)->queryAll();
+
+            $area_intersection      = "SELECT ST_AsGeoJson(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
+            $intersections          = Yii::$app->db->createCommand($area_intersection)->queryAll();
+
+            print_r($intersections);
+            echo "string";
+            print_r($json_intersections);
+            die();
+
             /* Mengambil data kesesuaian lahan */
             $get_data_kesesuaian    = "SELECT * FROM data_kesesuaian";
-            $arrat_data_kesesuaian  = Yii::$app->db->createCommand($get_data_kesesuaian)->queryAll();
+            $array_data_kesesuaian  = Yii::$app->db->createCommand($get_data_kesesuaian)->queryAll();
 
             /* Deklarasi variable result geojson */
             $result_geojson         = '{"type": "FeatureCollection","features": [';
 
             /* Intersection antara data draw dengan data kesesuaian lahan*/
-            for ($i=0; $i < count($arrat_data_kesesuaian); $i++) { 
-                $get_intersection   = "SELECT ST_AsGeoJson(ST_Intersection(geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM data_kesesuaian WHERE id = ".$arrat_data_kesesuaian[$i]['id']."";
+            for ($i=0; $i < count($array_data_kesesuaian); $i++) { 
+                $get_intersection   = "SELECT ST_AsGeoJson(ST_Intersection(geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM data_kesesuaian WHERE id = ".$array_data_kesesuaian[$i]['id']."";
                 $json_intersections = Yii::$app->db->createCommand($get_intersection)->queryColumn();
                 $json_intersection  = json_decode($json_intersections[0]);
 
                 if ($json_intersection->type === 'Polygon') {
 
                     /* SELECT attributes data_kesesuaian WHERE selected by intersection */
-                    $get_intersection_att   = "SELECT id, status FROM data_kesesuaian WHERE id = ".$arrat_data_kesesuaian[$i]['id']."";
+                    $get_intersection_att   = "SELECT id, status FROM data_kesesuaian WHERE id = ".$array_data_kesesuaian[$i]['id']."";
                     $json_intersection_att  = Yii::$app->db->createCommand($get_intersection_att)->queryAll();
 
                     $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"id\":\"".$json_intersection_att[0]['id']."\", \"status\":\"".$json_intersection_att[0]['status']."\"},\"geometry\": ";
@@ -119,11 +132,11 @@ class CompareController extends Controller
 
             $result_geojson         .= ']}';
             $result_data            = substr($result_geojson, 0, -3) . ' ]}';
-    
+
             /* Convert WKT to Geom */
             $query_geom_from_wkt    = "SELECT ST_GeomFromText('".$_POST['Compare']['geom']."', 4326), ST_Area(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
             $result_geom_from_wkt   = Yii::$app->db->createCommand($query_geom_from_wkt)->queryAll();
-            
+
             /* Convert m2 to Ha (Ha = m2 ÷ 10,000)*/
             $data_st_area           = $result_geom_from_wkt[0]['st_area'];
 
