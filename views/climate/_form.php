@@ -21,15 +21,18 @@ use kartik\slider\Slider;
     <?= $form->field($model, 'ch_temp')->HiddenInput()->label('') ?>
 
 
+    <!-- Label Rainfal -->
+    <div class="col-md-1"><button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Rainfal <span id="rainfal" class="badge">1</span></button></div>
 
-    <?=	'<div class="col-md-1">' ?>
-	<?= '<b class="badge" style="background-color:#2dc9ff"> <h6 style="font-weight: bold;">Rainfall</h6> </b> </div>'?>
 	<?= '<div class="col-md-10">'.Slider::widget([
         'name'=>'CH_TEMP',
         'value'=>10,
         'handleColor'=>Slider::TYPE_INFO,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('climate-ch_temp').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { 
+                document.getElementById('climate-ch_temp').value    = ConvertNumber(val.value); 
+                document.getElementById('rainfal').innerHTML         = ConvertString(val.value);
+            }",
         ],
         'pluginOptions'=>[
             // 'handle'=>'square',
