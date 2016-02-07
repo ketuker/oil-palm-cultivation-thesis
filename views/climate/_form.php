@@ -15,7 +15,7 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="climate-form">
-
+    <div id="cr" class="alert alert-success" role="alert">CR : 1 and Validation : TRUE</div>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'ch_temp')->HiddenInput()->label('') ?>
@@ -37,6 +37,7 @@ use kartik\slider\Slider;
                 document.getElementById('climate-ch_temp').value    = ConvertNumber(val.value); 
                 document.getElementById('rainfal').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('temperature').innerHTML         = ConvertMin(val.value);
+                checkCR();
             }",
         ],
         'pluginOptions'=>[
@@ -76,6 +77,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('climate-ch_dm').value = ConvertNumber(val.value); 
                             				document.getElementById('rainfal2').innerHTML   		= ConvertPlus(val.value);
                 							document.getElementById('dm').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
 
         }",
         ],
@@ -96,7 +98,7 @@ use kartik\slider\Slider;
     </button></div>
     
 
-    <?=	'</br> </br> </br> </br>' ?>
+    </br> </br> </br> </br>
 
     <?= $form->field($model, 'temp_dm')->HiddenInput()->label('') ?>
 
@@ -114,6 +116,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('climate-temp_dm').value = ConvertNumber(val.value); 
             								document.getElementById('temperature2').innerHTML    = ConvertPlus(val.value);
                 							document.getElementById('dm2').innerHTML          = ConvertMin(val.value);
+                                            checkCR();
         }",
         ],
         'pluginOptions'=>[
@@ -141,6 +144,25 @@ use kartik\slider\Slider;
 </div>
 
 <script type="text/javascript">
+    window.onload = Startup();
+
+    function Startup(){
+        document.getElementById('climate-ch_temp').value = 1;
+        document.getElementById('climate-temp_dm').value = 1;
+        document.getElementById('climate-ch_dm').value = 1;
+    }
+
+    function checkCR(){
+        var ch_temp = document.getElementById('climate-ch_temp').value;
+        var temp_dm = document.getElementById('climate-temp_dm').value;
+        var ch_dm   = document.getElementById('climate-ch_dm').value;
+
+        $.post("cr",{ch_temp: ch_temp,temp_dm: temp_dm, ch_dm: ch_dm}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('cr').innerHTML = 'CR : '+obj.cr+' and Validation : '+obj.validation;
+        });
+    }
+
     function ConvertString(paramkiriman){
         if (paramkiriman == 2) {
             return '1/9';
