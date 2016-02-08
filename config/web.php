@@ -65,19 +65,20 @@ $config = [
                 ],
             ],
         ],
-        'i18n' => [
-            'translations' => [
-                'app' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
-                    // 'basePath'=>'@app/message',
-                    'sourceLanguage'=>'en',
-                    'fileMap'=> [
-                        'app'=> 'app.php',
-                        // 'app/error'=>'error.php',
-                    ],
-                ],
-            ]
-        ],
+        // 'i18n' => [
+        //     'translations' => [
+        //         '*' => [
+        //             'class' => 'yii\i18n\PhpMessageSource',
+        //             'basePath'=>'@app/message',
+        //             'sourceLanguage'=>'en',
+        //             // 'language' => 'id',
+        //             'fileMap'=> [
+        //                 // 'app'=> 'app.php',
+        //                 // 'app/error'=>'error.php',
+        //             ],
+        //         ],
+        //     ]
+        // ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,

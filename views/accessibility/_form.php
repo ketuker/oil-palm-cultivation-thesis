@@ -15,11 +15,12 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="accessibility-form">
-
+    <div id="cr" class="alert alert-warning" role="alert">Consistency Ratio : 0 and Validation : true</div>
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'road_mills')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'road_mills')->HiddenInput()->label(false) ?>
 
+    </br>
 
     <!-- Label Mills -->
     <div class="col-md-2">
@@ -34,6 +35,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('accessibility-road_mills').value = ConvertNumber(val.value); 
             								document.getElementById('road').innerHTML         = ConvertPlus(val.value);
                 							document.getElementById('mills').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
         }",
         ],
         'pluginOptions'=>[
@@ -53,7 +55,7 @@ use kartik\slider\Slider;
 
     <?= '</br> </br> </br> ' ?>
 
-    <?= $form->field($model, 'road_town')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'road_town')->HiddenInput()->label(false) ?>
 
     <!-- Label Town -->
     <div class="col-md-2">
@@ -68,6 +70,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('accessibility-road_town').value = ConvertNumber(val.value); 
                         					document.getElementById('road2').innerHTML         = ConvertPlus(val.value);
                 							document.getElementById('town').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
         }",
         ],
         'pluginOptions'=>[
@@ -87,7 +90,7 @@ use kartik\slider\Slider;
 
     <?= '</br> </br> </br> ' ?>
 
-    <?= $form->field($model, 'mills_town')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'mills_town')->HiddenInput()->label(false) ?>
 
 
     <!-- Label Town -->
@@ -103,6 +106,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('accessibility-mills_town').value = ConvertNumber(val.value); 
                         					document.getElementById('mills2').innerHTML         = ConvertPlus(val.value);
                 							document.getElementById('town2').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
 
         }",
         ],
@@ -110,7 +114,7 @@ use kartik\slider\Slider;
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
     ]) . '</div>'?>
@@ -132,6 +136,24 @@ use kartik\slider\Slider;
 </div>
 
 <script type="text/javascript">
+    window.onload = Startup();
+
+    function Startup(){
+        document.getElementById('accessibility-road_mills').value = 1;
+        document.getElementById('accessibility-road_town').value = 1;
+        document.getElementById('accessibility-mills_town').value = 1;
+    }
+
+    function checkCR(){
+        var road_mills = document.getElementById('accessibility-road_mills').value;
+        var road_town = document.getElementById('accessibility-road_town').value;
+        var mills_town   = document.getElementById('accessibility-mills_town').value;
+
+        $.post("cr",{road_mills: road_mills,road_town: road_town, mills_town: mills_town}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('cr').innerHTML = 'Consistency Ratio : '+obj.cr+' and Validation : '+obj.validation;
+        });
+    }
     function ConvertString(paramkiriman){
         if (paramkiriman == 2) {
             return '1/9';

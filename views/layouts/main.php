@@ -77,12 +77,18 @@ AppAsset::register($this);
             'label' => Yii::t('app','Pairwise Comparison'),
             'items' => [
                  ['label' => Yii::t('app','Climate'), 'url' => ['/climate/create']],
-                 ['label' => Yii::t('app','Land'), 'url' => ['/land/create']],
+                 ['label' => Yii::t('app','Land'), 
+                    'items' => [
+                        ['label' => Yii::t('app','Non Peatland'), 'url' => ['/landnpeat/create']],
+                        ['label' => Yii::t('app','Peatland'), 'url' => ['/landpeat/create']],
+                    ]],
                  ['label' => Yii::t('app','Accessibility'), 'url' => ['accessibility/create']],
                  ['label' => Yii::t('app','Factors'), 'url' => ['factors/create']],
             ],
+            'options' => ['class' =>'nav-pills'],
+
         ];
-        $menuItems[] = ['label' => Yii::t('app','Sensitivity Analysis'), 'url' => ['/advusr/index']];
+        $menuItems[] = ['label' => Yii::t('app','Sensitivity Analysis'), 'url' => ['/advusr/create']];
         $menuItems[] = ['label' => Yii::t('app','Documentation'), 'url' => ['/documentation/index']];
         $menuItems[] = [
             'label' => Yii::t('app','Language'),
@@ -113,6 +119,7 @@ AppAsset::register($this);
 
                 ],
         ];
+
     }
 
     echo Nav::widget([

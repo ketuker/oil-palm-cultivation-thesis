@@ -19,9 +19,9 @@ class AdvusrSearch extends Advusr
     {
         return [
             [['id', 'id_user'], 'integer'],
-            [['skenario', 'date'], 'safe'],
-            [['ch_temp', 'ch_dm', 'temp_dm', 'bobot_ch', 'bobot_temp', 'bobot_dm', 'cr_climate', 'text_slope', 'text_thick', 'text_ripe', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_text', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr_land', 'road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr_accessibility', 'climate_land', 'climate_accessibility', 'land_accessibility', 'bobot_climate', 'bobot_land', 'bobot_accessibility', 'cr_factors'], 'number'],
-            [['validation_climate', 'validation_land', 'validation_accessibility', 'validation'], 'boolean'],
+            [['skenario', 'dates'], 'safe'],
+            [['ch_temp', 'ch_dm', 'temp_dm', 'bobot_ch', 'bobot_temp', 'bobot_dm', 'cr_climate', 'slope_text', 'slope_elev', 'text_elev', 'bobot_slopenp', 'bobot_text', 'bobot_elev', 'cr_landnpeat', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_slopep', 'bobot_thick', 'bobot_ripe', 'cr_landpeat', 'road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr_accessibility', 'climate_land', 'climate_accessibility', 'land_accessibility', 'bobot_climate', 'bobot_land', 'bobot_accessibility', 'cr_factors'], 'number'],
+            [['validation_climate', 'validation_landnpeat', 'validation_landpeat', 'validation_accessibility', 'validation_factors'], 'boolean'],
         ];
     }
 
@@ -67,18 +67,22 @@ class AdvusrSearch extends Advusr
             'bobot_dm' => $this->bobot_dm,
             'cr_climate' => $this->cr_climate,
             'validation_climate' => $this->validation_climate,
-            'text_slope' => $this->text_slope,
-            'text_thick' => $this->text_thick,
-            'text_ripe' => $this->text_ripe,
+            'slope_text' => $this->slope_text,
+            'slope_elev' => $this->slope_elev,
+            'text_elev' => $this->text_elev,
+            'bobot_slopenp' => $this->bobot_slopenp,
+            'bobot_text' => $this->bobot_text,
+            'bobot_elev' => $this->bobot_elev,
+            'cr_landnpeat' => $this->cr_landnpeat,
+            'validation_landnpeat' => $this->validation_landnpeat,
             'slope_thick' => $this->slope_thick,
             'slope_ripe' => $this->slope_ripe,
             'thick_ripe' => $this->thick_ripe,
-            'bobot_text' => $this->bobot_text,
-            'bobot_slope' => $this->bobot_slope,
+            'bobot_slopep' => $this->bobot_slopep,
             'bobot_thick' => $this->bobot_thick,
             'bobot_ripe' => $this->bobot_ripe,
-            'cr_land' => $this->cr_land,
-            'validation_land' => $this->validation_land,
+            'cr_landpeat' => $this->cr_landpeat,
+            'validation_landpeat' => $this->validation_landpeat,
             'road_mills' => $this->road_mills,
             'road_town' => $this->road_town,
             'mills_town' => $this->mills_town,
@@ -94,9 +98,9 @@ class AdvusrSearch extends Advusr
             'bobot_land' => $this->bobot_land,
             'bobot_accessibility' => $this->bobot_accessibility,
             'cr_factors' => $this->cr_factors,
-            'validation' => $this->validation,
+            'validation_factors' => $this->validation_factors,
             'id_user' => $this->id_user,
-            'date' => $this->date,
+            'dates' => $this->dates,
         ]);
 
         $query->andFilterWhere(['like', 'skenario', $this->skenario]);

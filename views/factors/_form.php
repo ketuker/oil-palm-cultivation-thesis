@@ -15,16 +15,19 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="climate-form">
-
+    <div id="cr" class="alert alert-success" role="alert">Consistency Ratio : 0 and Validation : true</div>
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'climate_land')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'climate_land')->HiddenInput()->label(false) ?>
+    </br>
 
     <!-- Label Land -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span ></span> Land 
-    <span id="land" class="badge">1</span></button></div>   <?= '<div class="col-md-7">'.Slider::widget([
+    <span id="land" class="badge">1</span></button></div>  
+
+    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'climate_land',
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
@@ -32,6 +35,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('factors-climate_land').value = ConvertNumber(val.value); 
                                             document.getElementById('climate').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('land').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
         }",
         ],
         'pluginOptions'=>[
@@ -52,59 +56,83 @@ use kartik\slider\Slider;
     </button></div>
     
 
-    <?= '</br> </br> </br> </br>' ?>
+    </br> </br> </br> 
 
 
-    <?= $form->field($model, 'climate_accessibility')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'climate_accessibility')->HiddenInput()->label(false) ?>
 
-    <?= '<div class="col-md-2">' ?>
-    <?= '<b class="badge" style="background-color:#74c365"> <h6 style="font-weight: bold;">Accessibility <span class="badge">'?><?= 4 ?> <?='</span></h6> </b> </div>'?>
+    <!-- Label Accessibility -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-success" >
+    <span ></span> Accessibility
+    <span id="access" class="badge">1</span></button></div>  
     <?= '<div class="col-md-7">'.Slider::widget([
-        'name'=>'CH_DM',
+        'name'=>'climate_accessibility',
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('factors-climate_accessibility').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('factors-climate_accessibility').value = ConvertNumber(val.value); 
+                                            document.getElementById('climate2').innerHTML         = ConvertPlus(val.value);
+                                            document.getElementById('access').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
+        }",
         ],
         'pluginOptions'=>[
             'min'=>2,
             'max'=>18,
             'step'=>1,
             'tooltip_position'=> 'top',
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#74c365"> <h6 style="font-weight: bold;"><span class="badge">'?><?= 4 ?> <?='</span> Climate</h6> </b> '; ?>
-    <?= '</div>' ?>
+    ]) . '</div>'?>
+    <!-- Label Climate -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-success" >
+    <span id="climate2" class="badge">1</span>
+    <span ></span> Climate 
+    </button></div>
     
 
-    <?= '</br> </br> </br> </br>' ?>
+    </br> </br> </br>
 
-    <?= $form->field($model, 'land_accessibility')->HiddenInput()->label('') ?>
+    <?= $form->field($model, 'land_accessibility')->HiddenInput()->label(false) ?>
 
-    <?= '<div class="col-md-2">' ?>
-    <?= '<b class="badge" style="background-color:#74c365"> <h6 style="font-weight: bold;">Accessibility <span class="badge">'?><?= 4 ?> <?='</span></h6> </b> </div>'?>
+    <!-- Label Accessibility -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-success" >
+    <span ></span> Accessibility
+    <span id="access2" class="badge">1</span></button></div> 
     <?= '<div class="col-md-7">'.Slider::widget([
-        'name'=>'TEMP_DM',
+        'name'=>'land_accessibility',
         'value'=>10,
         'handleColor'=>Slider::TYPE_SUCCESS,
         'pluginEvents' => [
-            'slideStop' => "function(val) { document.getElementById('factors-land_accessibility').value = ConvertNumber(val.value); }",
+            'slideStop' => "function(val) { document.getElementById('factors-land_accessibility').value = ConvertNumber(val.value); 
+                                            document.getElementById('land2').innerHTML         = ConvertPlus(val.value);
+                                            document.getElementById('access2').innerHTML         = ConvertMin(val.value);
+                                            checkCR();
+        }",
         ],
         'pluginOptions'=>[
             'min'=>2,
             'max'=>18,
             'step'=>1,
-            // 'tooltip'=>'always',
+            'tooltip'=>'hide',
             'formatter'=>new yii\web\JsExpression("function(val) { return ConvertString(val); }")
         ]
-    ]) . '</div> <div class="col-md-2"> <b class="badge" style="background-color:#74c365"> <h6 style="font-weight: bold;"><span class="badge">'?><?= 4 ?> <?='</span> Land</h6> </b> '; ?>
-    <?= '</div>' ?>
-    <?= '</br> </br> </br> </br>' ?>
+    ]) . '</div>'?>
+    <!-- Label Land -->
+    <div class="col-md-2">
+    <button type="button" class="btn btn-success" >
+    <span id="land2" class="badge">1</span>
+    <span ></span> Land 
+    </button></div>
+    </br> </br> </br>
 
 
 
-    <div class="form-group">
+    <br><br><div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
@@ -112,6 +140,24 @@ use kartik\slider\Slider;
 
 </div>
 <script type="text/javascript">
+    window.onload = Startup();
+
+    function Startup(){
+        document.getElementById('factors-climate_land').value = 1;
+        document.getElementById('factors-climate_accessibility').value = 1;
+        document.getElementById('factors-land_accessibility').value = 1;
+    }
+
+    function checkCR(){
+        var climate_land = document.getElementById('factors-climate_land').value;
+        var climate_accessibility = document.getElementById('factors-climate_accessibility').value;
+        var land_accessibility   = document.getElementById('factors-land_accessibility').value;
+
+        $.post("cr",{climate_land: climate_land,climate_accessibility: climate_accessibility, land_accessibility: land_accessibility}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('cr').innerHTML = 'Consistency Ratio : '+obj.cr+' and Validation : '+obj.validation;
+        });
+    }
     function ConvertString(paramkiriman){
         if (paramkiriman == 2) {
             return '1/9';

@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Accessibility */
+/* @var $model app\models\Landpeat */
 
-$this->title = 'Accessibility Weight Questionnaire';
-$this->params['breadcrumbs'][] = ['label' => 'Accessibilities', 'url' => ['index']];
+$this->title = 'Peatland Weight Questionnaire';
+$this->params['breadcrumbs'][] = ['label' => 'Peatland', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="accessibility-create">
+<div class="landpeat-create">
 
     <h3><?= Html::encode($this->title) ?></h3>
 
