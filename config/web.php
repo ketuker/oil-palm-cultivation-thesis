@@ -14,9 +14,9 @@ $config = [
             'cost' => 12,
             'admins' => ['ketuker']
         ],
-        /*'rbac' => [
+        'rbac' => [
             'class' => 'dektrium\rbac\Module',
-        ],*/
+        ],
     ],
     'components' => [
         'request' => [
