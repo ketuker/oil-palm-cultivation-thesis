@@ -15,7 +15,7 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="climate-form">
-    <div id="cr" class="alert alert-info" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="cr" class="alert alert-info" role="alert"><?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'ch_temp')->HiddenInput()->label(false) ?>
@@ -24,7 +24,7 @@ use kartik\slider\Slider;
     <!-- Label Temperature -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Temperature 
+    <span ></span> <?= Yii::t('app','Temperature') ?>  
     <span id="temperature" class="badge">1</span></button></div>
 
 	<?= '<div class="col-md-7">'.Slider::widget([
@@ -54,7 +54,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="rainfal" class="badge">1</span>
-    <span ></span> Rainfal 
+    <span ></span> <?= Yii::t('app','Rainfall') ?> 
     </button></div>
     
 
@@ -66,7 +66,7 @@ use kartik\slider\Slider;
     <!-- Label Dry Month -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Dry Month 
+    <span ></span> <?= Yii::t('app','Dry Month') ?> 
     <span id="dm" class="badge">1</span></button></div>
 
 	<?= '<div class="col-md-7">'.Slider::widget([
@@ -94,7 +94,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="rainfal2" class="badge">1</span>
-    <span ></span> Rainfal 
+    <span ></span> <?= Yii::t('app','Rainfall') ?> 
     </button></div>
     
 
@@ -106,7 +106,7 @@ use kartik\slider\Slider;
     <!-- Label Dry Month -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Dry Month 
+    <span ></span> <?= Yii::t('app','Dry Month') ?>
     <span id="dm2" class="badge">1</span></button></div>
 	<?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'TEMP_DM',
@@ -131,12 +131,12 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="temperature2" class="badge">1</span>
-    <span ></span> Temperature 
+    <span ></span> <?= Yii::t('app','Temperature') ?>
     </button></div>
     </br> </br> </br>
 
     <br><br><div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

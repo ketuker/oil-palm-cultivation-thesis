@@ -15,7 +15,7 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="landnpeat-form">
-    <div id="cr" class="alert alert-danger" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="cr" class="alert alert-danger" role="alert"><?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -27,7 +27,7 @@ use kartik\slider\Slider;
         <!-- Label Texture -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Texture 
+    <span ></span> <?= Yii::t('app','Texture') ?> 
     <span id="texture" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -57,7 +57,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?> 
     </button></div>
     </br> </br> </br>
 
@@ -67,7 +67,7 @@ use kartik\slider\Slider;
         <!-- Label Elevation -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Elevation 
+    <span ></span> <?= Yii::t('app','Elevation') ?> 
     <span id="elev" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -97,7 +97,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope2" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?> 
     </button></div>
     </br> </br> </br>
 
@@ -137,13 +137,13 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="texture2" class="badge">1</span>
-    <span ></span> Texture 
+    <span ></span> <?= Yii::t('app','Texture') ?> 
     </button></div>
     </br> </br> </br>
 
 
     </br> </br> <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -17,7 +17,7 @@ use kartik\slider\Slider;
 </style>
 
 <div class="landpeat-form">
-    <div id="cr" class="alert alert-danger" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="cr" class="alert alert-danger" role="alert"><?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?>: true</div>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -26,7 +26,7 @@ use kartik\slider\Slider;
         <!-- Label Thicknes -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Thickness 
+    <span ></span> <?= Yii::t('app','Peat Thickness') ?> 
     <span id="thick" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -56,7 +56,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br> </br>
 
@@ -66,7 +66,7 @@ use kartik\slider\Slider;
         <!-- Label Ripe -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Ripening 
+    <span ></span> <?= Yii::t('app','Peat Ripening') ?>
     <span id="ripe" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -96,7 +96,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope2" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br> </br>
 
@@ -106,7 +106,7 @@ use kartik\slider\Slider;
         <!-- Label Ripe -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Ripening 
+    <span ></span> <?= Yii::t('app','Peat Ripening') ?>
     <span id="ripe2" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -136,14 +136,14 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="thick2" class="badge">1</span>
-    <span ></span> Peat Thickness 
+    <span ></span> <?= Yii::t('app','Peat Thickness') ?>
     </button></div>
     </br> </br> </br>
 
 
 
     </br> </br><div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

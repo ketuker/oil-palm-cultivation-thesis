@@ -15,7 +15,7 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="accessibility-form">
-    <div id="cr" class="alert alert-warning" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="cr" class="alert alert-warning" role="alert"> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'road_mills')->HiddenInput()->label(false) ?>
@@ -25,7 +25,7 @@ use kartik\slider\Slider;
     <!-- Label Mills -->
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
-    <span ></span> Distance From Mills 
+    <span ></span> <?= Yii::t('app','Distance From Mills') ?> 
     <span id="mills" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_mills',
@@ -50,7 +50,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="road" class="badge">1</span>
-    <span ></span> Distance From Road 
+    <span ></span> <?= Yii::t('app','Distance From Road') ?>
     </button></div>
 
     <?= '</br> </br> </br> ' ?>
@@ -60,7 +60,7 @@ use kartik\slider\Slider;
     <!-- Label Town -->
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
-    <span ></span> Distance From Town 
+    <span ></span> <?= Yii::t('app','Distance From Town') ?> 
     <span id="town" class="badge">1</span></button></div>
    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_town',
@@ -85,7 +85,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="road2" class="badge">1</span>
-    <span ></span> Distance From Road 
+    <span ></span> <?= Yii::t('app','Distance From Road') ?>
     </button></div>
 
     <?= '</br> </br> </br> ' ?>
@@ -96,7 +96,7 @@ use kartik\slider\Slider;
     <!-- Label Town -->
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
-    <span ></span> Distance From Town 
+    <span ></span> <?= Yii::t('app','Distance From Town') ?>
     <span id="town2" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'mills_town',
@@ -122,13 +122,13 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="mills2" class="badge">1</span>
-    <span ></span> Distance From Mills 
+    <span ></span> <?= Yii::t('app','Distance From Mills') ?>
     </button></div>
 
     <?= '</br> </br> </br> ' ?>
 
     <br><br><div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

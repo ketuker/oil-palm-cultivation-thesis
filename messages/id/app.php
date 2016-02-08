@@ -105,19 +105,64 @@ return [
     '{n} PB' => '{n} PB',
     '{n} TB' => '{n} TB',
     'Language' => 'Bahasa',
+    'Bogor Agricultural University' => 'Institut Pertanian Bogor',
+    'Create Scenario' => 'Buat Skenario',
 
     /*Bahasa di Menu*/
-    'Area of Interest' => 'Wilayah yang menarik',
+    'Area of Interest' => 'Wilayah Kajian',
     'Documentation'     =>  'Dokumentasi',
-    'Pairwise Comparison' =>  'Perbandingan mbuh',
+    'Pairwise Comparison' =>  'Perbandingan Berpasangan',
     'Climate'    =>  'Iklim',
+    'Climates'    =>  'Iklim',
     'Land'   =>  'Tanah',
+    'Non Peatland' => 'Bukan Gambut',
+    'Peatland' => 'Gambut',
     'Accessibility'   =>  'Aksesibilitas',
     'Factors'   =>  'Faktor',
-    'Sensitivity Analysis' => 'Analisa sensitif',
+    'Sensitivity Analysis' => 'Analisa Sensitivitas',
+    'User'   =>  'Pengguna',
+    'Manage User'   =>  'Pengaturan Pengguna',
+    'Users'   =>  'Pengguna',
+    'Manage Users'   =>  'Pengaturan Pengguna',
 
     /* Home */
-    'Welcome to Web GIS Application for Selecting Oil Palm Plantation Site' => 'Selamat datang!',
+    'Welcome to Web GIS Application for Selecting Oil Palm Plantation Site' => 'Selamat datang di Aplikasi Web GIS untuk Pemilihan Lokasi Kebun Kelapa Sawit',
+ 
+    'Consistency Ratio' => 'Konsistensi Rasio',
+    'Validation' => 'Validasi',
+    'Create' => 'Buat',
+     /* Climate*/
+    'Climate Weight Questionnaire' => 'Kuisioner Bobot Iklim',
+    'Rainfall' => 'Curah Hujan',
+    'Temperature' => 'Suhu Udara',
+    'Dry Month' => 'Bulan Kering',
+
+    /* Aksesibility*/
+    'Accessibility Weight Questionnaire' => 'Kuisioner Bobot Aksesibilitas',
+    'Distance From Mills' => 'Jarak Dari Pabrik',
+    'Distance From Road' => 'Jarak Dari Jalan',
+    'Distance From Town' => 'Jarak Dari Kota',
+
+    /* Non Peat*/
+    'Non Peatland Weight Questionnaire' => 'Kuisioner Bobot Bukan Gambut',
+    'Texture' => 'Tekstur',
+    'Slope' => 'Lereng',
+    'Elevation' => 'Ketinggian',    
+
+    /* Peat*/
+    'Peatland Weight Questionnaire' => 'Kuisioner Bobot Gambut',
+    'Peat Thickness' => 'Kedalaman Gambut',
+    'Slope' => 'Lereng',
+    'Peat Ripening' => 'Kematangan Gambut',
+
+    /* Factor*/
+    'Factors Weight Questionnaire' => 'Kuisioner Bobot Faktor',
+
+
+    /* Aksesibility*/
+
+    
+
 
 ];
 ?>

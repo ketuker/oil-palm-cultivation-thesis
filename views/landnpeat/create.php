@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Landnpeat */
 
-$this->title = 'Non Peatland Weight Questionnaire';
-$this->params['breadcrumbs'][] = ['label' => 'Non Peatland', 'url' => ['index']];
+$this->title = Yii::t('app','Non Peatland Weight Questionnaire');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Non Peatland'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="landnpeat-create">

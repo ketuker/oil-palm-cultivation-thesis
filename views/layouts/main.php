@@ -33,7 +33,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '<b> <img src= "/logo.jpg" style="width:70px;height:30px;"> Bogor Agricultural University </b>',
+        'brandLabel' => '<b> <img src= "/logo.jpg" style="width:70px;height:30px;">'.'   '. Yii::t('app','Bogor Agricultural University') .'</b>',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-default navbar-fixed-top',
@@ -77,11 +77,8 @@ AppAsset::register($this);
             'label' => Yii::t('app','Pairwise Comparison'),
             'items' => [
                  ['label' => Yii::t('app','Climate'), 'url' => ['/climate/create']],
-                 ['label' => Yii::t('app','Land'), 
-                    'items' => [
-                        ['label' => Yii::t('app','Non Peatland'), 'url' => ['/landnpeat/create']],
-                        ['label' => Yii::t('app','Peatland'), 'url' => ['/landpeat/create']],
-                    ]],
+                 ['label' => Yii::t('app','Non Peatland'), 'url' => ['/landnpeat/create']],
+                 ['label' => Yii::t('app','Peatland'), 'url' => ['/landpeat/create']],
                  ['label' => Yii::t('app','Accessibility'), 'url' => ['accessibility/create']],
                  ['label' => Yii::t('app','Factors'), 'url' => ['factors/create']],
             ],
@@ -112,9 +109,9 @@ AppAsset::register($this);
             ],
         ];
         $menuItems[] = [
-            'label' => 'User',
+            'label' => Yii::t('app','User'),
             'items' => [
-                ['label' => 'Manage User', 'url' => ['/user/admin']],
+                ['label' => Yii::t('app','Manage User'), 'url' => ['/user/admin']],
                 ['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
 
                 ],

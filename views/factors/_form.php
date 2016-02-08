@@ -15,7 +15,7 @@ use kartik\slider\Slider;
 }
 </style>
 <div class="climate-form">
-    <div id="cr" class="alert alert-success" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="cr" class="alert alert-success" role="alert"><?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'climate_land')->HiddenInput()->label(false) ?>
@@ -24,7 +24,7 @@ use kartik\slider\Slider;
     <!-- Label Land -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Land 
+    <span ></span> <?= Yii::t('app','Land') ?> 
     <span id="land" class="badge">1</span></button></div>  
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -52,7 +52,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="climate" class="badge">1</span>
-    <span ></span> Climate 
+    <span ></span> <?= Yii::t('app','Climate') ?>
     </button></div>
     
 
@@ -64,7 +64,7 @@ use kartik\slider\Slider;
     <!-- Label Accessibility -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Accessibility
+    <span ></span> <?= Yii::t('app','Accessibility') ?>
     <span id="access" class="badge">1</span></button></div>  
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'climate_accessibility',
@@ -90,7 +90,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="climate2" class="badge">1</span>
-    <span ></span> Climate 
+    <span ></span> <?= Yii::t('app','Climate') ?>
     </button></div>
     
 
@@ -101,7 +101,7 @@ use kartik\slider\Slider;
     <!-- Label Accessibility -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Accessibility
+    <span ></span> <?= Yii::t('app','Accessibility') ?>
     <span id="access2" class="badge">1</span></button></div> 
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'land_accessibility',
@@ -126,14 +126,14 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="land2" class="badge">1</span>
-    <span ></span> Land 
+    <span ></span> <?= Yii::t('app','Land') ?>
     </button></div>
     </br> </br> </br>
 
 
 
     <br><br><div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

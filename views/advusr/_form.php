@@ -23,11 +23,11 @@ use kartik\slider\Slider;
 <!-- Sub Factor Climate -->
 
    <?= $form->field($model, 'ch_temp')->HiddenInput()->label(false) ?>
-    <div id="crclimate" class="alert alert-info" role="alert">CLIMATE FACTOR </br> Consistency Ratio : 0 and Validation : true</div>
+    <div id="crclimate" class="alert alert-info" role="alert"><?= Yii::t('app','Climate') ?> </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <!-- Label Temperature -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Temperature 
+    <span ></span> <?= Yii::t('app','Temperature') ?>  
     <span id="temperature" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -57,7 +57,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="rainfal" class="badge">1</span>
-    <span ></span> Rainfal 
+    <span ></span> <?= Yii::t('app','Rainfall') ?>  
     </button></div>
     
 
@@ -69,7 +69,7 @@ use kartik\slider\Slider;
     <!-- Label Dry Month -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Dry Month 
+    <span ></span> <?= Yii::t('app','Dry Month') ?>  
     <span id="dm" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -97,7 +97,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="rainfal2" class="badge">1</span>
-    <span ></span> Rainfal 
+    <span ></span> <?= Yii::t('app','Rainfall') ?>  
     </button></div>
     
 
@@ -109,7 +109,7 @@ use kartik\slider\Slider;
     <!-- Label Dry Month -->
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
-    <span ></span> Dry Month 
+    <span ></span> <?= Yii::t('app','Dry Month') ?>  
     <span id="dm2" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'temp_dm',
@@ -134,7 +134,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-info" >
     <span id="temperature2" class="badge">1</span>
-    <span ></span> Temperature 
+    <span ></span> <?= Yii::t('app','Temperature') ?>  
     </button></div>
     </br> </br> </br>
 
@@ -142,12 +142,12 @@ use kartik\slider\Slider;
 
 <!--  SubFactors Land Non Peat-->
 
-    <div id="crlannpeat" class="alert alert-danger" role="alert">Non Peatland </br> Consistency Ratio : 0 and Validation : true</div>
+    <div id="crlannpeat" class="alert alert-danger" role="alert"><?= Yii::t('app','Non Peatland') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'slope_text')->HiddenInput()->label(false) ?>
        <!-- Label Texture -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Texture 
+    <span ></span> <?= Yii::t('app','Texture') ?>  
     <span id="texture" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -177,7 +177,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br> 
 
@@ -187,7 +187,7 @@ use kartik\slider\Slider;
         <!-- Label Elevation -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Elevation 
+    <span ></span> <?= Yii::t('app','Elevation') ?>
     <span id="elev" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -217,7 +217,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slope2" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br>
 
@@ -227,7 +227,7 @@ use kartik\slider\Slider;
         <!-- Label Elevation -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Elevation 
+    <span ></span> <?= Yii::t('app','Elevation') ?>
     <span id="elev2" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -257,7 +257,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="texture2" class="badge">1</span>
-    <span ></span> Texture 
+    <span ></span> <?= Yii::t('app','Texture') ?>
     </button></div>
     </br> </br> </br>
 
@@ -266,12 +266,12 @@ use kartik\slider\Slider;
 
 
 <!-- Sub Factor Peatland -->
-    <div id="crlandpeat" class="alert alert-danger" role="alert">Peatland </br> Consistency Ratio : 0 and Validation : true</div>
+    <div id="crlandpeat" class="alert alert-danger" role="alert"><?= Yii::t('app','Peatland') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'slope_thick')->HiddenInput()->label(false) ?>
          <!-- Label Thicknes -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Thickness 
+    <span ></span> <?= Yii::t('app','Peat Thickness') ?>
     <span id="thick" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -301,7 +301,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slopep" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br>
 
@@ -311,7 +311,7 @@ use kartik\slider\Slider;
         <!-- Label Ripe -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Ripening 
+    <span ></span> <?= Yii::t('app','Peat Ripening') ?>
     <span id="ripe" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -341,7 +341,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="slopep2" class="badge">1</span>
-    <span ></span> Slope 
+    <span ></span> <?= Yii::t('app','Slope') ?>
     </button></div>
     </br> </br>
 
@@ -351,7 +351,7 @@ use kartik\slider\Slider;
         <!-- Label Ripe -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Peat Ripening 
+    <span ></span> <?= Yii::t('app','Peat Ripening') ?>
     <span id="ripe2" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -381,19 +381,19 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
     <span id="thick2" class="badge">1</span>
-    <span ></span> Peat Thickness 
+    <span ></span> <?= Yii::t('app','Peat Thickness') ?>
     </button></div>
     </br> </br> </br>
 
 
 
 <!-- Accessibility -->
-    <div id="craccess" class="alert alert-warning" role="alert">Accessibility </br> Consistency Ratio : 0 and Validation : true</div>
+    <div id="craccess" class="alert alert-warning" role="alert"><?= Yii::t('app','Accessibility') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'road_mills')->HiddenInput()->label(false) ?>
     <!-- Label Mills -->
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
-    <span ></span> Distance From Mills 
+    <span ></span> <?= Yii::t('app','Distance From Mills') ?>
     <span id="mills" class="badge">1</span></button></div>
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_mills',
@@ -418,7 +418,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="road" class="badge">1</span>
-    <span ></span> Distance From Road 
+    <span ></span> <?= Yii::t('app','Distance From Road') ?>
     </button></div>
 
     </br> </br>
@@ -428,7 +428,7 @@ use kartik\slider\Slider;
     <!-- Label Town -->
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
-    <span ></span> Distance From Town 
+    <span ></span> <?= Yii::t('app','Distance From Town') ?>
     <span id="town" class="badge">1</span></button></div>
    <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'road_town',
@@ -453,7 +453,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="road2" class="badge">1</span>
-    <span ></span> Distance From Road 
+    <span ></span> <?= Yii::t('app','Distance From Road') ?>
     </button></div>
 
     </br> </br>
@@ -490,18 +490,18 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-warning" >
     <span id="mills2" class="badge">1</span>
-    <span ></span> Distance From Mills 
+    <span ></span> <?= Yii::t('app','Distance From Mills') ?>
     </button></div>
 
     </br> </br> </br>
 
 <!-- All Factors -->
-    <div id="crfactors" class="alert alert-success" role="alert">Consistency Ratio : 0 and Validation : true</div>
+    <div id="crfactors" class="alert alert-success" role="alert"><?= Yii::t('app','Factors') ?> </br>  <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'climate_land')->HiddenInput()->label(false) ?>
     <!-- Label Land -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Land 
+    <span ></span> <?= Yii::t('app','Land') ?>
     <span id="land" class="badge">1</span></button></div>  
 
     <?= '<div class="col-md-7">'.Slider::widget([
@@ -529,7 +529,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="climate" class="badge">1</span>
-    <span ></span> Climate 
+    <span ></span> <?= Yii::t('app','Climate') ?>
     </button></div>
     
 
@@ -540,7 +540,7 @@ use kartik\slider\Slider;
     <!-- Label Accessibility -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Accessibility
+    <span ></span> <?= Yii::t('app','Accessibility') ?>
     <span id="access" class="badge">1</span></button></div>  
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'climate_accessibility',
@@ -566,7 +566,7 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="climate2" class="badge">1</span>
-    <span ></span> Climate 
+    <span ></span> <?= Yii::t('app','Climate') ?>
     </button></div>
     
 
@@ -576,7 +576,7 @@ use kartik\slider\Slider;
     <!-- Label Accessibility -->
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
-    <span ></span> Accessibility
+    <span ></span> <?= Yii::t('app','Accessibility') ?>
     <span id="access2" class="badge">1</span></button></div> 
     <?= '<div class="col-md-7">'.Slider::widget([
         'name'=>'land_accessibility',
@@ -601,15 +601,15 @@ use kartik\slider\Slider;
     <div class="col-md-2">
     <button type="button" class="btn btn-success" >
     <span id="land2" class="badge">1</span>
-    <span ></span> Land 
+    <span ></span> <?= Yii::t('app','Land') ?>
     </button></div>
     </br> </br> </br>
 
 
 
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </br> </br><div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create') : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
