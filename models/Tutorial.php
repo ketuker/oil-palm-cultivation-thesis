@@ -13,6 +13,8 @@ use Yii;
  * @property string $description
  * @property string $image
  * @property string $date
+ *
+ * @property TutorialCategory $idCategory
  */
 class Tutorial extends \yii\db\ActiveRecord
 {
@@ -32,7 +34,8 @@ class Tutorial extends \yii\db\ActiveRecord
         return [
             [['id_category', 'title', 'description'], 'required'],
             [['id_category'], 'integer'],
-            [['title', 'description', 'image'], 'string'],
+            [['title', 'description'], 'string'],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['date'], 'safe']
         ];
     }
@@ -44,11 +47,20 @@ class Tutorial extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'id_category' => 'Id Category',
+            'id_category' => 'Category',
             'title' => 'Title',
             'description' => 'Description',
             'image' => 'Image',
             'date' => 'Date',
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(TutorialCategory::className(), ['id' => 'id_category']);
+    }
+
 }
