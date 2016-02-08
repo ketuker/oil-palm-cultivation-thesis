@@ -5,6 +5,10 @@ namespace app\controllers;
 use Yii;
 use app\models\Compare;
 use app\models\CompareSearch;
+use app\models\ClimateAG;
+use app\models\ClimateAGSearch;
+use app\models\FactorsAG;
+use app\models\FactorsAGSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -62,13 +66,13 @@ class CompareController extends Controller
         $data_chart                     .= '[';
         for ($i=0; $i < count($datas); $i++) { 
             if ($i === (count($datas) - 1 )) {
-                $data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
+                //$data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
                 $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
-                $data_chart                 .= "label:" . $datas[$i]['properties']['status'] . "}";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status_climate'] . "}";
             }else{
-                $data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
+                //$data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
                 $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
-                $data_chart                 .= "label:" . $datas[$i]['properties']['status'] . "},";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status_climate'] . "},";
             }
         }
 
@@ -94,49 +98,54 @@ class CompareController extends Controller
 
             ini_set("memory_limit", "-1");
             
-            //$get_intersection       = "SELECT *, ST_AsGeoJson(ST_Intersection(the_geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM kesesuaian_4326";
-            // S = geom from draw
-            // B = Hasil intersects
             /***
-             * Langkah 
+             * Langkah - langkah mengambil data kesesuaian lahan
              * 1. INTERSECTS (TRUE | FALSE)
              * 2. INTERSECTION (Kesesuain To Geom from draw)
+             *
+             * S = geom from draw
+             * B = Hasil intersects
              **/
-            $get_intersection       = "SELECT b.*,ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))as geom from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true) as b;";
+            $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) as geom from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true) as b;";
+            $value_intersections    = Yii::$app->db->createCommand($get_intersection)->queryAll();
 
-            $json_intersections     = Yii::$app->db->createCommand($get_intersection)->queryAll();
+            $area_of_interest       = "SELECT ST_AsGeoJson(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
+            $aoi                    = Yii::$app->db->createCommand($area_of_interest)->queryAll();
 
-            $area_intersection      = "SELECT ST_AsGeoJson(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
-            $intersections          = Yii::$app->db->createCommand($area_intersection)->queryAll();
+            /***
+             * Get Average Geometry Climate
+             **/
+            $climate_ag             = ClimateAG::find()->OrderBy('id DESC')->one();
 
-            print_r($intersections);
-            echo "string";
-            print_r($json_intersections);
-            die();
-
-            /* Mengambil data kesesuaian lahan */
-            $get_data_kesesuaian    = "SELECT * FROM data_kesesuaian";
-            $array_data_kesesuaian  = Yii::$app->db->createCommand($get_data_kesesuaian)->queryAll();
+            /***
+             * Get Average Geometry Factor
+             **/
+            $factors_ag             = FactorsAG::find()->OrderBy('id DESC')->one();
 
             /* Deklarasi variable result geojson */
             $result_geojson         = '{"type": "FeatureCollection","features": [';
-
-            /* Intersection antara data draw dengan data kesesuaian lahan*/
-            for ($i=0; $i < count($array_data_kesesuaian); $i++) { 
-                $get_intersection   = "SELECT ST_AsGeoJson(ST_Intersection(geom, ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) FROM data_kesesuaian WHERE id = ".$array_data_kesesuaian[$i]['id']."";
-                $json_intersections = Yii::$app->db->createCommand($get_intersection)->queryColumn();
-                $json_intersection  = json_decode($json_intersections[0]);
-
-                if ($json_intersection->type === 'Polygon') {
-
-                    /* SELECT attributes data_kesesuaian WHERE selected by intersection */
-                    $get_intersection_att   = "SELECT id, status FROM data_kesesuaian WHERE id = ".$array_data_kesesuaian[$i]['id']."";
-                    $json_intersection_att  = Yii::$app->db->createCommand($get_intersection_att)->queryAll();
-
-                    $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"id\":\"".$json_intersection_att[0]['id']."\", \"status\":\"".$json_intersection_att[0]['status']."\"},\"geometry\": ";
-                    $result_geojson .= $json_intersections[0];
-                    $result_geojson .= "},";
+            
+            for ($i=0; $i < count($value_intersections); $i++) { 
+                
+                /* Baru climate */
+                $kesesuaian_climate         = ($value_intersections[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate));
+                
+                $status_climate             = 'N';
+                if ($kesesuaian_climate >= 0 AND $kesesuaian_climate <= 1) {
+                    $status_climate         = 'N';
+                }elseif ($kesesuaian_climate > 1 AND $kesesuaian_climate <= 2) {
+                    $status_climate         = 'S3';
+                }elseif ($kesesuaian_climate > 2 AND $kesesuaian_climate <= 3) {
+                    $status_climate         = 'S2';
+                }elseif ($kesesuaian_climate > 3 AND $kesesuaian_climate <= 4) {
+                    $status_climate         = 'S1';
+                }else{
+                    $status_climate         = 'S(alah)';
                 }
+
+                $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian_climate\":\"".$kesesuaian_climate."\", \"status_climate\":\"".$status_climate."\"},\"geometry\": ";
+                $result_geojson .= $value_intersections[$i]['geom'];
+                $result_geojson .= "},";
             }
 
             $result_geojson         .= ']}';
