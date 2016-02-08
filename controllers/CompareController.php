@@ -102,7 +102,7 @@ class CompareController extends Controller
              * 1. INTERSECTS (TRUE | FALSE)
              * 2. INTERSECTION (Kesesuain To Geom from draw)
              **/
-            $get_intersection       = "select b.*,st_intersection(b.geom,s.geom)as geom from (select kesesuaian_4326.*, st_intersects(s.geom,kesesuaian_4326.geom)as touch from kesesuaian_4326,s where st_intersects(s.geom,kesesuaian_4326.geom) = true) as b, s;";
+            $get_intersection       = "SELECT b.*,ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))as geom from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true) as b;";
 
             $json_intersections     = Yii::$app->db->createCommand($get_intersection)->queryAll();
 

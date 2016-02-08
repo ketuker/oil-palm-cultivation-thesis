@@ -6,13 +6,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Advusr */
 
-$this->title = 'Create Advusr';
-$this->params['breadcrumbs'][] = ['label' => 'Advusrs', 'url' => ['index']];
+$this->title = 'Create Scenario';
+$this->params['breadcrumbs'][] = ['label' => 'Sensitivity Analysis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="advusr-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <?= $this->render('_form', [
         'model' => $model,

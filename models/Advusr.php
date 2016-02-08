@@ -84,7 +84,7 @@ class Advusr extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'skenario' => 'Skenario',
+            'skenario' => 'Scenario',
             'ch_temp' => 'Ch Temp',
             'ch_dm' => 'Ch Dm',
             'temp_dm' => 'Temp Dm',
