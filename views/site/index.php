@@ -12,10 +12,7 @@ $this->title = 'My Yii Application';
 }
 </style>
 
-<?= Yii::$app->language ;?>
-<br>
-<?= Yii::$app->getRequest()->getCookies()->getValue('lang');?>
-<h3><center>Welcome to Web GIS Application for Selecting Oil Palm Plantation Site</center></h3>
+<h3><center><?= Yii::t('app','Welcome to Web GIS Application for Selecting Oil Palm Plantation Site');?></center></h3>
 <div class="site-index">
 
     <?= app\widgets\KetukerMap::widget();?>
