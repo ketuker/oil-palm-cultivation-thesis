@@ -29,8 +29,18 @@ use yii\helpers\Url;
     <div class="col-md-9">
         <?php 
             for ($i=0; $i < count($model); $i++) { 
-                echo '<blockquote><h4><b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> ' . $model[$i]['title'] . '</b></h4><br>';
-                echo $model[$i]['description'] . '</blockquote><br>';
+                echo '<blockquote>';
+                echo '<div class="row">';
+                if ($model[$i]['image']) {
+                    echo '<div class="col-md-12">';
+                    echo '<img src="../uploads/foto/' . $model[$i]['image'] . '" alt="' . $model[$i]['title'] . '" class="thumbnail" style="max-height:450px;">';
+                    echo '</div>';
+                }
+                echo '<div class="col-md-12">';
+                echo '<h4><b><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> ' . $model[$i]['title'] . '</b></h4><br>';
+                echo $model[$i]['description'];
+                echo '';
+                echo '</div></blockquote><br>';
             }
         ;?>
     </div>
