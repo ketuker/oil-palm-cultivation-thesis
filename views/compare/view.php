@@ -23,17 +23,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'description',
             'dates',
             'id_user',
-            'data:ntext',
+            //'data:ntext',
             'st_area',
             //'geom',
         ],
     ]) ?>
 
-    <?= app\widgets\KetukerChart::widget([
+    <?php /*echo app\widgets\KetukerChart::widget([
         'options' => [
             'data' => $data_chart
         ]
-    ]);?>
+    ]);*/?>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -64,7 +64,7 @@ $script .= '
 
     function style(feature) {
         return {
-            fillColor: getColor(feature.properties.status),
+            fillColor: getColor(feature.properties.status_climate),
             weight: 2,
             opacity: 1,
             color: "white",
@@ -76,7 +76,7 @@ $script .= '
     function onEachFeature(feature, layer) {
         // does this feature have a property named popupContent?
         if (feature.properties) {
-            layer.bindPopup("Status : "+feature.properties.status);
+            layer.bindPopup("Status : "+feature.properties.status_climate);
         }
     }
 
