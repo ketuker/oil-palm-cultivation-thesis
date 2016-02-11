@@ -1,3 +1,21 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+
+
 CREATE TABLE climate (
     id integer NOT NULL,
     ch_temp double precision NOT NULL,
@@ -13,18 +31,10 @@ CREATE TABLE climate (
 );
 
 
-ALTER TABLE public.climate OWNER TO apank;
-
---
--- Name: COLUMN climate.validation; Type: COMMENT; Schema: public; Owner: apank
---
 
 COMMENT ON COLUMN climate.validation IS 'TRUE = valid | FALSE = not valid';
 
 
---
--- Name: climate_id_seq; Type: SEQUENCE; Schema: public; Owner: apank
---
 
 CREATE SEQUENCE climate_id_seq
     START WITH 1
@@ -34,25 +44,19 @@ CREATE SEQUENCE climate_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.climate_id_seq OWNER TO apank;
-
---
--- Name: climate_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: apank
---
 
 ALTER SEQUENCE climate_id_seq OWNED BY climate.id;
 
 
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: apank
---
-
 ALTER TABLE ONLY climate ALTER COLUMN id SET DEFAULT nextval('climate_id_seq'::regclass);
 
 
---
--- Name: climate_pkey; Type: CONSTRAINT; Schema: public; Owner: apank; Tablespace: 
---
 
 ALTER TABLE ONLY climate
     ADD CONSTRAINT climate_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

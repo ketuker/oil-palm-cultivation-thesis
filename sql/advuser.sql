@@ -1,6 +1,20 @@
 --
--- Name: advusr; Type: TABLE; Schema: public; Owner: ketuker; Tablespace: 
+-- PostgreSQL database dump
 --
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+
 
 CREATE TABLE advusr (
     id integer NOT NULL,
@@ -46,14 +60,9 @@ CREATE TABLE advusr (
     cr_factors double precision NOT NULL,
     validation_factors boolean NOT NULL,
     id_user integer,
-    dates timestamp without time zone DEFAULT now() NOT NULL
+    date timestamp without time zone DEFAULT now() NOT NULL
 );
 
-
-
---
--- Name: advusr_id_seq; Type: SEQUENCE; Schema: public; Owner: ketuker
---
 
 CREATE SEQUENCE advusr_id_seq
     START WITH 1
@@ -63,11 +72,6 @@ CREATE SEQUENCE advusr_id_seq
     CACHE 1;
 
 
-
---
--- Name: advusr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ketuker
---
-
 ALTER SEQUENCE advusr_id_seq OWNED BY advusr.id;
 
 
@@ -76,19 +80,6 @@ ALTER SEQUENCE advusr_id_seq OWNED BY advusr.id;
 --
 
 ALTER TABLE ONLY advusr ALTER COLUMN id SET DEFAULT nextval('advusr_id_seq'::regclass);
-
-
---
--- Data for Name: advusr; Type: TABLE DATA; Schema: public; Owner: ketuker
---
-
-
-
---
--- Name: advusr_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ketuker
---
-
-SELECT pg_catalog.setval('advusr_id_seq', 1, false);
 
 
 --

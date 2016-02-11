@@ -14,9 +14,6 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
---
--- Name: aoi_compare; Type: TABLE; Schema: public; Owner: ketuker; Tablespace: 
---
 
 CREATE TABLE aoi_compare (
     id bigint NOT NULL,
@@ -26,15 +23,21 @@ CREATE TABLE aoi_compare (
     id_user integer,
     data text,
     st_area double precision,
-    geom geometry(Polygon,4326)
+    geom geometry(Polygon,4326),
+    data_rain text,
+    data_temp text,
+    data_dm text,
+    data_slope text,
+    data_text text,
+    data_elev text,
+    data_thick text,
+    data_ripe text,
+    data_road text,
+    data_mills text,
+    data_town text
 );
 
 
-ALTER TABLE public.aoi_compare OWNER TO ketuker;
-
---
--- Name: aoi_compare_id_seq; Type: SEQUENCE; Schema: public; Owner: ketuker
---
 
 CREATE SEQUENCE aoi_compare_id_seq
     START WITH 1
@@ -44,44 +47,14 @@ CREATE SEQUENCE aoi_compare_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.aoi_compare_id_seq OWNER TO ketuker;
-
---
--- Name: aoi_compare_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: ketuker
---
-
 ALTER SEQUENCE aoi_compare_id_seq OWNED BY aoi_compare.id;
 
 
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: ketuker
---
-
 ALTER TABLE ONLY aoi_compare ALTER COLUMN id SET DEFAULT nextval('aoi_compare_id_seq'::regclass);
 
-
---
--- Data for Name: aoi_compare; Type: TABLE DATA; Schema: public; Owner: ketuker
---
-
-
-
---
--- Name: aoi_compare_id_seq; Type: SEQUENCE SET; Schema: public; Owner: ketuker
---
-
-SELECT pg_catalog.setval('aoi_compare_id_seq', 1, false);
-
-
---
--- Name: aoi_compare_pkey; Type: CONSTRAINT; Schema: public; Owner: ketuker; Tablespace: 
---
 
 ALTER TABLE ONLY aoi_compare
     ADD CONSTRAINT aoi_compare_pkey PRIMARY KEY (id);
 
 
---
--- PostgreSQL database dump complete
---
 

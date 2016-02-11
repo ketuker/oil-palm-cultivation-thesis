@@ -1,6 +1,4 @@
---
--- Name: climate_average_geometric; Type: TABLE; Schema: public; Owner: apank; Tablespace: 
---
+
 
 CREATE TABLE climate_average_geometric (
     id integer NOT NULL,
@@ -17,10 +15,6 @@ CREATE TABLE climate_average_geometric (
 );
 
 
---
--- Name: climate_summary_id_seq; Type: SEQUENCE; Schema: public; Owner: apank
---
-
 CREATE SEQUENCE climate_summary_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -29,15 +23,10 @@ CREATE SEQUENCE climate_summary_id_seq
     CACHE 1;
 
 
---
--- Name: climate_summary_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: apank
---
-
 ALTER SEQUENCE climate_summary_id_seq OWNED BY climate_average_geometric.id;
 
 
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: apank
---
-
 ALTER TABLE ONLY climate_average_geometric ALTER COLUMN id SET DEFAULT nextval('climate_summary_id_seq'::regclass);
+
+
+
