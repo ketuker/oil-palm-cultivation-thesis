@@ -33,7 +33,7 @@ class Compare extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'geom'], 'required'],
-            [['title', 'description', 'data', 'geom'], 'string'],
+            [['title', 'description', 'data','data_rain','data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town', 'geom'], 'string'],
             [['dates'], 'safe'],
             [['id_user'], 'integer'],
             [['st_area'], 'number']
@@ -47,11 +47,22 @@ class Compare extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'dates' => 'Dates',
+            'title' => Yii::t('app','Title'),
+            'description' => Yii::t('app','Description'),
+            'dates' => Yii::t('app','Dates'),
             'id_user' => 'Id User',
             'data' => 'Data',
+            'data_rain' => 'Data Rain',
+            'data_temp' => 'Data Temperature',
+            'data_dm' => 'Data Dry Month',
+            'data_slope' => 'Data Slope',
+            'data_text' => 'Data Texture',
+            'data_elev' => 'Data Elevation',
+            'data_thick' => 'Data Peat Thickness',
+            'data_ripe' => 'Data Peat Ripening',
+            'data_road' => 'Data Distance From Road',
+            'data_mills' => 'Data Distance From Mills',
+            'data_town' => 'Data Distance From Town',
             'st_area' => 'St Area',
             'geom' => 'Geom',
         ];

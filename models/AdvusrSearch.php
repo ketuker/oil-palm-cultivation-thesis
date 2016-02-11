@@ -19,7 +19,7 @@ class AdvusrSearch extends Advusr
     {
         return [
             [['id', 'id_user'], 'integer'],
-            [['skenario', 'dates'], 'safe'],
+            [['skenario', 'date'], 'safe'],
             [['ch_temp', 'ch_dm', 'temp_dm', 'bobot_ch', 'bobot_temp', 'bobot_dm', 'cr_climate', 'slope_text', 'slope_elev', 'text_elev', 'bobot_slopenp', 'bobot_text', 'bobot_elev', 'cr_landnpeat', 'slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_slopep', 'bobot_thick', 'bobot_ripe', 'cr_landpeat', 'road_mills', 'road_town', 'mills_town', 'bobot_road', 'bobot_mills', 'bobot_town', 'cr_accessibility', 'climate_land', 'climate_accessibility', 'land_accessibility', 'bobot_climate', 'bobot_land', 'bobot_accessibility', 'cr_factors'], 'number'],
             [['validation_climate', 'validation_landnpeat', 'validation_landpeat', 'validation_accessibility', 'validation_factors'], 'boolean'],
         ];
@@ -100,7 +100,7 @@ class AdvusrSearch extends Advusr
             'cr_factors' => $this->cr_factors,
             'validation_factors' => $this->validation_factors,
             'id_user' => $this->id_user,
-            'dates' => $this->dates,
+            'date' => $this->date,
         ]);
 
         $query->andFilterWhere(['like', 'skenario', $this->skenario]);

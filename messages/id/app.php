@@ -107,6 +107,14 @@ return [
     'Language' => 'Bahasa',
     'Bogor Agricultural University' => 'Institut Pertanian Bogor',
     'Create Scenario' => 'Buat Skenario',
+    'Scenario' => 'Skenario',
+    'Create Climate Weight' => 'Buat Bobot Iklim',
+    'Create Non Peatland Weight' => 'Buat Bobot Bukan Gambut',
+    
+    'Climate Weight' => 'Bobot Iklim',
+
+
+    'Are you sure you want to delete this item?' => 'Apa kamu yakin ingin menghapus data ini?',
 
     /*Bahasa di Menu*/
     'Area of Interest' => 'Wilayah Kajian',
@@ -131,6 +139,9 @@ return [
     'Consistency Ratio' => 'Konsistensi Rasio',
     'Validation' => 'Validasi',
     'Create' => 'Buat',
+    'Create AOI' => 'Buat WK',
+    'Update AOI' => 'Perbarui WK',
+    'Upload AOI' => 'Unggah WK',
      /* Climate*/
     'Climate Weight Questionnaire' => 'Kuisioner Bobot Iklim',
     'Rainfall' => 'Curah Hujan',
@@ -142,6 +153,11 @@ return [
     'Distance From Mills' => 'Jarak Dari Pabrik',
     'Distance From Road' => 'Jarak Dari Jalan',
     'Distance From Town' => 'Jarak Dari Kota',
+    
+    'Accessibilities Weight'=> 'Bobot Aksesibilitas',
+    'Accessibilities'=> 'Aksesibilitas',
+    'Create Accessibility'=> 'Buat Aksesibilitas',
+
 
     /* Non Peat*/
     'Non Peatland Weight Questionnaire' => 'Kuisioner Bobot Bukan Gambut',
@@ -151,6 +167,7 @@ return [
 
     /* Peat*/
     'Peatland Weight Questionnaire' => 'Kuisioner Bobot Gambut',
+    'Peat Weight' => 'Bobot Gambut',
     'Peat Thickness' => 'Kedalaman Gambut',
     'Slope' => 'Lereng',
     'Peat Ripening' => 'Kematangan Gambut',
@@ -162,7 +179,41 @@ return [
     /* Aksesibility*/
 
     
+    'Title' => 'Judul',
+    'Description' => 'Deskrpsi',
+    'Update' => 'Perbarui',
+    'Dates' => 'Tanggal',
+    'Date' => 'Tanggal',
+    'Rainfall Weight' => 'Bobot Curah Hujan',
+    'Temperature Weight' => 'Bobot Suhu',
+    'Dry Month Weight' => 'Bobot Bulan Kering',
+    'Elevation Weight' => 'Bobot Ketinggian',
+    'Slope Weight' => 'Bobot Lereng',
+    'Texture Weight' => 'Bobot Tekstur',
+    'Peat Thickness Weight' => 'Bobot Kedalaman Gambut',
+    'Peat Ripening Weight' => 'Bobot Kematangan Gambut',
+    'Create Area of Interest' => 'Buat Wilayah Kajian',
 
+
+
+    'Category' => 'Kategori',
+    'Method' => 'Metode',
+
+
+
+    'Road Weight' => 'Bobot Jalan',
+    'Mills Weight' => 'Bobot Pabrik',
+    'Town Weight' => 'Bobot Kota',
+
+    'Factors Weight' => 'Bobot Terhadap Faktor',
+    'Climate Weight' => 'Bobot Iklim',
+    'Land Weight' => 'Bobot Tanah',
+    'Accessibility Weight' => 'Bobot Aksesibilitas',
+    'Climate Consistency Ratio' => 'Kosistensi Rasio Iklim',
+    'Non Peat Land Consistency Ratio' => 'Kosistensi Rasio Tanah Bukan Gambut',
+    'Peat Land Consistency Ratio' => 'Kosistensi Rasio Gambut',
+    'Accessibility Consistency Ratio' => 'Kosistensi Rasio Aksesibilitas',
+    'Factors Consistency Ratio' => 'Kosistensi Rasio Faktor',
 
 ];
 ?>

@@ -38,7 +38,7 @@ class TutorialCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'category' => 'Category',
+            'category' => Yii::t('app','Category'),
         ];
     }
 }

@@ -35,10 +35,10 @@ class Landnpeat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['slope_text', 'slope_elev', 'text_elev', 'bobot_slope', 'bobot_text', 'bobot_elev', 'cr', 'id_user'], 'required'],
+            [['slope_text', 'slope_elev', 'text_elev', 'bobot_slope', 'bobot_text', 'bobot_elev', 'cr'], 'required'],
             [['slope_text', 'slope_elev', 'text_elev', 'bobot_slope', 'bobot_text', 'bobot_elev', 'cr'], 'number'],
             [['validation'], 'boolean'],
-            [['id_user'], 'string'],
+            [['id_user'], 'integer'],
             [['date'], 'safe']
         ];
     }
@@ -53,13 +53,13 @@ class Landnpeat extends \yii\db\ActiveRecord
             'slope_text' => 'Slope Text',
             'slope_elev' => 'Slope Elev',
             'text_elev' => 'Text Elev',
-            'bobot_slope' => 'Bobot Slope',
-            'bobot_text' => 'Bobot Text',
-            'bobot_elev' => 'Bobot Elev',
-            'cr' => 'Cr',
-            'validation' => 'Validation',
+            'bobot_slope' => Yii::t('app','Slope Weight'),
+            'bobot_text' => Yii::t('app','Texture Weight'),
+            'bobot_elev' => Yii::t('app','Elevation Weight'),
+            'cr' => Yii::t('app','Consistency Ratio'),
+            'validation' => Yii::t('app','Validation'),
             'id_user' => 'Id User',
-            'date' => 'Date',
+            'date' => Yii::t('app','Date'),
         ];
     }
 }

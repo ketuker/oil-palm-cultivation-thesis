@@ -53,13 +53,13 @@ class Accessibility extends \yii\db\ActiveRecord
             'road_mills' => 'Road Mills',
             'road_town' => 'Road Town',
             'mills_town' => 'Mills Town',
-            'bobot_road' => 'Bobot Road',
-            'bobot_mills' => 'Bobot Mills',
-            'bobot_town' => 'Bobot Town',
-            'cr' => 'Cr',
-            'validation' => 'Validation',
+            'bobot_road' => Yii::t('app','Road Weight'),
+            'bobot_mills' => Yii::t('app','Mills Weight'),
+            'bobot_town' => Yii::t('app','Town Weight'),
+            'cr' => Yii::t('app','Consistency Ratio'),
+            'validation' => Yii::t('app','Validation'),
             'id_user' => 'Id User',
-            'date' => 'Date',
+            'date' => Yii::t('app','Date'),
         ];
     }
 }

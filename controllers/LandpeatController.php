@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Landpeat;
 use app\models\LandpeatSearch;
+use app\models\LandpeatAG;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -239,12 +240,13 @@ class LandpeatController extends Controller
                 $validation             = FALSE;
             }
 
+
             if (Yii::$app->user->getId()) {
                 $_POST['Landpeat']['slope_thick']    = $slope_thick;
                 $_POST['Landpeat']['slope_ripe']      = $slope_ripe;
                 $_POST['Landpeat']['thick_ripe']    = $thick_ripe;
                 $_POST['Landpeat']['bobot_slope']   = $bobot_slope;
-                $_POST['Landpeat']['boobt_thick'] = $bobot_thick;
+                $_POST['Landpeat']['bobot_thick'] = $bobot_thick;
                 $_POST['Landpeat']['bobot_ripe']   = $bobot_ripe;
                 $_POST['Landpeat']['cr']         = $consistensi_rasio;
                 $_POST['Landpeat']['validation'] = $validation;
@@ -266,19 +268,96 @@ class LandpeatController extends Controller
                         $slope_thick_ag_base[$i]            = $data_landpeats[$i]['slope_thick'];
                         $slope_ripe_ag_base[$i]              = $data_landpeats[$i]['slope_ripe'];
                         $thick_ripe_ag_base[$i]            = $data_landpeats[$i]['thick_ripe'];
-                        $bobot_slope_ag_base[$i]           = $data_landpeats[$i]['bobot_slope'];
-                        $bobot_thick_ag_base[$i]         = $data_landpeats[$i]['boobt_thick'];
-                        $bobot_ripe_ag_base[$i]           = $data_landpeats[$i]['bobot_ripe'];
-                        $consistensi_rasio_ag_base[$i]  = $data_landpeats[$i]['cr'];
+                        // $bobot_slope_ag_base[$i]           = $data_landpeats[$i]['bobot_slope'];
+                        // $bobot_thick_ag_base[$i]         = $data_landpeats[$i]['bobot_thick'];
+                        // $bobot_ripe_ag_base[$i]           = $data_landpeats[$i]['bobot_ripe'];
+                        // $consistensi_rasio_ag_base[$i]  = $data_landpeats[$i]['cr'];
                     }
 
-                    $slope_thick_ag                         = sqrt (array_product($slope_thick_ag_base));
-                    $slope_ripe_ag                           = sqrt (array_product($slope_ripe_ag_base));
-                    $thick_ripe_ag                         = sqrt (array_product($thick_ripe_ag_base));
-                    $bobot_slope_ag                        = sqrt (array_product($bobot_slope_ag_base));
-                    $bobot_thick_ag                      = sqrt (array_product($bobot_thick_ag_base));
-                    $bobot_ripe_ag                        = sqrt (array_product($bobot_ripe_ag_base));
-                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    $slope_thick_ag                         = pow(array_product($slope_thick_ag_base),1/count($data_landpeats));
+                    $thick_slope_ag                         = 1/$slope_thick_ag;
+                    $slope_slope_ag                         = 1;
+
+
+                    $slope_ripe_ag                          = pow(array_product($slope_ripe_ag_base),1/count($data_landpeats));
+                    $ripe_slope_ag                          = 1/$slope_ripe_ag;
+                    $ripe_ripe_ag                           = 1;
+                    
+
+                    $thick_ripe_ag                          = pow(array_product($thick_ripe_ag_base),1/count($data_landpeats));
+                    $ripe_thick_ag                          = 1/$thick_ripe_ag;
+                    $thick_thick_ag                         = 1;
+                  
+
+
+                    // $bobot_slope_ag                        = sqrt (array_product($bobot_slope_ag_base));
+                    // $bobot_thick_ag                      = sqrt (array_product($bobot_thick_ag_base));
+                    // $bobot_ripe_ag                        = sqrt (array_product($bobot_ripe_ag_base));
+                    // $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    
+                    $sum_column_slope_ag      = $slope_slope_ag + $thick_slope_ag + $ripe_slope_ag;
+                    $sum_column_thick_ag    = $slope_thick_ag + $thick_thick_ag + $ripe_thick_ag;
+                    $sum_column_ripe_ag      = $slope_ripe_ag + $thick_ripe_ag + $ripe_ripe_ag;
+
+
+                    /* ---- */
+                    $divided_sum_sum_ag        = $sum_column_slope_ag / $sum_column_slope_ag;
+
+                    $divided_slope_slope_ag_sum      = $slope_slope_ag / $sum_column_slope_ag;
+                    $divided_slope_thick_ag_sum    = $thick_slope_ag / $sum_column_slope_ag;
+                    $divided_slope_ripe_ag_sum      = $ripe_slope_ag / $sum_column_slope_ag;
+
+                    $divided_thick_slope_ag_sum    = $slope_thick_ag / $sum_column_thick_ag;
+                    $divided_thick_thick_ag_sum  = $thick_thick_ag / $sum_column_thick_ag;
+                    $divided_thick_ripe_ag_sum    = $ripe_thick_ag / $sum_column_thick_ag;
+
+                    $divided_ripe_slope_ag_sum      = $slope_ripe_ag / $sum_column_ripe_ag;
+                    $divided_ripe_thick_ag_sum    = $thick_ripe_ag / $sum_column_ripe_ag;
+                    $divided_ripe_ripe_ag_sum      = $ripe_ripe_ag / $sum_column_ripe_ag;
+                    /* ---- */
+
+                    $sum_slope_ag             = $divided_slope_slope_ag_sum + $divided_thick_slope_ag_sum + $divided_ripe_slope_ag_sum;
+                    $sum_thick_ag           = $divided_slope_thick_ag_sum + $divided_thick_thick_ag_sum + $divided_ripe_thick_ag_sum;
+                    $sum_ripe_ag             = $divided_slope_ripe_ag_sum + $divided_thick_ripe_ag_sum + $divided_ripe_ripe_ag_sum;
+                    $sum_divided_ag        = $divided_sum_sum_ag + $divided_sum_sum_ag + $divided_sum_sum_ag;
+
+                    /* ---- */
+                    $bobot_slope_ag           = $sum_slope_ag / $sum_divided_ag;
+                    $bobot_thick_ag         = $sum_thick_ag / $sum_divided_ag;
+                    $bobot_ripe_ag           = $sum_ripe_ag / $sum_divided_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $multiple_slope_slope_ag_bobot      = $slope_slope_ag * $bobot_slope_ag;
+                    $multiple_slope_thick_ag_bobot    = $thick_slope_ag * $bobot_slope_ag;
+                    $multiple_slope_ripe_ag_bobot      = $ripe_slope_ag * $bobot_slope_ag;
+
+                    $multiple_thick_slope_ag_bobot    = $slope_thick_ag * $bobot_thick_ag;
+                    $multiple_thick_thick_ag_bobot  = $thick_thick_ag * $bobot_thick_ag;
+                    $multiple_thick_ripe_ag_bobot    = $ripe_thick_ag * $bobot_thick_ag;
+
+                    $multiple_ripe_slope_ag_bobot      = $slope_ripe_ag * $bobot_ripe_ag;
+                    $multiple_ripe_thick_ag_bobot    = $thick_ripe_ag * $bobot_ripe_ag;
+                    $multiple_ripe_ripe_ag_bobot      = $ripe_ripe_ag * $bobot_ripe_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $sum_bobot_slope_ag               = $multiple_slope_slope_ag_bobot + $multiple_thick_slope_ag_bobot + $multiple_ripe_slope_ag_bobot;
+                    $sum_bobot_thick_ag             = $multiple_slope_thick_ag_bobot + $multiple_thick_thick_ag_bobot + $multiple_ripe_thick_ag_bobot;
+                    $sum_bobot_ripe_ag               = $multiple_slope_ripe_ag_bobot + $multiple_thick_ripe_ag_bobot + $multiple_ripe_ripe_ag_bobot;
+                    /* ---- */
+
+                    $divided_bobot_slope_ag           = $sum_bobot_slope_ag / $bobot_slope_ag;
+                    $divided_bobot_thick_ag         = $sum_bobot_thick_ag / $bobot_thick_ag;
+                    $divided_bobot_ripe_ag           = $sum_bobot_ripe_ag / $bobot_ripe_ag;
+
+                    /* ---- */
+                    $lamda_max_ag                  = ($divided_bobot_slope_ag + $divided_bobot_thick_ag + $divided_bobot_ripe_ag) / $sum_divided_ag;
+                    $jumlah_factor_ag              = $sum_divided_ag;
+                    $consistensi_index_ag          = ($lamda_max_ag-$jumlah_factor_ag)/($jumlah_factor_ag-1);
+                    $rasio_index_ag                = 0.58;
+                    $consistensi_rasio_ag          = $consistensi_index_ag / $rasio_index_ag;
+                    /* ---- */                    
 
                     $model_ag                           = new LandpeatAG();
 
@@ -286,7 +365,7 @@ class LandpeatController extends Controller
                     $_POSTAG['LandpeatAG']['slope_ripe']        = $slope_ripe_ag;
                     $_POSTAG['LandpeatAG']['thick_ripe']      = $thick_ripe_ag;
                     $_POSTAG['LandpeatAG']['bobot_slope']     = $bobot_slope_ag;
-                    $_POSTAG['LandpeatAG']['boobt_thick']   = $bobot_thick_ag;
+                    $_POSTAG['LandpeatAG']['bobot_thick']   = $bobot_thick_ag;
                     $_POSTAG['LandpeatAG']['bobot_ripe']     = $bobot_ripe_ag;
                     $_POSTAG['LandpeatAG']['cr']           = $consistensi_rasio_ag;
 

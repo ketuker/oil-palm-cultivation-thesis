@@ -16,13 +16,10 @@ use kartik\slider\Slider;
 </style>
 <div class="landnpeat-form">
     <div id="cr" class="alert alert-danger" role="alert"><?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
-
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'slope_text')->HiddenInput()->label(false) ?>
-
     </br>
-
 
         <!-- Label Texture -->
     <div class="col-md-2">

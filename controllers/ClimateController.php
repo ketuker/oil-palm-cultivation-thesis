@@ -267,19 +267,86 @@ class ClimateController extends Controller
                         $ch_temp_ag_base[$i]            = $data_climates[$i]['ch_temp'];
                         $ch_dm_ag_base[$i]              = $data_climates[$i]['ch_dm'];
                         $temp_dm_ag_base[$i]            = $data_climates[$i]['temp_dm'];
-                        $bobot_ch_ag_base[$i]           = $data_climates[$i]['bobot_ch'];
-                        $bobot_temp_ag_base[$i]         = $data_climates[$i]['boobt_temp'];
-                        $bobot_dm_ag_base[$i]           = $data_climates[$i]['bobot_dm'];
-                        $consistensi_rasio_ag_base[$i]  = $data_climates[$i]['cr'];
+
                     }
 
-                    $ch_temp_ag                         = sqrt (array_product($ch_temp_ag_base));
-                    $ch_dm_ag                           = sqrt (array_product($ch_dm_ag_base));
-                    $temp_dm_ag                         = sqrt (array_product($temp_dm_ag_base));
-                    $bobot_ch_ag                        = sqrt (array_product($bobot_ch_ag_base));
-                    $bobot_temp_ag                      = sqrt (array_product($bobot_temp_ag_base));
-                    $bobot_dm_ag                        = sqrt (array_product($bobot_dm_ag_base));
-                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    $ch_temp_ag                         = pow (array_product($ch_temp_ag_base),1/count($data_climates));
+                    $temp_ch_ag                         = 1/$ch_temp_ag;
+                    $ch_ch_ag                           = 1;
+
+                    $ch_dm_ag                           = pow (array_product($ch_dm_ag_base),1/count($data_climates));
+                    $dm_ch_ag                           = 1/$ch_dm_ag;
+                    $dm_dm_ag                           = 1;
+
+                    $temp_dm_ag                         = pow (array_product($temp_dm_ag_base),1/count($data_climates));
+                    $dm_temp_ag                         = 1/$temp_dm_ag;
+                    $temp_temp_ag                       = 1;
+
+
+                    $sum_column_ch_ag      = $ch_ch_ag + $temp_ch_ag + $dm_ch_ag;
+                    $sum_column_temp_ag    = $ch_temp_ag + $temp_temp_ag + $dm_temp_ag;
+                    $sum_column_dm_ag      = $ch_dm_ag + $temp_dm_ag + $dm_dm_ag;
+
+
+                    /* ---- */
+                    $divided_sum_sum_ag        = $sum_column_ch_ag / $sum_column_ch_ag;
+
+                    $divided_ch_ch_ag_sum      = $ch_ch_ag / $sum_column_ch_ag;
+                    $divided_ch_temp_ag_sum    = $temp_ch_ag / $sum_column_ch_ag;
+                    $divided_ch_dm_ag_sum      = $dm_ch_ag / $sum_column_ch_ag;
+
+                    $divided_temp_ch_ag_sum    = $ch_temp_ag / $sum_column_temp_ag;
+                    $divided_temp_temp_ag_sum  = $temp_temp_ag / $sum_column_temp_ag;
+                    $divided_temp_dm_ag_sum    = $dm_temp_ag / $sum_column_temp_ag;
+
+                    $divided_dm_ch_ag_sum      = $ch_dm_ag / $sum_column_dm_ag;
+                    $divided_dm_temp_ag_sum    = $temp_dm_ag / $sum_column_dm_ag;
+                    $divided_dm_dm_ag_sum      = $dm_dm_ag / $sum_column_dm_ag;
+                    /* ---- */
+
+                    $sum_ch_ag             = $divided_ch_ch_ag_sum + $divided_temp_ch_ag_sum + $divided_dm_ch_ag_sum;
+                    $sum_temp_ag           = $divided_ch_temp_ag_sum + $divided_temp_temp_ag_sum + $divided_dm_temp_ag_sum;
+                    $sum_dm_ag             = $divided_ch_dm_ag_sum + $divided_temp_dm_ag_sum + $divided_dm_dm_ag_sum;
+                    $sum_divided_ag        = $divided_sum_sum_ag + $divided_sum_sum_ag + $divided_sum_sum_ag;
+
+                    /* ---- */
+                    $bobot_ch_ag           = $sum_ch_ag / $sum_divided_ag;
+                    $bobot_temp_ag         = $sum_temp_ag / $sum_divided_ag;
+                    $bobot_dm_ag           = $sum_dm_ag / $sum_divided_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $multiple_ch_ch_ag_bobot      = $ch_ch_ag * $bobot_ch_ag;
+                    $multiple_ch_temp_ag_bobot    = $temp_ch_ag * $bobot_ch_ag;
+                    $multiple_ch_dm_ag_bobot      = $dm_ch_ag * $bobot_ch_ag;
+
+                    $multiple_temp_ch_ag_bobot    = $ch_temp_ag * $bobot_temp_ag;
+                    $multiple_temp_temp_ag_bobot  = $temp_temp_ag * $bobot_temp_ag;
+                    $multiple_temp_dm_ag_bobot    = $dm_temp_ag * $bobot_temp_ag;
+
+                    $multiple_dm_ch_ag_bobot      = $ch_dm_ag * $bobot_dm_ag;
+                    $multiple_dm_temp_ag_bobot    = $temp_dm_ag * $bobot_dm_ag;
+                    $multiple_dm_dm_ag_bobot      = $dm_dm_ag * $bobot_dm_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $sum_bobot_ch_ag               = $multiple_ch_ch_ag_bobot + $multiple_temp_ch_ag_bobot + $multiple_dm_ch_ag_bobot;
+                    $sum_bobot_temp_ag             = $multiple_ch_temp_ag_bobot + $multiple_temp_temp_ag_bobot + $multiple_dm_temp_ag_bobot;
+                    $sum_bobot_dm_ag               = $multiple_ch_dm_ag_bobot + $multiple_temp_dm_ag_bobot + $multiple_dm_dm_ag_bobot;
+                    /* ---- */
+
+                    $divided_bobot_ch_ag           = $sum_bobot_ch_ag / $bobot_ch_ag;
+                    $divided_bobot_temp_ag         = $sum_bobot_temp_ag / $bobot_temp_ag;
+                    $divided_bobot_dm_ag           = $sum_bobot_dm_ag / $bobot_dm_ag;
+
+                    /* ---- */
+                    $lamda_max_ag                  = ($divided_bobot_ch_ag + $divided_bobot_temp_ag + $divided_bobot_dm_ag) / $sum_divided_ag;
+                    $jumlah_factor_ag              = $sum_divided_ag;
+                    $consistensi_index_ag          = ($lamda_max_ag-$jumlah_factor_ag)/($jumlah_factor_ag-1);
+                    $rasio_index_ag                = 0.58;
+                    $consistensi_rasio_ag          = $consistensi_index_ag / $rasio_index_ag;
+                    /* ---- */
+
 
                     $model_ag                           = new ClimateAG();
 

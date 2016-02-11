@@ -53,13 +53,13 @@ class Climate extends \yii\db\ActiveRecord
             'ch_temp' => 'Ch Temp',
             'ch_dm' => 'Ch Dm',
             'temp_dm' => 'Temp Dm',
-            'bobot_ch' => 'Bobot Ch',
-            'boobt_temp' => 'Boobt Temp',
-            'bobot_dm' => 'Bobot Dm',
-            'cr' => 'Cr',
-            'validation' => 'Validation',
+            'bobot_ch' => Yii::t('app','Rainfall Weight'),
+            'boobt_temp' => Yii::t('app','Temperature Weight'),
+            'bobot_dm' => Yii::t('app','Dry Month Weight'),
+            'cr' => Yii::t('app','Consistency Ratio'),
+            'validation' => Yii::t('app','Validation'),
             'id_user' => 'Id User',
-            'date' => 'Date',
+            'date' => Yii::t('app','Date'),
         ];
     }
 }

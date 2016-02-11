@@ -46,7 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'category',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+             'controller' => 'tutorialcategory'
+            ],
         ],
     ]); ?>
 

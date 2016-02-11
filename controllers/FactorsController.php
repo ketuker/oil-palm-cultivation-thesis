@@ -265,31 +265,105 @@ class FactorsController extends Controller
 
                     for ($i=0; $i < count($data_factors); $i++) { 
                         $climate_land_ag_base[$i]            = $data_factors[$i]['climate_land'];
-                        $climate_accessibility_ag_base[$i]              = $data_factors[$i]['climate_accessibility'];
-                        $land_accessibility_ag_base[$i]            = $data_factors[$i]['land_accessibility'];
-                        $bobot_climate_ag_base[$i]           = $data_factors[$i]['bobot_climate'];
-                        $bobot_land_ag_base[$i]         = $data_factors[$i]['bobot_land'];
-                        $bobot_accessibility_ag_base[$i]           = $data_factors[$i]['bobot_accessibility'];
-                        $consistensi_rasio_ag_base[$i]  = $data_factors[$i]['cr'];
+                        $climate_accessibility_ag_base[$i]   = $data_factors[$i]['climate_accessibility'];
+                        $land_accessibility_ag_base[$i]      = $data_factors[$i]['land_accessibility'];
+                        // $bobot_climate_ag_base[$i]           = $data_factors[$i]['bobot_climate'];
+                        // $bobot_land_ag_base[$i]              = $data_factors[$i]['bobot_land'];
+                        // $bobot_accessibility_ag_base[$i]     = $data_factors[$i]['bobot_accessibility'];
+                        // $consistensi_rasio_ag_base[$i]       = $data_factors[$i]['cr'];
                     }
 
-                    $climate_land_ag                         = sqrt (array_product($climate_land_ag_base));
-                    $climate_accessibility_ag                           = sqrt (array_product($climate_accessibility_ag_base));
-                    $land_accessibility_ag                         = sqrt (array_product($land_accessibility_ag_base));
-                    $bobot_climate_ag                        = sqrt (array_product($bobot_climate_ag_base));
-                    $bobot_land_ag                      = sqrt (array_product($bobot_land_ag_base));
-                    $bobot_accessibility_ag                        = sqrt (array_product($bobot_accessibility_ag_base));
-                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    $climate_land_ag                         = pow (array_product($climate_land_ag_base),1/count($data_factors));
+                    $land_climate_ag                         = 1 / $climate_land_ag;
+                    $climate_climate_ag                      = 1;
 
-                    $model_ag                           = new FactorsAG();
+                    $climate_accessibility_ag                = pow (array_product($climate_accessibility_ag_base),1/count($data_factors));
+                    $accessibility_climate_ag                = 1 / $climate_accessibility_ag ;
+                    $land_land_ag                            = 1;
 
-                    $_POSTAG['FactorsAG']['climate_land']      = $climate_land_ag;
-                    $_POSTAG['FactorsAG']['climate_accessibility']        = $climate_accessibility_ag;
-                    $_POSTAG['FactorsAG']['land_accessibility']      = $land_accessibility_ag;
-                    $_POSTAG['FactorsAG']['bobot_climate']     = $bobot_climate_ag;
-                    $_POSTAG['FactorsAG']['bobot_land']   = $bobot_land_ag;
-                    $_POSTAG['FactorsAG']['bobot_accessibility']     = $bobot_accessibility_ag;
-                    $_POSTAG['FactorsAG']['cr']           = $consistensi_rasio_ag;
+                    $land_accessibility_ag                   = pow (array_product($land_accessibility_ag_base),1/count($data_factors));
+                    $accessibility_land_ag                   = 1 / $land_accessibility_ag ;
+                    $accessibility_accessibility_ag          = 1;
+
+                    // $bobot_climate_ag                        = sqrt (array_product($bobot_climate_ag_base));
+                    // $bobot_land_ag                           = sqrt (array_product($bobot_land_ag_base));
+                    // $bobot_accessibility_ag                  = sqrt (array_product($bobot_accessibility_ag_base));
+                    // $consistensi_rasio_ag                    = sqrt (array_product($consistensi_rasio_ag_base));
+
+                    $sum_column_climate_ag           = $climate_climate_ag + $land_climate_ag + $accessibility_climate_ag;
+                    $sum_column_land_ag              = $climate_land_ag + $land_land_ag + $accessibility_land_ag;
+                    $sum_column_accessibility_ag     = $climate_accessibility_ag + $land_accessibility_ag + $accessibility_accessibility_ag;
+
+
+                    /* ---- */
+                    $divided_sum_sum_ag              = $sum_column_climate_ag / $sum_column_climate_ag;
+
+                    $divided_climate_climate_ag_sum        = $climate_climate_ag / $sum_column_climate_ag;
+                    $divided_climate_land_ag_sum           = $land_climate_ag / $sum_column_climate_ag;
+                    $divided_climate_accessibility_ag_sum  = $accessibility_climate_ag / $sum_column_climate_ag;
+
+                    $divided_land_climate_ag_sum           = $climate_land_ag / $sum_column_land_ag;
+                    $divided_land_land_ag_sum              = $land_land_ag / $sum_column_land_ag;
+                    $divided_land_accessibility_ag_sum     = $accessibility_land_ag / $sum_column_land_ag;
+
+                    $divided_accessibility_climate_ag_sum        = $climate_accessibility_ag / $sum_column_accessibility_ag;
+                    $divided_accessibility_land_ag_sum           = $land_accessibility_ag / $sum_column_accessibility_ag;
+                    $divided_accessibility_accessibility_ag_sum  = $accessibility_accessibility_ag / $sum_column_accessibility_ag;
+                    /* ---- */
+
+                    $sum_climate_ag        = $divided_climate_climate_ag_sum + $divided_land_climate_ag_sum + $divided_accessibility_climate_ag_sum;
+                    $sum_land_ag           = $divided_climate_land_ag_sum + $divided_land_land_ag_sum + $divided_accessibility_land_ag_sum;
+                    $sum_accessibility_ag  = $divided_climate_accessibility_ag_sum + $divided_land_accessibility_ag_sum + $divided_accessibility_accessibility_ag_sum;
+                    $sum_divided_ag        = $divided_sum_sum_ag + $divided_sum_sum_ag + $divided_sum_sum_ag;
+
+                    /* ---- */
+                    $bobot_climate_ag          = $sum_climate_ag / $sum_divided_ag;
+                    $bobot_land_ag             = $sum_land_ag / $sum_divided_ag;
+                    $bobot_accessibility_ag    = $sum_accessibility_ag / $sum_divided_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $multiple_climate_climate_ag_bobot           = $climate_climate_ag * $bobot_climate_ag;
+                    $multiple_climate_land_ag_bobot              = $land_climate_ag * $bobot_climate_ag;
+                    $multiple_climate_accessibility_ag_bobot     = $accessibility_climate_ag * $bobot_climate_ag;
+
+                    $multiple_land_climate_ag_bobot        = $climate_land_ag * $bobot_land_ag;
+                    $multiple_land_land_ag_bobot           = $land_land_ag * $bobot_land_ag;
+                    $multiple_land_accessibility_ag_bobot  = $accessibility_land_ag * $bobot_land_ag;
+
+                    $multiple_accessibility_climate_ag_bobot           = $climate_accessibility_ag * $bobot_accessibility_ag;
+                    $multiple_accessibility_land_ag_bobot              = $land_accessibility_ag * $bobot_accessibility_ag;
+                    $multiple_accessibility_accessibility_ag_bobot     = $accessibility_accessibility_ag * $bobot_accessibility_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $sum_bobot_climate_ag          = $multiple_climate_climate_ag_bobot + $multiple_land_climate_ag_bobot + $multiple_accessibility_climate_ag_bobot;
+                    $sum_bobot_land_ag             = $multiple_climate_land_ag_bobot + $multiple_land_land_ag_bobot + $multiple_accessibility_land_ag_bobot;
+                    $sum_bobot_accessibility_ag    = $multiple_climate_accessibility_ag_bobot + $multiple_land_accessibility_ag_bobot + $multiple_accessibility_accessibility_ag_bobot;
+                    /* ---- */
+
+                    $divided_bobot_climate_ag        = $sum_bobot_climate_ag / $bobot_climate_ag;
+                    $divided_bobot_land_ag           = $sum_bobot_land_ag / $bobot_land_ag;
+                    $divided_bobot_accessibility_ag  = $sum_bobot_accessibility_ag / $bobot_accessibility_ag;
+
+                    /* ---- */
+                    $lamda_max_ag                  = ($divided_bobot_climate_ag + $divided_bobot_land_ag + $divided_bobot_accessibility_ag) / $sum_divided_ag;
+                    $jumlah_factor_ag              = $sum_divided_ag;
+                    $consistensi_index_ag          = ($lamda_max_ag-$jumlah_factor_ag)/($jumlah_factor_ag-1);
+                    $rasio_index_ag                = 0.58;
+                    $consistensi_rasio_ag          = $consistensi_index_ag / $rasio_index_ag;
+                    /* ---- */
+
+
+                    $model_ag                                = new FactorsAG();
+
+                    $_POSTAG['FactorsAG']['climate_land']           = $climate_land_ag;
+                    $_POSTAG['FactorsAG']['climate_accessibility']  = $climate_accessibility_ag;
+                    $_POSTAG['FactorsAG']['land_accessibility']     = $land_accessibility_ag;
+                    $_POSTAG['FactorsAG']['bobot_climate']          = $bobot_climate_ag;
+                    $_POSTAG['FactorsAG']['bobot_land']             = $bobot_land_ag;
+                    $_POSTAG['FactorsAG']['bobot_accessibility']    = $bobot_accessibility_ag;
+                    $_POSTAG['FactorsAG']['cr']                     = $consistensi_rasio_ag;
 
                     if ($model_ag->load($_POSTAG) && $model_ag->save()) {
                         

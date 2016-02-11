@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create Comparison' : 'Update Comparison', ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app','Create AOI') : Yii::t('app','Update AOI'), ['class' => $model->isNewRecord ? 'btn btn-success pull-right' : 'btn btn-primary pull-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

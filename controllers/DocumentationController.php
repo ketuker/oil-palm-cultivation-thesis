@@ -9,13 +9,21 @@ class DocumentationController extends \yii\web\Controller
 {
     public function actionIndex($id = FALSE)
     {
-
-    	if (empty($id)) {
-    		$id = 1;
-    	}
-
     	$tutorial 	= Tutorial::find()->AsArray()->all();
     	$category 	= TutorialCategory::find()->AsArray()->all();
+
+    	for ($i=0; $i < count($category); $i++) { 
+    			$idall[] 	= $category[$i]['id'];
+	            }
+
+    	if (empty($id)) {
+
+	            $id = min($idall);
+
+    	}
+
+	            // print_r($id);
+	            // die;
     	
     	$model 		= $this->findModel($id);
 

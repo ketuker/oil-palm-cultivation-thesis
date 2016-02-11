@@ -19,7 +19,7 @@ class CompareSearch extends Compare
     {
         return [
             [['id', 'id_user'], 'integer'],
-            [['title', 'description', 'dates', 'data', 'geom'], 'safe'],
+            [['title', 'description', 'data','data_rain','data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town', 'geom'], 'safe'],
             [['st_area'], 'number'],
         ];
     }
@@ -66,6 +66,7 @@ class CompareSearch extends Compare
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'data', $this->data])
+            ->andFilterWhere(['like', 'data_rain', $this->data])
             ->andFilterWhere(['like', 'geom', $this->geom]);
 
         return $dataProvider;

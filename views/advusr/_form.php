@@ -40,7 +40,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-ch_temp').value    = ConvertNumber(val.value); 
                 document.getElementById('rainfal').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('temperature').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRclimate();
             }",
         ],
         'pluginOptions'=>[
@@ -80,7 +80,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-ch_dm').value = ConvertNumber(val.value); 
                                             document.getElementById('rainfal2').innerHTML           = ConvertPlus(val.value);
                                             document.getElementById('dm').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRclimate();
 
         }",
         ],
@@ -119,7 +119,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-temp_dm').value = ConvertNumber(val.value); 
                                             document.getElementById('temperature2').innerHTML    = ConvertPlus(val.value);
                                             document.getElementById('dm2').innerHTML          = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRclimate();
         }",
         ],
         'pluginOptions'=>[
@@ -142,7 +142,7 @@ use kartik\slider\Slider;
 
 <!--  SubFactors Land Non Peat-->
 
-    <div id="crlannpeat" class="alert alert-danger" role="alert"><?= Yii::t('app','Non Peatland') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
+    <div id="crlandnpeat" class="alert alert-danger" role="alert"><?= Yii::t('app','Non Peatland') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'slope_text')->HiddenInput()->label(false) ?>
        <!-- Label Texture -->
     <div class="col-md-2">
@@ -160,7 +160,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-slope_text').value    = ConvertNumber(val.value); 
                 document.getElementById('slope').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('texture').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandnpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -200,7 +200,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-slope_elev').value    = ConvertNumber(val.value); 
                 document.getElementById('slope2').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('elev').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandnpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -240,7 +240,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-text_elev').value    = ConvertNumber(val.value); 
                 document.getElementById('texture2').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('elev2').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandnpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -263,8 +263,6 @@ use kartik\slider\Slider;
 
 
 
-
-
 <!-- Sub Factor Peatland -->
     <div id="crlandpeat" class="alert alert-danger" role="alert"><?= Yii::t('app','Peatland') ?>   </br> <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'slope_thick')->HiddenInput()->label(false) ?>
@@ -284,7 +282,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-slope_thick').value    = ConvertNumber(val.value); 
                 document.getElementById('slopep').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('thick').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -324,7 +322,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-slope_ripe').value    = ConvertNumber(val.value); 
                 document.getElementById('slopep2').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('ripe').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -364,7 +362,7 @@ use kartik\slider\Slider;
                 document.getElementById('advusr-thick_ripe').value    = ConvertNumber(val.value); 
                 document.getElementById('thick2').innerHTML         = ConvertPlus(val.value);
                 document.getElementById('ripe2').innerHTML         = ConvertMin(val.value);
-                checkCR();
+                checkCRlandpeat();
             }",
         ],
         'pluginOptions'=>[
@@ -403,7 +401,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-road_mills').value = ConvertNumber(val.value); 
                                             document.getElementById('road').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('mills').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRaccess();
         }",
         ],
         'pluginOptions'=>[
@@ -438,7 +436,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-road_town').value = ConvertNumber(val.value); 
                                             document.getElementById('road2').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('town').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRaccess();
         }",
         ],
         'pluginOptions'=>[
@@ -474,7 +472,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-mills_town').value = ConvertNumber(val.value); 
                                             document.getElementById('mills2').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('town2').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRaccess();
 
         }",
         ],
@@ -496,7 +494,7 @@ use kartik\slider\Slider;
     </br> </br> </br>
 
 <!-- All Factors -->
-    <div id="crfactors" class="alert alert-success" role="alert"><?= Yii::t('app','Factors') ?> </br>  <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
+    <div id="crfactor" class="alert alert-success" role="alert"><?= Yii::t('app','Factors') ?> </br>  <?= Yii::t('app','Consistency Ratio') ?>: 0 and <?= Yii::t('app','Validation') ?> : true</div>
     <?= $form->field($model, 'climate_land')->HiddenInput()->label(false) ?>
     <!-- Label Land -->
     <div class="col-md-2">
@@ -512,7 +510,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-climate_land').value = ConvertNumber(val.value); 
                                             document.getElementById('climate').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('land').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRfactor();
         }",
         ],
         'pluginOptions'=>[
@@ -550,7 +548,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-climate_accessibility').value = ConvertNumber(val.value); 
                                             document.getElementById('climate2').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('access').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRfactor();
         }",
         ],
         'pluginOptions'=>[
@@ -586,7 +584,7 @@ use kartik\slider\Slider;
             'slideStop' => "function(val) { document.getElementById('advusr-land_accessibility').value = ConvertNumber(val.value); 
                                             document.getElementById('land2').innerHTML         = ConvertPlus(val.value);
                                             document.getElementById('access2').innerHTML         = ConvertMin(val.value);
-                                            checkCR();
+                                            checkCRfactor();
         }",
         ],
         'pluginOptions'=>[
@@ -604,6 +602,11 @@ use kartik\slider\Slider;
     <span ></span> <?= Yii::t('app','Land') ?>
     </button></div>
     </br> </br> </br>
+
+
+
+
+
 
 
 
@@ -626,6 +629,18 @@ use kartik\slider\Slider;
         document.getElementById('advusr-slope_text').value = 1;
         document.getElementById('advusr-slope_elev').value = 1;
         document.getElementById('advusr-text_elev').value = 1;
+
+        document.getElementById('advusr-slope_thick').value = 1;
+        document.getElementById('advusr-slope_ripe').value = 1;
+        document.getElementById('advusr-thick_ripe').value = 1;
+
+        document.getElementById('advusr-road_town').value = 1;
+        document.getElementById('advusr-road_mills').value = 1;
+        document.getElementById('advusr-mills_town').value = 1;
+
+        document.getElementById('advusr-climate_land').value = 1;
+        document.getElementById('advusr-climate_accessibility').value = 1;
+        document.getElementById('advusr-land_accessibility').value = 1;
     }
 
     function checkCRclimate(){
@@ -633,11 +648,56 @@ use kartik\slider\Slider;
         var temp_dm = document.getElementById('advusr-temp_dm').value;
         var ch_dm   = document.getElementById('advusr-ch_dm').value;
 
-        $.post("cr",{ch_temp: ch_temp,temp_dm: temp_dm, ch_dm: ch_dm}, function(data, status){
-            obj = JSON.parse(data);
-            document.getElementById('cr').innerHTML = 'Consistency Ratio : '+obj.cr+' and Validation : '+obj.validation;
+        $.post("crclimate",{ch_temp: ch_temp,temp_dm: temp_dm, ch_dm: ch_dm}, function(dataclimate, statusclimate){
+            obj = JSON.parse(dataclimate);
+            document.getElementById('crclimate').innerHTML = 'Consistency Ratio : '+obj.crclimate+' and Validation : '+obj.validation;
         });
     }
+
+    function checkCRlandnpeat(){
+        var slope_text = document.getElementById('advusr-slope_text').value;
+        var slope_elev = document.getElementById('advusr-slope_elev').value;
+        var text_elev   = document.getElementById('advusr-text_elev').value;
+
+        $.post("crlandnpeat",{slope_text: slope_text,slope_elev: slope_elev, text_elev: text_elev}, function(datalandnpeat, statuslandnpeat){
+            obj = JSON.parse(datalandnpeat);
+            document.getElementById('crlandnpeat').innerHTML = 'Consistency Ratio : '+obj.crlandnpeat+' and Validation : '+obj.validation;
+        });
+    }
+
+    function checkCRlandpeat(){
+        var slope_thick = document.getElementById('advusr-slope_thick').value;
+        var slope_ripe = document.getElementById('advusr-slope_ripe').value;
+        var thick_ripe   = document.getElementById('advusr-thick_ripe').value;
+
+        $.post("crlandpeat",{slope_thick: slope_thick,slope_ripe: slope_ripe, thick_ripe: thick_ripe}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('crlandpeat').innerHTML = 'Consistency Ratio : '+obj.crlandpeat+' and Validation : '+obj.validation;
+        });
+    }
+
+    function checkCRaccess(){
+        var road_mills = document.getElementById('advusr-road_mills').value;
+        var road_town = document.getElementById('advusr-road_town').value;
+        var mills_town   = document.getElementById('advusr-mills_town').value;
+
+        $.post("craccess",{road_mills: road_mills,road_town: road_town, mills_town: mills_town}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('craccess').innerHTML = 'Consistency Ratio : '+obj.craccess+' and Validation : '+obj.validation;
+        });
+    }
+
+    function checkCRfactor(){
+        var climate_land = document.getElementById('advusr-climate_land').value;
+        var climate_accessibility = document.getElementById('advusr-climate_accessibility').value;
+        var land_accessibility   = document.getElementById('advusr-land_accessibility').value;
+
+        $.post("crfactor",{climate_land: climate_land,climate_accessibility: climate_accessibility, land_accessibility: land_accessibility}, function(data, status){
+            obj = JSON.parse(data);
+            document.getElementById('crfactor').innerHTML = 'Consistency Ratio : '+obj.crfactor+' and Validation : '+obj.validation;
+        });
+    }
+
 
     function ConvertString(paramkiriman){
         if (paramkiriman == 2) {

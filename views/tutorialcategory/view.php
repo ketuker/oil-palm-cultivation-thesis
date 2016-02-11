@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Tutorialcategory */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tutorialcategories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Tutorialcategories', 'url' => Yii::$app->homeUrl.'tutorial'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tutorialcategory-view">

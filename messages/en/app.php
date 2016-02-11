@@ -111,17 +111,7 @@ return [
     '{n} MB' => '{n} MB',
     '{n} PB' => '{n} PB',
     '{n} TB' => '{n} TB',
-    'Language' => 'Bahasa',
 
-    /*Bahasa di Menu*/
-    'Area of Interest' => 'Wilayah yang menarik',
-    'Documentation'     =>  'Dokumentasi',
-    'Pairwise Comparison' =>  'Perbandingan mbuh',
-    'Climate'    =>  'Iklim',
-    'Land'   =>  'Tanah',
-    'Accessibility'   =>  'Aksesibilitas',
-    'Factors'   =>  'Faktor',
-    'Sensitivity Analysis' => 'Analisa sensitif'
 ];
 
 ?>

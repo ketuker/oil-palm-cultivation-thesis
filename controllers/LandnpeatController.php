@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Landnpeat;
 use app\models\LandnpeatSearch;
+use app\models\LandnpeatAG;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -238,55 +239,134 @@ class LandnpeatController extends Controller
                 $validation             = FALSE;
             }
 
+
             if (Yii::$app->user->getId()) {
-                $_POST['Landnpeat']['slope_text']    = $slope_text;
-                $_POST['Landnpeat']['slope_elev']      = $slope_elev;
+                $_POST['Landnpeat']['slope_text']   = $slope_text;
+                $_POST['Landnpeat']['slope_elev']   = $slope_elev;
                 $_POST['Landnpeat']['text_elev']    = $text_elev;
-                $_POST['Landnpeat']['bobot_slope']   = $bobot_slope;
-                $_POST['Landnpeat']['boobt_text'] = $bobot_text;
+                $_POST['Landnpeat']['bobot_slope']  = $bobot_slope;
+                $_POST['Landnpeat']['bobot_text']   = $bobot_text;
                 $_POST['Landnpeat']['bobot_elev']   = $bobot_elev;
-                $_POST['Landnpeat']['cr']         = $consistensi_rasio;
-                $_POST['Landnpeat']['validation'] = $validation;
-                $_POST['Landnpeat']['id_user']    = Yii::$app->user->getId();
+                $_POST['Landnpeat']['cr']           = $consistensi_rasio;
+                $_POST['Landnpeat']['validation']   = $validation;
+                $_POST['Landnpeat']['id_user']      = Yii::$app->user->getId();
 
                 if ($model->load($_POST) && $model->save()) {
 
-                    $data_text_texts                      = Landnpeat::find()->where(['validation'=> TRUE])->AsArray()->All();
+                    $data_text_texts                    = Landnpeat::find()->where(['validation'=> TRUE])->AsArray()->All();
 
-                    $slope_text_ag_base                    = [];
-                    $slope_elev_ag_base                      = [];
-                    $text_elev_ag_base                    = [];
-                    $bobot_slope_ag_base                   = [];
+                    $slope_text_ag_base                 = [];
+                    $slope_elev_ag_base                 = [];
+                    $text_elev_ag_base                  = [];
+                    $bobot_slope_ag_base                = [];
                     $bobot_text_ag_base                 = [];
-                    $bobot_elev_ag_base                   = [];
+                    $bobot_elev_ag_base                 = [];
                     $consistensi_rasio_ag_base          = [];
 
                     for ($i=0; $i < count($data_text_texts); $i++) { 
-                        $slope_text_ag_base[$i]            = $data_text_texts[$i]['slope_text'];
-                        $slope_elev_ag_base[$i]              = $data_text_texts[$i]['slope_elev'];
-                        $text_elev_ag_base[$i]            = $data_text_texts[$i]['text_elev'];
-                        $bobot_slope_ag_base[$i]           = $data_text_texts[$i]['bobot_slope'];
-                        $bobot_text_ag_base[$i]         = $data_text_texts[$i]['boobt_text'];
-                        $bobot_elev_ag_base[$i]           = $data_text_texts[$i]['bobot_elev'];
-                        $consistensi_rasio_ag_base[$i]  = $data_text_texts[$i]['cr'];
+                        $slope_text_ag_base[$i]         = $data_text_texts[$i]['slope_text'];
+                        $slope_elev_ag_base[$i]         = $data_text_texts[$i]['slope_elev'];
+                        $text_elev_ag_base[$i]          = $data_text_texts[$i]['text_elev'];
+                        // $bobot_slope_ag_base[$i]        = $data_text_texts[$i]['bobot_slope'];
+                        // $bobot_text_ag_base[$i]         = $data_text_texts[$i]['bobot_text'];
+                        // $bobot_elev_ag_base[$i]         = $data_text_texts[$i]['bobot_elev'];
+                        // $consistensi_rasio_ag_base[$i]  = $data_text_texts[$i]['cr'];
                     }
 
-                    $slope_text_ag                         = sqrt (array_product($slope_text_ag_base));
-                    $slope_elev_ag                           = sqrt (array_product($slope_elev_ag_base));
-                    $text_elev_ag                         = sqrt (array_product($text_elev_ag_base));
-                    $bobot_slope_ag                        = sqrt (array_product($bobot_slope_ag_base));
-                    $bobot_text_ag                      = sqrt (array_product($bobot_text_ag_base));
-                    $bobot_elev_ag                        = sqrt (array_product($bobot_elev_ag_base));
-                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    $slope_text_ag                          = pow (array_product($slope_text_ag_base),1/count($data_text_texts));
+                    $text_slope_ag                          = 1/$slope_text_ag;
+                    $slope_slope_ag                         = 1;
+
+
+                    $slope_elev_ag                          = pow (array_product($slope_elev_ag_base),1/count($data_text_texts));
+                    $elev_slope_ag                          = 1/$slope_elev_ag;
+                    $elev_elev_ag                           = 1;                    
+
+
+                    $text_elev_ag                           = pow (array_product($text_elev_ag_base),1/count($data_text_texts));
+                    $elev_text_ag                           = 1/$text_elev_ag;
+                    $text_text_ag                           = 1;
+
+                    // $bobot_slope_ag                     = sqrt (array_product($bobot_slope_ag_base));
+                    // $bobot_text_ag                      = sqrt (array_product($bobot_text_ag_base));
+                    // $bobot_elev_ag                      = sqrt (array_product($bobot_elev_ag_base));
+                    // $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+
+
+                    $sum_column_slope_ag      = $slope_slope_ag + $text_slope_ag + $elev_slope_ag;
+                    $sum_column_text_ag    = $slope_text_ag + $text_text_ag + $elev_text_ag;
+                    $sum_column_elev_ag      = $slope_elev_ag + $text_elev_ag + $elev_elev_ag;
+
+
+                    /* ---- */
+                    $divided_sum_sum_ag        = $sum_column_slope_ag / $sum_column_slope_ag;
+
+                    $divided_slope_slope_ag_sum      = $slope_slope_ag / $sum_column_slope_ag;
+                    $divided_slope_text_ag_sum    = $text_slope_ag / $sum_column_slope_ag;
+                    $divided_slope_elev_ag_sum      = $elev_slope_ag / $sum_column_slope_ag;
+
+                    $divided_text_slope_ag_sum    = $slope_text_ag / $sum_column_text_ag;
+                    $divided_text_text_ag_sum  = $text_text_ag / $sum_column_text_ag;
+                    $divided_text_elev_ag_sum    = $elev_text_ag / $sum_column_text_ag;
+
+                    $divided_elev_slope_ag_sum      = $slope_elev_ag / $sum_column_elev_ag;
+                    $divided_elev_text_ag_sum    = $text_elev_ag / $sum_column_elev_ag;
+                    $divided_elev_elev_ag_sum      = $elev_elev_ag / $sum_column_elev_ag;
+                    /* ---- */
+
+                    $sum_slope_ag             = $divided_slope_slope_ag_sum + $divided_text_slope_ag_sum + $divided_elev_slope_ag_sum;
+                    $sum_text_ag           = $divided_slope_text_ag_sum + $divided_text_text_ag_sum + $divided_elev_text_ag_sum;
+                    $sum_elev_ag             = $divided_slope_elev_ag_sum + $divided_text_elev_ag_sum + $divided_elev_elev_ag_sum;
+                    $sum_divided_ag        = $divided_sum_sum_ag + $divided_sum_sum_ag + $divided_sum_sum_ag;
+
+                    /* ---- */
+                    $bobot_slope_ag           = $sum_slope_ag / $sum_divided_ag;
+                    $bobot_text_ag         = $sum_text_ag / $sum_divided_ag;
+                    $bobot_elev_ag           = $sum_elev_ag / $sum_divided_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $multiple_slope_slope_ag_bobot      = $slope_slope_ag * $bobot_slope_ag;
+                    $multiple_slope_text_ag_bobot    = $text_slope_ag * $bobot_slope_ag;
+                    $multiple_slope_elev_ag_bobot      = $elev_slope_ag * $bobot_slope_ag;
+
+                    $multiple_text_slope_ag_bobot    = $slope_text_ag * $bobot_text_ag;
+                    $multiple_text_text_ag_bobot  = $text_text_ag * $bobot_text_ag;
+                    $multiple_text_elev_ag_bobot    = $elev_text_ag * $bobot_text_ag;
+
+                    $multiple_elev_slope_ag_bobot      = $slope_elev_ag * $bobot_elev_ag;
+                    $multiple_elev_text_ag_bobot    = $text_elev_ag * $bobot_elev_ag;
+                    $multiple_elev_elev_ag_bobot      = $elev_elev_ag * $bobot_elev_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $sum_bobot_slope_ag               = $multiple_slope_slope_ag_bobot + $multiple_text_slope_ag_bobot + $multiple_elev_slope_ag_bobot;
+                    $sum_bobot_text_ag             = $multiple_slope_text_ag_bobot + $multiple_text_text_ag_bobot + $multiple_elev_text_ag_bobot;
+                    $sum_bobot_elev_ag               = $multiple_slope_elev_ag_bobot + $multiple_text_elev_ag_bobot + $multiple_elev_elev_ag_bobot;
+                    /* ---- */
+
+                    $divided_bobot_slope_ag           = $sum_bobot_slope_ag / $bobot_slope_ag;
+                    $divided_bobot_text_ag         = $sum_bobot_text_ag / $bobot_text_ag;
+                    $divided_bobot_elev_ag           = $sum_bobot_elev_ag / $bobot_elev_ag;
+
+                    /* ---- */
+                    $lamda_max_ag                  = ($divided_bobot_slope_ag + $divided_bobot_text_ag + $divided_bobot_elev_ag) / $sum_divided_ag;
+                    $jumlah_factor_ag              = $sum_divided_ag;
+                    $consistensi_index_ag          = ($lamda_max_ag-$jumlah_factor_ag)/($jumlah_factor_ag-1);
+                    $rasio_index_ag                = 0.58;
+                    $consistensi_rasio_ag          = $consistensi_index_ag / $rasio_index_ag;
+                    /* ---- */
 
                     $model_ag                           = new LandnpeatAG();
 
-                    $_POSTAG['LandnpeatAG']['slope_text']      = $slope_text_ag;
-                    $_POSTAG['LandnpeatAG']['slope_elev']        = $slope_elev_ag;
-                    $_POSTAG['LandnpeatAG']['text_elev']      = $text_elev_ag;
-                    $_POSTAG['LandnpeatAG']['bobot_slope']     = $bobot_slope_ag;
-                    $_POSTAG['LandnpeatAG']['boobt_text']   = $bobot_text_ag;
-                    $_POSTAG['LandnpeatAG']['bobot_elev']     = $bobot_elev_ag;
+
+
+                    $_POSTAG['LandnpeatAG']['slope_text']   = $slope_text_ag;
+                    $_POSTAG['LandnpeatAG']['slope_elev']   = $slope_elev_ag;
+                    $_POSTAG['LandnpeatAG']['text_elev']    = $text_elev_ag;
+                    $_POSTAG['LandnpeatAG']['bobot_slope']  = $bobot_slope_ag;
+                    $_POSTAG['LandnpeatAG']['bobot_text']   = $bobot_text_ag;
+                    $_POSTAG['LandnpeatAG']['bobot_elev']   = $bobot_elev_ag;
                     $_POSTAG['LandnpeatAG']['cr']           = $consistensi_rasio_ag;
 
                     if ($model_ag->load($_POSTAG) && $model_ag->save()) {

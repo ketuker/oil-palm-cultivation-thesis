@@ -35,7 +35,7 @@ class Landpeat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr', 'id_user'], 'required'],
+            [['slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr'], 'required'],
             [['slope_thick', 'slope_ripe', 'thick_ripe', 'bobot_slope', 'bobot_thick', 'bobot_ripe', 'cr'], 'number'],
             [['validation'], 'boolean'],
             [['id_user'], 'integer'],
@@ -53,13 +53,13 @@ class Landpeat extends \yii\db\ActiveRecord
             'slope_thick' => 'Slope Thick',
             'slope_ripe' => 'Slope Ripe',
             'thick_ripe' => 'Thick Ripe',
-            'bobot_slope' => 'Bobot Slope',
-            'bobot_thick' => 'Bobot Thick',
-            'bobot_ripe' => 'Bobot Ripe',
-            'cr' => 'Cr',
-            'validation' => 'Validation',
+            'bobot_slope' => Yii::t('app','Slope Weight'),
+            'bobot_thick' => Yii::t('app','Peat Thickness Weight'),
+            'bobot_ripe' => Yii::t('app','Peat Ripening Weight'),
+            'cr' => Yii::t('app','Consistency Ratio'),
+            'validation' => Yii::t('app','Validation'),
             'id_user' => 'Id User',
-            'date' => 'Date',
+            'date' => Yii::t('app','Date'),
         ];
     }
 }

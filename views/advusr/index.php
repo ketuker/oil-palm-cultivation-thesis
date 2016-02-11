@@ -7,16 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\AdvusrSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Advusrs';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app','Scenario');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Sensitivity Analysis'),];
 ?>
 <div class="advusr-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Advusr', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app','Create Scenario'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,15 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            // 'id',
             'skenario',
-            'ch_temp',
-            'ch_dm',
-            'temp_dm',
+            // 'ch_temp',
+            // 'ch_dm',
+            // 'temp_dm',
             // 'bobot_ch',
             // 'bobot_temp',
             // 'bobot_dm',
-            // 'cr_climate',
+            'cr_climate',
             // 'validation_climate:boolean',
             // 'slope_text',
             // 'slope_elev',
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'bobot_slopenp',
             // 'bobot_text',
             // 'bobot_elev',
-            // 'cr_landnpeat',
+            'cr_landnpeat',
             // 'validation_landnpeat:boolean',
             // 'slope_thick',
             // 'slope_ripe',
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'bobot_slopep',
             // 'bobot_thick',
             // 'bobot_ripe',
-            // 'cr_landpeat',
+            'cr_landpeat',
             // 'validation_landpeat:boolean',
             // 'road_mills',
             // 'road_town',
@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'bobot_road',
             // 'bobot_mills',
             // 'bobot_town',
-            // 'cr_accessibility',
+            'cr_accessibility',
             // 'validation_accessibility:boolean',
             // 'climate_land',
             // 'climate_accessibility',
@@ -65,10 +65,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'bobot_climate',
             // 'bobot_land',
             // 'bobot_accessibility',
-            // 'cr_factors',
+            'cr_factors',
             // 'validation_factors:boolean',
             // 'id_user',
-            // 'dates',
+            // 'date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

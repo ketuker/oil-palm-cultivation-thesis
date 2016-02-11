@@ -52,13 +52,13 @@ class Factors extends \yii\db\ActiveRecord
             'climate_land' => 'Climate Land',
             'climate_accessibility' => 'Climate Accessibility',
             'land_accessibility' => 'Land Accessibility',
-            'bobot_climate' => 'Bobot Climate',
-            'bobot_land' => 'Bobot Land',
-            'bobot_accessibility' => 'Bobot Accessibility',
-            'cr' => 'Cr',
-            'validation' => 'Validation',
+            'bobot_climate' => Yii::t('app','Climate Weight'),
+            'bobot_land' => Yii::t('app','Land Weight'),
+            'bobot_accessibility' => Yii::t('app','Accessibility Weight'),
+            'cr' => Yii::t('app','Consistency Ratio'),
+            'validation' => Yii::t('app','Validation'),
             'id_user' => 'Id User',
-            'date' => 'Date',
+            'date' => Yii::t('app','Date'),
         ];
     }
 }

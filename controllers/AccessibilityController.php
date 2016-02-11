@@ -157,10 +157,9 @@ class AccessibilityController extends Controller
 
         if (Yii::$app->request->post()) {
 
-            $road_mills    = $_POST['road_mills'];
+            $road_mills    = $_POST['Accessibility']['road_mills'];
             $mills_road    = 1 / $road_mills;
             $road_road      = 1;
-
 
             $mills_town    = $_POST['Accessibility']['mills_town'];
             $town_mills    = 1 / $mills_town;
@@ -267,19 +266,96 @@ class AccessibilityController extends Controller
                         $road_mills_ag_base[$i]            = $data_access[$i]['road_mills'];
                         $road_town_ag_base[$i]              = $data_access[$i]['road_town'];
                         $mills_town_ag_base[$i]            = $data_access[$i]['mills_town'];
-                        $bobot_road_ag_base[$i]           = $data_access[$i]['bobot_road'];
-                        $bobot_mills_ag_base[$i]         = $data_access[$i]['bobot_mills'];
-                        $bobot_town_ag_base[$i]           = $data_access[$i]['bobot_town'];
-                        $consistensi_rasio_ag_base[$i]  = $data_access[$i]['cr'];
+                        // $bobot_road_ag_base[$i]           = $data_access[$i]['bobot_road'];
+                        // $bobot_mills_ag_base[$i]         = $data_access[$i]['bobot_mills'];
+                        // $bobot_town_ag_base[$i]           = $data_access[$i]['bobot_town'];
+                        // $consistensi_rasio_ag_base[$i]  = $data_access[$i]['cr'];
                     }
 
-                    $road_mills_ag                         = sqrt (array_product($road_mills_ag_base));
-                    $road_town_ag                           = sqrt (array_product($road_town_ag_base));
-                    $mills_town_ag                         = sqrt (array_product($mills_town_ag_base));
-                    $bobot_road_ag                        = sqrt (array_product($bobot_road_ag_base));
-                    $bobot_mills_ag                      = sqrt (array_product($bobot_mills_ag_base));
-                    $bobot_town_ag                        = sqrt (array_product($bobot_town_ag_base));
-                    $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+                    $road_mills_ag                         = pow(array_product($road_mills_ag_base),1/count($data_access));
+                    $mills_road_ag                         = 1 / $road_mills_ag;
+                    $road_road_ag                          = 1;
+
+
+                    $road_town_ag                          = pow(array_product($road_town_ag_base),1/count($data_access));
+                    $town_mills_ag                         = 1 / $road_town_ag;
+                    $mills_mills_ag                        = 1;
+
+                    $mills_town_ag                         = pow(array_product($mills_town_ag_base),1/count($data_access));
+                    $town_road_ag                          = 1 / $mills_town_ag;
+                    $town_town_ag                          = 1;
+
+                    // $bobot_road_ag                        = sqrt (array_product($bobot_road_ag_base));
+                    // $bobot_mills_ag                      = sqrt (array_product($bobot_mills_ag_base));
+                    // $bobot_town_ag                        = sqrt (array_product($bobot_town_ag_base));
+                    // $consistensi_rasio_ag               = sqrt (array_product($consistensi_rasio_ag_base));
+
+                    $sum_column_road_ag      = $road_road_ag + $mills_road_ag + $town_road_ag;
+                    $sum_column_mills_ag    = $road_mills_ag + $mills_mills_ag + $town_mills_ag;
+                    $sum_column_town_ag      = $road_town_ag + $mills_town_ag + $town_town_ag;
+
+
+                    /* ---- */
+                    $divided_sum_sum_ag        = $sum_column_road_ag / $sum_column_road_ag;
+
+                    $divided_road_road_ag_sum      = $road_road_ag / $sum_column_road_ag;
+                    $divided_road_mills_ag_sum    = $mills_road_ag / $sum_column_road_ag;
+                    $divided_road_town_ag_sum      = $town_road_ag / $sum_column_road_ag;
+
+                    $divided_mills_road_ag_sum    = $road_mills_ag / $sum_column_mills_ag;
+                    $divided_mills_mills_ag_sum  = $mills_mills_ag / $sum_column_mills_ag;
+                    $divided_mills_town_ag_sum    = $town_mills_ag / $sum_column_mills_ag;
+
+                    $divided_town_road_ag_sum      = $road_town_ag / $sum_column_town_ag;
+                    $divided_town_mills_ag_sum    = $mills_town_ag / $sum_column_town_ag;
+                    $divided_town_town_ag_sum      = $town_town_ag / $sum_column_town_ag;
+                    /* ---- */
+
+                    $sum_road_ag             = $divided_road_road_ag_sum + $divided_mills_road_ag_sum + $divided_town_road_ag_sum;
+                    $sum_mills_ag           = $divided_road_mills_ag_sum + $divided_mills_mills_ag_sum + $divided_town_mills_ag_sum;
+                    $sum_town_ag             = $divided_road_town_ag_sum + $divided_mills_town_ag_sum + $divided_town_town_ag_sum;
+                    $sum_divided_ag        = $divided_sum_sum_ag + $divided_sum_sum_ag + $divided_sum_sum_ag;
+
+                    /* ---- */
+                    $bobot_road_ag           = $sum_road_ag / $sum_divided_ag;
+                    $bobot_mills_ag         = $sum_mills_ag / $sum_divided_ag;
+                    $bobot_town_ag           = $sum_town_ag / $sum_divided_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $multiple_road_road_ag_bobot      = $road_road_ag * $bobot_road_ag;
+                    $multiple_road_mills_ag_bobot    = $mills_road_ag * $bobot_road_ag;
+                    $multiple_road_town_ag_bobot      = $town_road_ag * $bobot_road_ag;
+
+                    $multiple_mills_road_ag_bobot    = $road_mills_ag * $bobot_mills_ag;
+                    $multiple_mills_mills_ag_bobot  = $mills_mills_ag * $bobot_mills_ag;
+                    $multiple_mills_town_ag_bobot    = $town_mills_ag * $bobot_mills_ag;
+
+                    $multiple_town_road_ag_bobot      = $road_town_ag * $bobot_town_ag;
+                    $multiple_town_mills_ag_bobot    = $mills_town_ag * $bobot_town_ag;
+                    $multiple_town_town_ag_bobot      = $town_town_ag * $bobot_town_ag;
+                    /* ---- */
+
+                    /* ---- */
+                    $sum_bobot_road_ag               = $multiple_road_road_ag_bobot + $multiple_mills_road_ag_bobot + $multiple_town_road_ag_bobot;
+                    $sum_bobot_mills_ag             = $multiple_road_mills_ag_bobot + $multiple_mills_mills_ag_bobot + $multiple_town_mills_ag_bobot;
+                    $sum_bobot_town_ag               = $multiple_road_town_ag_bobot + $multiple_mills_town_ag_bobot + $multiple_town_town_ag_bobot;
+                    /* ---- */
+
+                    $divided_bobot_road_ag           = $sum_bobot_road_ag / $bobot_road_ag;
+                    $divided_bobot_mills_ag         = $sum_bobot_mills_ag / $bobot_mills_ag;
+                    $divided_bobot_town_ag           = $sum_bobot_town_ag / $bobot_town_ag;
+
+                    /* ---- */
+                    $lamda_max_ag                  = ($divided_bobot_road_ag + $divided_bobot_mills_ag + $divided_bobot_town_ag) / $sum_divided_ag;
+                    $jumlah_factor_ag              = $sum_divided_ag;
+                    $consistensi_index_ag          = ($lamda_max_ag-$jumlah_factor_ag)/($jumlah_factor_ag-1);
+                    $rasio_index_ag                = 0.58;
+                    $consistensi_rasio_ag          = $consistensi_index_ag / $rasio_index_ag;
+                    /* ---- */
+
+
+
 
                     $model_ag                           = new AccessibilityAG();
 

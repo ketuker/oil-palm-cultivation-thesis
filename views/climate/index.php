@@ -7,16 +7,16 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ClimateSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Climates';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Yii::t('app','Climate Weight');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Climates'),];
 ?>
 <div class="climate-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Climate', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app','Create Climate Weight'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,17 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'ch_temp',
-            'ch_dm',
-            'temp_dm',
+            // 'id',
+            // 'ch_temp',
+            // 'ch_dm',
+            // 'temp_dm',
             'bobot_ch',
-            // 'boobt_temp',
-            // 'bobot_dm',
-            // 'cr',
-            // 'validation:boolean',
+            'boobt_temp',
+            'bobot_dm',
+            'cr',
+            'validation:boolean',
             // 'id_user',
-            // 'date',
+            'date:date',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
