@@ -14,8 +14,26 @@ $config = [
             'cost' => 12,
             'admins' => ['ketuker']
         ],
-        'rbac' => [
-            'class' => 'dektrium\rbac\Module',
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            //'layout' => '@app/views/layouts/main',
+            'layout' => 'left-menu', // it can be '@path/to/your/layout'.
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                    //'userClassName' => 'app\models\User',
+                    'userClassName' => 'dektrium\user\models\User',
+                    'idField' => 'id',
+                    'usernameField' => 'username',
+                    'searchClass' => 'app\models\UserSearch'
+                ]
+            ],
+            'menus' => [
+                'assignment' => [
+                    'label' => 'Grand Access' // change label
+                ],
+                //'route' => null, // disable menu route 
+            ]
         ],
     ],
     'components' => [
@@ -34,7 +52,7 @@ $config = [
             'errorAction' => 'site/error',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\DbManager'
+            'class' => 'yii\rbac\DbManager',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -89,6 +107,18 @@ $config = [
     ],
     'as beforeRequest'=>[
         'class'=>'app\components\Language'
+    ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'admin/*',
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
+        ]
     ],
     'params' => $params,
 ];
