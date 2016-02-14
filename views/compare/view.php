@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description',
             'dates:date',
-            'id_user',
+            'user.username',
             //'data:ntext',
             'st_area',
             //'geom',

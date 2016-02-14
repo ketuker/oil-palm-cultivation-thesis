@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'bobot_town',
             'cr',
             'validation:boolean',
-            // 'id_user',
+            'user.username',
             'date:date',
         ],
     ]) ?>

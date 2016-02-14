@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use dektrium\user\models\User;
 
 /**
  * This is the model class for table "aoi_compare".
@@ -15,6 +16,19 @@ use Yii;
  * @property string $data
  * @property double $st_area
  * @property string $geom
+ * @property string $data_rain
+ * @property string $data_temp
+ * @property string $data_dm
+ * @property string $data_slope
+ * @property string $data_text
+ * @property string $data_elev
+ * @property string $data_thick
+ * @property string $data_ripe
+ * @property string $data_road
+ * @property string $data_mills
+ * @property string $data_town
+ *
+ * @property User $idUser
  */
 class Compare extends \yii\db\ActiveRecord
 {
@@ -32,8 +46,8 @@ class Compare extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'geom'], 'required'],
-            [['title', 'description', 'data','data_rain','data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town', 'geom'], 'string'],
+            [['title'], 'required'],
+            [['title', 'description', 'data', 'geom', 'data_rain', 'data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town'], 'string'],
             [['dates'], 'safe'],
             [['id_user'], 'integer'],
             [['st_area'], 'number']
@@ -50,21 +64,29 @@ class Compare extends \yii\db\ActiveRecord
             'title' => Yii::t('app','Title'),
             'description' => Yii::t('app','Description'),
             'dates' => Yii::t('app','Dates'),
-            'id_user' => 'Id User',
+            'id_user' => Yii::t('app','Username'),
             'data' => 'Data',
-            'data_rain' => 'Data Rain',
-            'data_temp' => 'Data Temperature',
-            'data_dm' => 'Data Dry Month',
-            'data_slope' => 'Data Slope',
-            'data_text' => 'Data Texture',
-            'data_elev' => 'Data Elevation',
-            'data_thick' => 'Data Peat Thickness',
-            'data_ripe' => 'Data Peat Ripening',
-            'data_road' => 'Data Distance From Road',
-            'data_mills' => 'Data Distance From Mills',
-            'data_town' => 'Data Distance From Town',
             'st_area' => 'St Area',
             'geom' => 'Geom',
+            'data_rain' => 'Data Rain',
+            'data_temp' => 'Data Temp',
+            'data_dm' => 'Data Dm',
+            'data_slope' => 'Data Slope',
+            'data_text' => 'Data Text',
+            'data_elev' => 'Data Elev',
+            'data_thick' => 'Data Thick',
+            'data_ripe' => 'Data Ripe',
+            'data_road' => 'Data Road',
+            'data_mills' => 'Data Mills',
+            'data_town' => 'Data Town',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 }
