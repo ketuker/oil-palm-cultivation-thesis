@@ -49,7 +49,17 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $get_geojson_kecamatan  = "SELECT *, ST_AsGeoJson(geom), ST_X(ST_Centroid(geom)), ST_Y(ST_Centroid(geom)) FROM admin";
+        $data_admin             = Yii::$app->db->createCommand($get_geojson_kecamatan)->queryAll();
+
+        $get_bbox               = "SELECT ST_AsGeoJson(Box2D(ST_Union(geom))) FROM admin";
+        $bbox_geojsons          = Yii::$app->db->createCommand($get_bbox)->queryColumn();
+        $bbox_geojson           = $bbox_geojsons[0];
+
+        return $this->render('index', [
+            'data_admin' => $data_admin,
+            'bbox_geojson' => $bbox_geojson
+        ]);
     }
 
     public function actionLogin()
@@ -90,5 +100,24 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    
+    public function actionChart()
+    {
+        return $this->render('chart');
+    }
+
+    public function actionLanguage()
+    {
+        if(isset($_POST['lang'])){
+
+            Yii::$app->language = $_POST['lang'];
+            
+            $cookie = new yii\web\Cookie(['name'=>'lang','value'=>$_POST['lang']]);
+
+            Yii::$app->getResponse()->getCookies()->add($cookie);
+
+            return Yii::$app->language;
+        }
     }
 }
