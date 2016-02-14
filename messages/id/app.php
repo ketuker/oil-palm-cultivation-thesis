@@ -112,7 +112,9 @@ return [
     'Create Non Peatland Weight' => 'Buat Bobot Bukan Gambut',
     
     'Climate Weight' => 'Bobot Iklim',
-
+    'Login' => 'Masuk',
+    'login' => 'masuk',
+    'Don\'t have an account? Sign up!' => 'Belum punya akun? Silahkan daftar',
 
     'Are you sure you want to delete this item?' => 'Apa kamu yakin ingin menghapus data ini?',
 
@@ -132,6 +134,8 @@ return [
     'Manage User'   =>  'Pengaturan Pengguna',
     'Users'   =>  'Pengguna',
     'Manage Users'   =>  'Pengaturan Pengguna',
+    'English'   =>  'Inggris',
+    'Indonesian'   =>  'Indonesia',
 
     /* Home */
     'Welcome to Web GIS Application for Selecting Oil Palm Plantation Site' => 'Selamat datang di Aplikasi Web GIS untuk Pemilihan Lokasi Kebun Kelapa Sawit',

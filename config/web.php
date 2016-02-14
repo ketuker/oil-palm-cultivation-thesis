@@ -78,6 +78,13 @@ $config = [
                 ]
             ]
         ],
+        'view' => [
+        'theme' => [
+            'pathMap' => [
+                '@dektrium/user/views' => '@app/views/dektrium'  // mapping for override the views dektrium with  your views 
+                ],
+            ],
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'as beforeRequest'=>[
