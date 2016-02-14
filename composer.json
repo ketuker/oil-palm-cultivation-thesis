@@ -20,6 +20,7 @@
         "yiisoft/yii2-swiftmailer": "*",
         "dektrium/yii2-user": "0.9.*@dev",
         "dektrium/yii2-rbac": "v0.2.0",
+        "mdmsoft/yii2-admin": "~3.0",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-slider": "*",
         "kartik-v/yii2-tabs-x": "*"
