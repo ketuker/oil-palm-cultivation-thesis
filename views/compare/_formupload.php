@@ -19,14 +19,17 @@ use kartik\file\FileInput;
         </div>
         <div class="col-md-6">
             <?php echo $form->field($model, 'data')->widget(FileInput::classname(), [
-                'options' => ['accept' => 'zip'],
-                'pluginOptions' => [
-                    'showPreview' => false,
-                    'pluginLoading' => true,
-                    //'showCaption' => true,
-                    //'showRemove' => true,
-                    //'showUpload' => false
+                'options' => [
+                'accept' => 'zip',
+
                 ],
+                // 'pluginOptions' => [
+                //     'showPreview' => false,
+                //     'pluginLoading' => true,
+                //     //'showCaption' => true,
+                //     //'showRemove' => true,
+                //     //'showUpload' => false
+                // ],
             ]);
             ?>
         </div>

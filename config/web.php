@@ -25,7 +25,7 @@ $config = [
                     'userClassName' => 'dektrium\user\models\User',
                     'idField' => 'id',
                     'usernameField' => 'username',
-                    'searchClass' => 'app\models\UserSearch'
+                    // 'searchClass' => 'app\models\UserSearch'
                 ]
             ],
             'menus' => [
@@ -96,13 +96,7 @@ $config = [
                 ]
             ]
         ],
-        'view' => [
-        'theme' => [
-            'pathMap' => [
-                '@dektrium/user/views' => '@app/views/dektrium'  // mapping for override the views dektrium with  your views 
-                ],
-            ],
-        ],
+        
         'db' => require(__DIR__ . '/db.php'),
     ],
     'as beforeRequest'=>[

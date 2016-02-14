@@ -721,7 +721,7 @@ class CompareController extends Controller
 
             $_model->data       = UploadedFile::getInstance($model, 'data');
 
-            if ($_model->data) {
+            if (($_model->data)) {
 
                 /* create folder with name = $this->tanggal() */
                 $create_folder      = exec('mkdir ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir);
@@ -734,7 +734,8 @@ class CompareController extends Controller
 
                 /* Get data file shp */
                 $find_file_shp               = exec('find ' .Yii::getAlias('@tms') . '/uploads/' . $prefix_dir . '/*.shp', $file, $err);
-
+print_r($find_file_shp);
+die;
                 if ($file[0]) {
 
                     $proj4script        = "gdalsrsinfo -o proj4 $file[0]";
