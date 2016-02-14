@@ -57,16 +57,6 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
-  'dektrium/yii2-rbac' => 
-  array (
-    'name' => 'dektrium/yii2-rbac',
-    'version' => '0.2.0.0',
-    'alias' => 
-    array (
-      '@dektrium/rbac' => $vendorDir . '/dektrium/yii2-rbac',
-    ),
-    'bootstrap' => 'dektrium\\rbac\\Bootstrap',
-  ),
   'yiisoft/yii2-jui' => 
   array (
     'name' => 'yiisoft/yii2-jui',
@@ -291,6 +281,15 @@ return array (
     'alias' => 
     array (
       '@kartik/color' => $vendorDir . '/kartik-v/yii2-widget-colorinput',
+    ),
+  ),
+  'mdmsoft/yii2-admin' => 
+  array (
+    'name' => 'mdmsoft/yii2-admin',
+    'version' => '2.2.0.0',
+    'alias' => 
+    array (
+      '@mdm/admin' => $vendorDir . '/mdmsoft/yii2-admin',
     ),
   ),
 );
