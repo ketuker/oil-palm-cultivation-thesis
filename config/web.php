@@ -25,7 +25,7 @@ $config = [
                     'userClassName' => 'dektrium\user\models\User',
                     'idField' => 'id',
                     'usernameField' => 'username',
-                    // 'searchClass' => 'app\models\UserSearch'
+                    //'searchClass' => 'app\models\UserSearch'
                 ]
             ],
             'menus' => [

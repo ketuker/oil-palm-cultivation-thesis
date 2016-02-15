@@ -198,12 +198,8 @@ return [
     'Peat Ripening Weight' => 'Bobot Kematangan Gambut',
     'Create Area of Interest' => 'Buat Wilayah Kajian',
 
-
-
     'Category' => 'Kategori',
     'Method' => 'Metode',
-
-
 
     'Road Weight' => 'Bobot Jalan',
     'Mills Weight' => 'Bobot Pabrik',
@@ -218,6 +214,8 @@ return [
     'Peat Land Consistency Ratio' => 'Kosistensi Rasio Gambut',
     'Accessibility Consistency Ratio' => 'Kosistensi Rasio Aksesibilitas',
     'Factors Consistency Ratio' => 'Kosistensi Rasio Faktor',
+
+    'Username' => 'Pengguna',
 
 ];
 ?>
