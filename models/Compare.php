@@ -59,9 +59,9 @@ class Compare extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => Yii::t('app','Title'),
-            'description' => Yii::t('app','Description'),
-            'dates' => Yii::t('app','Dates'),
+            'title' => 'Title',
+            'description' => 'Description',
+            'dates' => 'Dates',
             'id_user' => 'Id User',
             'data' => 'Data',
             'st_area' => 'St Area',
@@ -83,7 +83,7 @@ class Compare extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUser()
+    public function getIdUser()
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
