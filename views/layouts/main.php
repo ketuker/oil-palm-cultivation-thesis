@@ -40,12 +40,21 @@ AppAsset::register($this);
         ],
     ]);
 
-    $menuItems = [
-        //['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => Yii::t('app','Area of Interest'), 'url' => ['/compare/index']],
-        // ['label' => 'About', 'url' => ['/site/about']],
-        // ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
+    if (Yii::$app->user->isGuest) {
+    $menuItems[] = ['label' => Yii::t('app','Area of Interest'), 
+         'items' => [
+             ['label' => Yii::t('app','AOI Suitability Analysis'), 'url' => ['/compare/index']],
+         ],
+        ];
+    } else {
+    $menuItems[] = ['label' => Yii::t('app','Area of Interest'), 
+         'items' => [
+             ['label' => Yii::t('app','AOI Suitability Analysis'), 'url' => ['/compare/index']],
+             ['label' => Yii::t('app','AOI Sensitivity Analysis'), 'url' => ['/landnpeat/create']], 
+         ],
+        ];    
+    }
+
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => Yii::t('app','Documentation'), 'url' => ['/documentation/index']];
@@ -70,8 +79,7 @@ AppAsset::register($this);
                     ]
             ],
         ];
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/register']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/user/login']];
+        $menuItems[] = ['label' => Yii::t('app','Login'), 'url' => ['/user/login']];
     } else {
         $menuItems[] = [
             'label' => Yii::t('app','Pairwise Comparison'),
@@ -111,7 +119,7 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => Yii::t('app','User'),
             'items' => [
-                ['label' => Yii::t('app','Manage User'), 'url' => ['/user/admin']],
+                // ['label' => Yii::t('app','Manage User'), 'url' => ['/user/admin']],
                 ['label' => 'Logout (' . Yii::$app->user->identity->username . ')', 'url' => ['site/logout'], 'linkOptions' => ['data-method' => 'post']],
 
                 ],
