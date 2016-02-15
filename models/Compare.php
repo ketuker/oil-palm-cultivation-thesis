@@ -64,7 +64,7 @@ class Compare extends \yii\db\ActiveRecord
             'title' => Yii::t('app','Title'),
             'description' => Yii::t('app','Description'),
             'dates' => Yii::t('app','Dates'),
-            'id_user' => Yii::t('app','Username'),
+            'id_user' => Yii::t('app','User'),
             'data' => 'Data',
             'st_area' => 'St Area',
             'geom' => 'Geom',

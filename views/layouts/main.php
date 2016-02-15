@@ -50,7 +50,7 @@ AppAsset::register($this);
     $menuItems[] = ['label' => Yii::t('app','Area of Interest'), 
          'items' => [
              ['label' => Yii::t('app','AOI Suitability Analysis'), 'url' => ['/compare/index']],
-             ['label' => Yii::t('app','AOI Sensitivity Analysis'), 'url' => ['/landnpeat/create']], 
+             ['label' => Yii::t('app','AOI Sensitivity Analysis'), 'url' => ['/sensitivity/index']], 
          ],
         ];    
     }
