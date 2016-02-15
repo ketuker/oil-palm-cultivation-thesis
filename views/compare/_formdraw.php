@@ -62,7 +62,7 @@ for ($i=0; $i < count($data_admin); $i++) {
     $script .= '
 
         var myStyle = {
-            "color": "#ff7800",
+            "color": "#ff0023",
             "weight": 2,
             "opacity": 0.65
         };
@@ -71,7 +71,7 @@ for ($i=0; $i < count($data_admin); $i++) {
             layer.on("click", function (e) {
                 var popup = L.popup()
                     .setLatLng(e.latlng)
-                    .setContent(feature.properties.kecamatan)
+                    .setContent("Kecamatan : "+feature.properties.kecamatan)
                     .openOn(map);
             });
         };
@@ -94,7 +94,7 @@ for ($i=0; $i < count($data_admin); $i++) {
             draggable: true,       // Allow label dragging...?
             zIndexOffset: 1000     // Make appear above other map features
         });
-        map.addLayer(Label);
+        // map.addLayer(Label);
 
     ';
 }
