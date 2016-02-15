@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use dektrium\user\models\User;
 
 /**
  * This is the model class for table "aoi_compare".
@@ -45,6 +46,7 @@ class Compare extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+
             [['title', 'description', 'data', 'geom', 'data_rain', 'data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town'], 'string'],
             [['dates'], 'safe'],
             [['id_user'], 'integer'],
@@ -59,10 +61,10 @@ class Compare extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'dates' => 'Dates',
-            'id_user' => 'Id User',
+            'title' => Yii::t('app','Title'),
+            'description' => Yii::t('app','Description'),
+            'dates' => Yii::t('app','Dates'),
+            'id_user' => Yii::t('app','Username'),
             'data' => 'Data',
             'st_area' => 'St Area',
             'geom' => 'Geom',
@@ -83,7 +85,8 @@ class Compare extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdUser()
+    public function getUser()
+
     {
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }

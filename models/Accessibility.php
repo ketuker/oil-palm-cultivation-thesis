@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use dektrium\user\models\User;
 
 /**
  * This is the model class for table "accessibility".
@@ -61,5 +62,13 @@ class Accessibility extends \yii\db\ActiveRecord
             'id_user' => 'Id User',
             'date' => Yii::t('app','Date'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
 }
