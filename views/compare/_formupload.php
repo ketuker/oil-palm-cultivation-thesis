@@ -12,7 +12,7 @@ use kartik\file\FileInput;
 
 <div class="compare-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <div class="row">
         <div class="col-md-6">
@@ -20,10 +20,7 @@ use kartik\file\FileInput;
         </div>
         <div class="col-md-6">
             <?php echo $form->field($model, 'data')->widget(FileInput::classname(), [
-                'options' => [
-                'accept' => 'zip',
-
-                ],
+                'options' => [ 'accept' => 'zip'],
                 // 'pluginOptions' => [
                 //     'showPreview' => false,
                 //     'pluginLoading' => true,
