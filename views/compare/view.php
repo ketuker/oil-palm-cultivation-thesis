@@ -55,16 +55,16 @@ $script .= '
     
     function getColor(d) {
         return d > 4  ? "#E31A1C" :
-               d > 3  ? "#FC4E2A" :
-               d > 2   ? "#FD8D3C" :
-               d > 1   ? "#FEB24C" :
-               d > 0   ? "#FED976" :
-                          "#FFEDA0";
+               d > 3  ? "#54ff00" :
+               d > 2   ? "#fffc00" :
+               d > 1   ? "#ff7a00" :
+               d > 0   ? "#ff0000" :
+                          "#ff0000";
     }
 
     function style(feature) {
         return {
-            fillColor: getColor(feature.properties.status_climate),
+            fillColor: getColor(feature.properties.kesesuaian),
             weight: 2,
             opacity: 1,
             color: "white",
@@ -84,7 +84,7 @@ $script .= '
 
     function style0(feature) {
         return {
-            fillColor: getColor0(feature.properties.status_climate),
+            fillColor: getColor0(feature.properties.status_suitability),
             weight: 2,
             opacity: 1,
             color: "white",
@@ -96,7 +96,7 @@ $script .= '
     function onEachFeature(feature, layer) {
         // does this feature have a property named popupContent?
         if (feature.properties) {
-            layer.bindPopup("Status : "+feature.properties.status_climate);
+            layer.bindPopup("Suitability : "+feature.properties.status_suitability+"</br>"+"Luas : "+feature.properties.luas);
         }
     }
     function onEachFeatureRain(feature, layer) {

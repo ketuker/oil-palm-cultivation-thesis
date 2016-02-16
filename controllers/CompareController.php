@@ -232,11 +232,11 @@ class CompareController extends Controller
             if ($i === (count($datas) - 1 )) {
                 //$data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
                 $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
-                $data_chart                 .= "label:" . $datas[$i]['properties']['status_climate'] . "}";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status_suitability'] . "}";
             }else{
                 //$data_chart                 .= "{value:" . $datas[$i]['properties']['id'] . ",";
                 $data_chart                 .= "color:'#F7464A',highlight: '#FF5A5E',";
-                $data_chart                 .= "label:" . $datas[$i]['properties']['status_climate'] . "},";
+                $data_chart                 .= "label:" . $datas[$i]['properties']['status_suitability'] . "},";
             }
         }
 
@@ -270,8 +270,11 @@ class CompareController extends Controller
              * S = geom from draw
              * B = Hasil intersects
              **/
-            $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) as geom from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true) as b;";
+            $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326)), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true and kesesuaian.ket_land = 'bukan gambut') as b;";
             $value_intersections    = Yii::$app->db->createCommand($get_intersection)->queryAll();      
+
+            $get_intersection_peat       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326)), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),kesesuaian.geom) = true and kesesuaian.ket_land = 'gambut') as b;";
+            $value_intersections_peat    = Yii::$app->db->createCommand($get_intersection_peat)->queryAll();   
 
             $area_of_interest       = "SELECT ST_AsGeoJson(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
             $aoi                    = Yii::$app->db->createCommand($area_of_interest)->queryAll();
@@ -298,24 +301,52 @@ class CompareController extends Controller
             			if (isset($accessibility_ag)){
             				if (isset($factors_ag)){
 
-					            for ($i=0; $i < count($value_intersections); $i++) { 
-					                $kesesuaian_climate         = ($value_intersections[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate));
-					                $status_climate             = 'N';
-					                if ($kesesuaian_climate >= 0 AND $kesesuaian_climate <= 1) {
-					                    $status_climate         = 'N';
-					                }elseif ($kesesuaian_climate > 1 AND $kesesuaian_climate <= 2) {
-					                    $status_climate         = 'S3';
-					                }elseif ($kesesuaian_climate > 2 AND $kesesuaian_climate <= 3) {
-					                    $status_climate         = 'S2';
-					                }elseif ($kesesuaian_climate > 3 AND $kesesuaian_climate <= 4) {
-					                    $status_climate         = 'S1';
-					                }else{
-					                    $status_climate         = 'S(alah)';
-					                }
-					                $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian_climate\":\"".$kesesuaian_climate."\", \"status_climate\":\"".$status_climate."\"},\"geometry\": ";
-					                $result_geojson .= $value_intersections[$i]['geom'];
-					                $result_geojson .= "},";
-					            }
+									for ($i=0; $i < count($value_intersections); $i++) { 
+                                	// print_r($value_intersections[$i]['scoredept']);
+                                	// die;
+									if (isset($value_intersections[$i]['scoredept']))	{									
+                                    $kesesuaian_nonpeat         = ($value_intersections[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate)) + ($value_intersections[$i]['score_text'] * ($landnp_ag->bobot_text * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_lrg'] * ($landnp_ag->bobot_slope * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_elev'] * ($landnp_ag->bobot_elev * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_road'] * ($accessibility_ag->bobot_road * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_mill'] * ($accessibility_ag->bobot_mills * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_town'] * ($accessibility_ag->bobot_town * $factors_ag->bobot_accessibility));
+                                    $kesesuaian_konstraint		= $kesesuaian_nonpeat * ($value_intersections[$i]['cont_sunga']) * ($value_intersections[$i]['consrtrw']) * ($value_intersections[$i]['const_kwsn']) * ($value_intersections[$i]['const_mukim']) * ($value_intersections[$i]['cons_pipib']) ;
+                                    $status_suitability             = 'N';
+                                    if ($kesesuaian_konstraint >= 0 AND $kesesuaian_konstraint <= 1) {
+                                        $status_suitability         = 'Not Suitable';
+                                    }elseif ($kesesuaian_konstraint > 1 AND $kesesuaian_konstraint <= 2) {
+                                        $status_suitability         = 'Mostly Suitable';
+                                    }elseif ($kesesuaian_konstraint > 2 AND $kesesuaian_konstraint <= 3) {
+                                        $status_suitability         = 'Suitable';
+                                    }elseif ($kesesuaian_konstraint > 3 AND $kesesuaian_konstraint <= 4) {
+                                        $status_suitability         = 'Very Suitable';
+                                    }else{
+                                        $status_suitability         = 'S(alah)';
+                                    }
+	                                    
+                                    $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian\":\"".$kesesuaian_konstraint."\", \"status_suitability\":\"".$status_suitability."\", \"luas\":\"".$value_intersections[$i]['luas']."\"},\"geometry\": ";
+                                    $result_geojson .= $value_intersections[$i]['geom'];
+                                    $result_geojson .= "},";
+					            }}
+                                for ($i=0; $i < count($value_intersections_peat); $i++) { 
+                                	if (isset($value_intersections[$i]['score_text']))	{	
+                                	// print_r($value_intersections_peat[$i]['scoredept']);
+                                	// die;
+                                    $kesesuaian_peat         		= ($value_intersections_peat[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoreripe'] * ($landp_ag->bobot_ripe * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['score_lrg'] * ($landp_ag->bobot_slope * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['scoredept'] * ($landp_ag->bobot_thick * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['score_road'] * ($accessibility_ag->bobot_road * $factors_ag->bobot_accessibility)) + ($value_intersections_peat[$i]['score_mill'] * ($accessibility_ag->bobot_mills * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_town'] * ($accessibility_ag->bobot_town * $factors_ag->bobot_accessibility));
+                                    $kesesuaian_konstraint_peat		= $kesesuaian_peat * ($value_intersections_peat[$i]['cont_sunga']) * ($value_intersections_peat[$i]['consrtrw']) * ($value_intersections_peat[$i]['const_kwsn']) * ($value_intersections_peat[$i]['const_mukim']) * ($value_intersections_peat[$i]['cons_pipib']) ;
+                                    $status_suitability             = 'N';
+                                    if ($kesesuaian_konstraint_peat >= 0 AND $kesesuaian_konstraint_peat <= 1) {
+                                        $status_suitability         = 'Not Suitable';
+                                    }elseif ($kesesuaian_konstraint_peat > 1 AND $kesesuaian_konstraint_peat <= 2) {
+                                        $status_suitability         = 'Mostly Suitable';
+                                    }elseif ($kesesuaian_konstraint_peat > 2 AND $kesesuaian_konstraint_peat <= 3) {
+                                        $status_suitability         = 'Suitable';
+                                    }elseif ($kesesuaian_konstraint_peat > 3 AND $kesesuaian_konstraint_peat <= 4) {
+                                        $status_suitability         = 'Very Suitable';
+                                    }else{
+                                        $status_suitability         = 'S(alah)';
+                                    }
+
+                                    $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian\":\"".$kesesuaian_konstraint_peat."\", \"status_suitability\":\"".$status_suitability."\", \"luas\":\"".$value_intersections_peat[$i]['luas']."\"},\"geometry\": ";
+                                    $result_geojson .= $value_intersections_peat[$i]['geom'];
+                                    $result_geojson .= "},";
+                                }}
 					            $result_geojson         .= ']}';
 					            $result_data            = substr($result_geojson, 0, -3) . ' ]}';
 
@@ -452,7 +483,7 @@ class CompareController extends Controller
 					                }elseif ($score_text <= 4 and $score_text > 3) {
 					                    $status_texture         = 'Fine, Slightly fine, Medium';
 					                }else{
-					                    $status_texture         = 'S(alah)';
+					                    $status_texture         = 'Peat Area';
 					                }
 					                $result_geojson_txt .= "{\"type\": \"Feature\",\"properties\": {\"score_text\":\"".$score_text."\", \"status_texture\":\"".$status_texture."\"},\"geometry\": ";
 					                $result_geojson_txt .= $value_texture[$i]['geom'];
@@ -478,7 +509,7 @@ class CompareController extends Controller
 					                }elseif ($score_elev <= 4 and $score_elev > 3) {
 					                    $status_elevation         = '0 - 200';
 					                }else{
-					                    $status_elevation         = 'S(alah)';
+					                    $status_elevation         = 'Peat Area';
 					                }
 					                $result_geojson_elev .= "{\"type\": \"Feature\",\"properties\": {\"score_elev\":\"".$score_elev."\", \"status_elevation\":\"".$status_elevation."\"},\"geometry\": ";
 					                $result_geojson_elev .= $value_elevation[$i]['geom'];
@@ -507,7 +538,7 @@ class CompareController extends Controller
 					                }elseif ($scoredept <= 4 and $scoredept > 3) {
 					                    $status_thickness         = '> 400';
 					                }else{
-					                    $status_thickness         = 'S(alah)';
+					                    $status_thickness         = 'Non Peat Area';
 					                }
 					                $result_geojson_thick .= "{\"type\": \"Feature\",\"properties\": {\"scoredept\":\"".$scoredept."\", \"status_thickness\":\"".$status_thickness."\"},\"geometry\": ";
 					                $result_geojson_thick .= $value_thickness[$i]['geom'];
@@ -534,7 +565,7 @@ class CompareController extends Controller
 					                }elseif ($scoreripe <= 4 and $scoreripe > 3) {
 					                    $status_ripening         = 'Fibric';
 					                }else{
-					                    $status_ripening         = 'S(alah)';
+					                    $status_ripening         = 'Peat Area';
 					                }
 					                $result_geojson_ripe .= "{\"type\": \"Feature\",\"properties\": {\"scoreripe\":\"".$scoreripe."\", \"status_ripening\":\"".$status_ripening."\"},\"geometry\": ";
 					                $result_geojson_ripe .= $value_ripening[$i]['geom'];
@@ -721,6 +752,9 @@ class CompareController extends Controller
 
             $_model->data       = UploadedFile::getInstance($model, 'data');
 
+                print_r($_model);
+                die;
+
             if (($_model->data)) {
 
                 /* create folder with name = $this->tanggal() */
@@ -734,8 +768,7 @@ class CompareController extends Controller
 
                 /* Get data file shp */
                 $find_file_shp               = exec('find ' .Yii::getAlias('@tms') . '/uploads/' . $prefix_dir . '/*.shp', $file, $err);
-print_r($find_file_shp);
-die;
+
                 if ($file[0]) {
 
                     $proj4script        = "gdalsrsinfo -o proj4 $file[0]";
@@ -794,7 +827,7 @@ die;
                 }
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $_model->id]);
         } else {
             return $this->render('createupload', [
                 'model' => $model,
