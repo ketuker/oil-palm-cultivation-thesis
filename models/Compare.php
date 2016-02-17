@@ -47,11 +47,11 @@ class Compare extends \yii\db\ActiveRecord
     {
         return [
 
-            [['title', 'description', 'geom', 'data_rain', 'data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town'], 'string'],
+            [['title', 'description', 'data', 'geom', 'data_rain', 'data_temp', 'data_dm', 'data_slope', 'data_text', 'data_elev', 'data_thick', 'data_ripe', 'data_road', 'data_mills', 'data_town'], 'string'],
             [['dates'], 'safe'],
             [['id_user'], 'integer'],
             [['st_area'], 'number'],
-            [['data'], 'file', 'skipOnEmpty' => false, 'extensions' => 'zip'],
+            [['shp'], 'file', 'skipOnEmpty' => true, 'extensions' => 'zip']
         ];
     }
 
@@ -80,6 +80,7 @@ class Compare extends \yii\db\ActiveRecord
             'data_road' => 'Data Road',
             'data_mills' => 'Data Mills',
             'data_town' => 'Data Town',
+            'shp' => 'SHP',
         ];
     }
 

@@ -19,7 +19,7 @@ use kartik\file\FileInput;
             <?= $form->field($model, 'title')->textInput() ?>
         </div>
         <div class="col-md-6">
-            <?php echo $form->field($model, 'data')->widget(FileInput::classname(), [
+            <?php echo $form->field($model, 'shp')->widget(FileInput::classname(), [
                 'options' => [ 'accept' => 'zip'],
                 // 'pluginOptions' => [
                 //     'showPreview' => false,

@@ -320,7 +320,7 @@ class CompareController extends Controller
                                         $status_suitability         = 'S(alah)';
                                     }
 	                                    
-                                    $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian\":\"".$kesesuaian_konstraint."\", \"status_suitability\":\"".$status_suitability."\", \"luas\":\"".$value_intersections[$i]['luas']."\"},\"geometry\": ";
+                                    $result_geojson .= "{\"type\": \"Feature\",\"properties\": {\"kesesuaian\":\"".$kesesuaian_konstraint."\", \"status_suitability\":\"".$status_suitability."\", \"ket_ch\":\"".$value_intersections[$i]['ket_ch']."\", \"ket_suhu\":\"".$value_intersections[$i]['ket_suhu']."\", \"ket_dm\":\"".$value_intersections[$i]['ket_dm']."\", \"ket_lrg\":\"".$value_intersections[$i]['ket_lrg']."\", \"ket_text\":\"".$value_intersections[$i]['ket_text']."\", \"ket_elev\":\"".$value_intersections[$i]['ket_elev']."\", \"ket_thick\":\"".$value_intersections[$i]['ket_thick']."\", \"ket_peat_ripe\":\"".$value_intersections[$i]['ket_peat_ripe']."\", \"distance_r\":\"".$value_intersections[$i]['distance_r']."\", \"distance_m\":\"".$value_intersections[$i]['distance_m']."\", \"distance_k\":\"".$value_intersections[$i]['distance_k']."\", \"ket_cons_sung\":\"".$value_intersections[$i]['ket_cons_sung']."\", \"ket_rtrw\":\"".$value_intersections[$i]['ket_rtrw']."\", \"ket_kwsn\":\"".$value_intersections[$i]['ket_kwsn']."\", \"ket_mukim\":\"".$value_intersections[$i]['ket_mukim']."\", \"ket_pipib\":\"".$value_intersections[$i]['ket_pipib']."\", \"luas\":\"".$value_intersections[$i]['luas']."\"},\"geometry\": ";
                                     $result_geojson .= $value_intersections[$i]['geom'];
                                     $result_geojson .= "},";
 					            }}
@@ -690,10 +690,18 @@ class CompareController extends Controller
             if (!Yii::$app->user->isGuest) {
                 $_POST['Compare']['id_user']    = Yii::$app->user->identity->id;
             }
-            
+            // print_r($result_data);
+            // die;
+
+
+
             if ($model->load($_POST) && $model->save()) {
+                // print_r($model->getErrors());
+                // die;
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
+                // print_r($model->getErrors());
+                // die;
                 echo "error";
             }
             
@@ -725,7 +733,7 @@ class CompareController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreateupload()
+public function actionCreateupload()
     {
         $model = new Compare();
 
@@ -750,21 +758,21 @@ class CompareController extends Controller
 
             $_model             = new Compare();
 
-            $_model->data       = UploadedFile::getInstance($model, 'data');
+            $_model->shp       = UploadedFile::getInstance($model, 'shp');
 
-                print_r($_model);
-                die;
+                // print_r($_model->shp->extension);
+                // die;
 
-            if (($_model->data)) {
+            if (($_model->shp)) {
 
                 /* create folder with name = $this->tanggal() */
                 $create_folder      = exec('mkdir ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir);
 
                 /* save .zip to path @app/tms/$this->tanggal()/filename.zip */
-                move_uploaded_file($_model->data->tempName, Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->data->baseName . '.' . $_model->data->extension);
+                move_uploaded_file($_model->shp->tempName, Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension);
 
                 /* ekstrak filename.zip to filename.shp */
-                $unzip                  = exec('unzip ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->data->baseName . '.' . $_model->data->extension . ' -d ' .Yii::getAlias('@web') . '/' . $prefix_dir . '/');
+                $unzip                  = exec('unzip ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->data->extension . ' -d ' .Yii::getAlias('@web') . '/' . $prefix_dir . '/');
 
                 /* Get data file shp */
                 $find_file_shp               = exec('find ' .Yii::getAlias('@tms') . '/uploads/' . $prefix_dir . '/*.shp', $file, $err);

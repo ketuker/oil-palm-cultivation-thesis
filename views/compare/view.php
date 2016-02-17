@@ -96,7 +96,34 @@ $script .= '
     function onEachFeature(feature, layer) {
         // does this feature have a property named popupContent?
         if (feature.properties) {
-            layer.bindPopup("Suitability : "+feature.properties.status_suitability+"</br>"+"Luas : "+feature.properties.luas);
+            layer.bindPopup(
+                "<b>Suitability : </b>"+feature.properties.status_suitability
+                                        +"</br>"+"<b>Climate</b>"
+                                            +"</br>"+"Rainfall :"+feature.properties.ket_ch
+                                            +"</br>"+"Temperature :"+feature.properties.ket_suhu
+                                            +"</br>"+"Dry Month :"+feature.properties.ket_dm 
+                                        +"</br>"+"<b>Land</b>"
+                                            +"</br>"+"Slope :"+feature.properties.ket_lrg
+                                            +"</br>"+"Texture :"+feature.properties.ket_text
+                                            +"</br>"+"Elevation :"+feature.properties.ket_elev 
+                                            +"</br>"+"Ripening :"+feature.properties.ket_peat_ripe                                            
+                                            +"</br>"+"Thickness :"+feature.properties.ket_thick
+                                        +"</br>"+"<b>Accessibility</b>"
+                                            +"</br>"+"Road :"+feature.properties.distance_r
+                                            +"</br>"+"Mills :"+feature.properties.distance_m
+                                            +"</br>"+"Town :"+feature.properties.distance_k  
+                                        +"</br>"+"<b>Constraint</b>"
+                                            +"</br>"+"Forest Region :"+feature.properties.ket_kwsn
+                                            +"</br>"+"Spatial Map :"+feature.properties.ket_rtrw
+                                            +"</br>"+"River Banks :"+feature.properties.ket_cons_sung
+                                            +"</br>"+"Settlement :"+feature.properties.ket_mukim
+                                            +"</br>"+"PIPIB :"+feature.properties.ket_pipib       
+             
+                                        +"</br>"+"<b>Area : </b>"+feature.properties.luas
+
+
+            );
+
         }
     }
     function onEachFeatureRain(feature, layer) {
