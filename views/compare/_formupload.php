@@ -12,6 +12,8 @@ use kartik\file\FileInput;
 
 <div class="compare-form">
 
+    <?= Yii::$app->session->getFlash('error'); ?>
+
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
     <div class="row">
