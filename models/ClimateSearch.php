@@ -71,6 +71,11 @@ class ClimateSearch extends Climate
             'date' => $this->date,
         ]);
 
+        $dataProvider->sort->attributes['user'] = [
+            'asc' => ['user.username' => SORT_ASC],
+            'desc' => ['user.username' => SORT_DESC],
+        ];
+
         return $dataProvider;
     }
 }

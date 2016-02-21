@@ -35,6 +35,12 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Factors'),];
             'cr',
             'validation:boolean',
             // 'id_user',
+            [
+            'label' => 'Username',
+            'attribute'=>'id',
+            'value'=>'user.username',
+            //'contentOptions'=>['style'=>'width: 120px;']
+            ],
             'date',
 
             ['class' => 'yii\grid\ActionColumn'],

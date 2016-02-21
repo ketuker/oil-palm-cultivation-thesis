@@ -27,7 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'description',
             'dates:date',
-            'user.username',
+            // 'user.username',
+            [
+            'label' => 'Username',
+            'attribute'=>'id',
+            'value'=>'user.username',
+            //'contentOptions'=>['style'=>'width: 120px;']
+            ],
             // 'data:ntext',
             // 'st_area',
             // 'geom',

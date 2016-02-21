@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use dektrium\user\models\User;
 
 /**
  * This is the model class for table "climate".
@@ -62,4 +63,10 @@ class Climate extends \yii\db\ActiveRecord
             'date' => Yii::t('app','Date'),
         ];
     }
+    public function getUser()
+
+    {
+        return $this->hasOne(User::className(), ['id' => 'id_user']);
+    }
 }
+

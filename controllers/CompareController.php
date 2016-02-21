@@ -351,7 +351,7 @@ class CompareController extends Controller
 					            $result_data            = substr($result_geojson, 0, -3) . ' ]}';
 
 					            /* Convert WKT to Geom */
-					            $query_geom_from_wkt    = "SELECT ST_GeomFromText('".$_POST['Compare']['geom']."', 4326), ST_Area(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))";
+					            $query_geom_from_wkt    = "SELECT ST_GeomFromText('".$_POST['Compare']['geom']."', 4326), (ST_Area(ST_Transform(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),32750))* 0.0001) as st_area";
 					            $result_geom_from_wkt   = Yii::$app->db->createCommand($query_geom_from_wkt)->queryAll();
 
 
@@ -746,7 +746,7 @@ public function actionCreateupload()
             $id_user            = Yii::$app->user->identity->id;
         
             /* Get Directory Web Root */        
-            $pathData           = Yii::getAlias('@web');
+            $pathData           = Yii::getAlias('@webroot');
             
             /* Get Database Name & Database User */
             $data               = explode(";",Yii::$app->db->dsn);
@@ -760,23 +760,27 @@ public function actionCreateupload()
 
             $_model->shp       = UploadedFile::getInstance($model, 'shp');
 
-                // print_r($_model->shp->extension);
-                // die;
+
 
             if (($_model->shp)) {
 
                 /* create folder with name = $this->tanggal() */
-                $create_folder      = exec('mkdir ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir);
+                $create_folder      = exec('mkdir ' .$pathData . '/uploads/shp/' . $prefix_dir);
+
+                // print_r($pathData.'/uploads/shp'.$prefix_dir.'/'.$_model->shp->baseName.'.'.$_model->shp->extension);
+                // die;
 
                 /* save .zip to path @app/tms/$this->tanggal()/filename.zip */
-                move_uploaded_file($_model->shp->tempName, Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension);
+                move_uploaded_file($_model->shp->tempName, $pathData. '/uploads/shp/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension);
 
                 /* ekstrak filename.zip to filename.shp */
-                $unzip                  = exec('unzip ' .Yii::getAlias('@web') . '/uploads/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->data->extension . ' -d ' .Yii::getAlias('@web') . '/' . $prefix_dir . '/');
+
+                $unzip                  = exec('unzip ' .Yii::getAlias('@webroot'). '/uploads/shp/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension . ' -d ' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . '/');
 
                 /* Get data file shp */
-                $find_file_shp               = exec('find ' .Yii::getAlias('@tms') . '/uploads/' . $prefix_dir . '/*.shp', $file, $err);
-
+                $find_file_shp               = exec('find ' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . '/*.shp', $file, $err);
+// print_r($file);
+// die;
                 if ($file[0]) {
 
                     $proj4script        = "gdalsrsinfo -o proj4 $file[0]";
@@ -788,16 +792,24 @@ public function actionCreateupload()
                     $getSrid            = Yii::$app->db->createCommand("SELECT srid FROM spatial_ref_sys WHERE proj4text like '%$proj4%'")->queryOne();
 
                     $epsg               = $getSrid['srid'];
+// print_r($getSrid);
+// die;
 
                     if($epsg !== null) {
-                        $shp2pgsql      = exec("shp2pgsql -I -s $epsg:4326 -g \"the_geom\" ".$file[0].' public.'.$prefix_dir.' | psql -U '.$db_user.' -d '.$db_name,$arr,$jj);
+                        $shp2pgsql      = exec('shp2pgsql -I -s $epsg:4326 -g the_geom '.$file[0].' upload.'.$prefix_dir.' >' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . $_model->shp->baseName.'/.sql',$arr,$jj);
+                        // $shp2sql        =   
+print_r($arr);
+die;
+
 
                         if($jj == 0) {
 
                             /* GET bounds */
-                            $sqlGetBound    = "SELECT ST_ASGEOJSON(ST_Envelope(ST_ASTEXT(ST_Extent(ST_TRANSFORM(the_geom,4326))))) FROM $prefix_dir";
+                            $sqlGetBound    = "SELECT ST_ASGEOJSON(ST_Envelope(ST_ASTEXT(ST_Extent(ST_Transform(the_geom,4326))))) FROM $prefix_dir";
                             $dataGetBound   = Yii::$app->db->createCommand($sqlGetBound)->queryOne();
                             $jadi_bound     = $dataGetBound['st_asgeojson'];
+
+
 
                             /* Check geometry type */
                             $sqlGetMarker   = "SELECT Geometrytype(the_geom) FROM $prefix_dir limit 1";

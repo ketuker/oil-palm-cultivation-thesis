@@ -34,7 +34,13 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Accessibilities'),];
             'bobot_town',
             'cr',
             'validation:boolean',
-            // 'id_user',
+            // 'user.username',
+            [
+            'label' => 'Username',
+            'attribute'=>'id',
+            'value'=>'user.username',
+            //'contentOptions'=>['style'=>'width: 120px;']
+            ],
             'date:date',
 
             ['class' => 'yii\grid\ActionColumn'],
