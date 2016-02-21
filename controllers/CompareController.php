@@ -796,25 +796,45 @@ public function actionCreateupload()
 // die;
 
                     if($epsg !== null) {
-                        $shp2pgsql      = exec('shp2pgsql -I -s $epsg:4326 -g the_geom '.$file[0].' upload.'.$prefix_dir.' >' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . $_model->shp->baseName.'/.sql',$arr,$jj);
+                        // $shp2pgsql      = exec('shp2pgsql -I -s $epsg:4326 -g the_geom '.$file[0].' upload.'.$prefix_dir.' >' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . $_model->shp->baseName.'/.sql',$arr,$jj);
                         // $shp2sql        =   
-print_r($arr);
-die;
+                        $shp2pgsql      = exec("shp2pgsql -I -s $epsg:4326 -g \"the_geom\" ".$file[0].' upload.'.$prefix_dir.' | psql -U '.$db_user.' -d '.$db_name,$arr,$jj);
+// print_r($arr[7]);
+// die;
 
 
                         if($jj == 0) {
 
                             /* GET bounds */
-                            $sqlGetBound    = "SELECT ST_ASGEOJSON(ST_Envelope(ST_ASTEXT(ST_Extent(ST_Transform(the_geom,4326))))) FROM $prefix_dir";
-                            $dataGetBound   = Yii::$app->db->createCommand($sqlGetBound)->queryOne();
-                            $jadi_bound     = $dataGetBound['st_asgeojson'];
+                            // $sqlGetBound    = "SELECT ST_ASGEOJSON(ST_Envelope(ST_ASTEXT(ST_Extent(ST_Transform(the_geom,4326))))) FROM upload.$prefix_dir";
+                            // $dataGetBound   = Yii::$app->db->createCommand($sqlGetBound)->queryOne();
+                            // $jadi_bound     = $dataGetBound['st_asgeojson'];
 
 
 
-                            /* Check geometry type */
-                            $sqlGetMarker   = "SELECT Geometrytype(the_geom) FROM $prefix_dir limit 1";
-                            $dataGetMarker  = Yii::$app->db->createCommand($sqlGetMarker)->queryOne();
-                            $geom_type      = $dataGetMarker['geometrytype'];
+                            // /* Check geometry type */
+                            // $sqlGetMarker   = "SELECT Geometrytype(the_geom) FROM upload.$prefix_dir limit 1";
+                            // $dataGetMarker  = Yii::$app->db->createCommand($sqlGetMarker)->queryOne();
+                            // $geom_type      = $dataGetMarker['geometrytype'];
+
+                            // geom ftom table
+                            $sqlGetJson   = "SELECT ST_Asgeojson(st_astext((st_dump(the_geom)).geom))  from upload.$prefix_dir limit 1";
+                            $dataGetJson  = Yii::$app->db->createCommand($sqlGetJson)->queryOne();
+                            $geom_Json      = $dataGetJson['st_asgeojson'];
+
+                                $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."'))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."')), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom) = true and kesesuaian.ket_land = 'bukan gambut') as b;";
+                                $value_intersections    = Yii::$app->db->createCommand($get_intersection)->queryAll();      
+
+                                $get_intersection_peat       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."'))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."')), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom) = true and kesesuaian.ket_land = 'gambut') as b;";
+                                $value_intersections_peat    = Yii::$app->db->createCommand($get_intersection_peat)->queryAll();  
+
+
+
+print_r($dataGetJson);
+die;
+
+
+
 
                             /* Get Column Name */
                             $sqlGetColumn   = "select column_name from information_schema.columns where table_name='".$prefix_dir."'";
@@ -835,13 +855,13 @@ die;
                             $model->is_public           = TRUE;
                             $model->id_user_created     = $id_user;
 
-                            if ($model->save()) {
-                                $re_url             =  Url::to(['update','id'=>$model->id]);
-                                echo \yii\helpers\Json::encode(['output'=>$re_url, 'message'=>'']);
-                            } else {
-                                /* if failed to save data */
-                                header("HTTP/1.0 500 Internal Server Error");
-                            }
+                            // if ($model->save()) {
+                            //     $re_url             =  Url::to(['update','id'=>$model->id]);
+                            //     echo \yii\helpers\Json::encode(['output'=>$re_url, 'message'=>'']);
+                            // } else {
+                            //     /* if failed to save data */
+                            //     header("HTTP/1.0 500 Internal Server Error");
+                            // }
                         }
                     }
                 }
