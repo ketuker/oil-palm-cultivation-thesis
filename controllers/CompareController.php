@@ -226,7 +226,7 @@ class CompareController extends Controller
         $datas_json                     = json_decode($model->data, TRUE);
         $datas                          = $datas_json['features'];
         
-        $data_chart                     = '';
+        /*$data_chart                     = '';
         $data_chart                     .= '[';
         for ($i=0; $i < count($datas); $i++) { 
             if ($i === (count($datas) - 1 )) {
@@ -240,11 +240,11 @@ class CompareController extends Controller
             }
         }
 
-        $data_chart                     .= ']';
+        $data_chart                     .= ']';*/
 
         return $this->render('view', [
             'model' => $model,
-            'data_chart' => $data_chart,
+            //'data_chart' => $data_chart,
             'query_geom_to_geojson_value' => $query_geom_to_geojson_value
         ]);
     }
