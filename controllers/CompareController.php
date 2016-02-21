@@ -188,17 +188,6 @@ class CompareController extends Controller
 	    			}
 	    		}
 
-
-
-
-
-
-
-
-
-
-
-
         return $this->render('nodata', [
         	'climag'=> $climag,
         	'landnpag'=> $landnpag,
@@ -302,8 +291,6 @@ class CompareController extends Controller
             				if (isset($factors_ag)){
 
 									for ($i=0; $i < count($value_intersections); $i++) { 
-                                	// print_r($value_intersections[$i]['scoredept']);
-                                	// die;
 									if (isset($value_intersections[$i]['scoredept']))	{									
                                     $kesesuaian_nonpeat         = ($value_intersections[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate)) + ($value_intersections[$i]['score_text'] * ($landnp_ag->bobot_text * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_lrg'] * ($landnp_ag->bobot_slope * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_elev'] * ($landnp_ag->bobot_elev * $factors_ag->bobot_land)) + ($value_intersections[$i]['score_road'] * ($accessibility_ag->bobot_road * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_mill'] * ($accessibility_ag->bobot_mills * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_town'] * ($accessibility_ag->bobot_town * $factors_ag->bobot_accessibility));
                                     $kesesuaian_konstraint		= $kesesuaian_nonpeat * ($value_intersections[$i]['cont_sunga']) * ($value_intersections[$i]['consrtrw']) * ($value_intersections[$i]['const_kwsn']) * ($value_intersections[$i]['const_mukim']) * ($value_intersections[$i]['cons_pipib']) ;
@@ -324,10 +311,9 @@ class CompareController extends Controller
                                     $result_geojson .= $value_intersections[$i]['geom'];
                                     $result_geojson .= "},";
 					            }}
+
                                 for ($i=0; $i < count($value_intersections_peat); $i++) { 
                                 	if (isset($value_intersections[$i]['score_text']))	{	
-                                	// print_r($value_intersections_peat[$i]['scoredept']);
-                                	// die;
                                     $kesesuaian_peat         		= ($value_intersections_peat[$i]['scorech'] * ($climate_ag->bobot_ch * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoresuhu'] * ($climate_ag->boobt_temp * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoredry'] * ($climate_ag->bobot_dm * $factors_ag->bobot_climate)) + ($value_intersections_peat[$i]['scoreripe'] * ($landp_ag->bobot_ripe * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['score_lrg'] * ($landp_ag->bobot_slope * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['scoredept'] * ($landp_ag->bobot_thick * $factors_ag->bobot_land)) + ($value_intersections_peat[$i]['score_road'] * ($accessibility_ag->bobot_road * $factors_ag->bobot_accessibility)) + ($value_intersections_peat[$i]['score_mill'] * ($accessibility_ag->bobot_mills * $factors_ag->bobot_accessibility)) + ($value_intersections[$i]['score_town'] * ($accessibility_ag->bobot_town * $factors_ag->bobot_accessibility));
                                     $kesesuaian_konstraint_peat		= $kesesuaian_peat * ($value_intersections_peat[$i]['cont_sunga']) * ($value_intersections_peat[$i]['consrtrw']) * ($value_intersections_peat[$i]['const_kwsn']) * ($value_intersections_peat[$i]['const_mukim']) * ($value_intersections_peat[$i]['cons_pipib']) ;
                                     $status_suitability             = 'N';
@@ -347,6 +333,7 @@ class CompareController extends Controller
                                     $result_geojson .= $value_intersections_peat[$i]['geom'];
                                     $result_geojson .= "},";
                                 }}
+
 					            $result_geojson         .= ']}';
 					            $result_data            = substr($result_geojson, 0, -3) . ' ]}';
 
@@ -354,10 +341,7 @@ class CompareController extends Controller
 					            $query_geom_from_wkt    = "SELECT ST_GeomFromText('".$_POST['Compare']['geom']."', 4326), (ST_Area(ST_Transform(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),32750))* 0.0001) as st_area";
 					            $result_geom_from_wkt   = Yii::$app->db->createCommand($query_geom_from_wkt)->queryAll();
 
-
-
 					            /* Climate Rainfall */
-
 								$get_rainfall  		    = "SELECT b.scorech as scorech,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.scorech;";
 					            $value_rainfall    		= Yii::$app->db->createCommand($get_rainfall)->queryAll();      
 					            $result_geojson_rain     = '{"type": "FeatureCollection","features": [';
@@ -382,9 +366,7 @@ class CompareController extends Controller
 					            $result_geojson_rain         .= ']}';
 					            $result_data_rain             = substr($result_geojson_rain, 0, -3) . ' ]}';
 
-
 								/* Climate Temperature */
-
 								$get_temperature  		    = "SELECT b.scoresuhu as scoresuhu, ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.scoresuhu;";
 					            $value_temperature    		= Yii::$app->db->createCommand($get_temperature)->queryAll();      
 					            $result_geojson_temp     = '{"type": "FeatureCollection","features": [';
@@ -409,9 +391,7 @@ class CompareController extends Controller
 					            $result_geojson_temp         .= ']}';
 					            $result_data_temp             = substr($result_geojson_temp, 0, -3) . ' ]}';
 
-
 					            /* Climate Dry Month */
-
 								$get_drymonth  		    = "SELECT b.scoredry as scoredry ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.scoredry;";
 					            $value_drymonth    		= Yii::$app->db->createCommand($get_drymonth)->queryAll();      
 					            $result_geojson_dm     = '{"type": "FeatureCollection","features": [';
@@ -437,7 +417,6 @@ class CompareController extends Controller
 					            $result_data_dm             = substr($result_geojson_dm, 0, -3) . ' ]}';
 
 					            /* Land slope */
-
 					            $get_slope            = "SELECT b.score_lrg as score_lrg ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_lrg order by b.score_lrg asc;";
 					            $value_slope          = Yii::$app->db->createCommand($get_slope)->queryAll();      
 					            $result_geojson_slp     = '{"type": "FeatureCollection","features": [';
@@ -463,11 +442,7 @@ class CompareController extends Controller
 					            $result_geojson_slp         .= ']}';
 					            $result_data_slp             = substr($result_geojson_slp, 0, -3) . ' ]}';
 
-
 					            /* Land  Non Peat Texture */
-
-
-
 					            $get_texture           = "SELECT b.score_text as score_text ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_text;";
 					            $value_texture         = Yii::$app->db->createCommand($get_texture)->queryAll();      
 					            $result_geojson_txt     = '{"type": "FeatureCollection","features": [';
@@ -493,7 +468,6 @@ class CompareController extends Controller
 					            $result_data_txt             = substr($result_geojson_txt, 0, -3) . ' ]}';
 
 					            /* Land Non Peat Elevation */
-
 					            $get_elevation           = "SELECT b.score_elev as score_elev ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_elev;";
 					            $value_elevation         = Yii::$app->db->createCommand($get_elevation)->queryAll();      
 					            $result_geojson_elev     = '{"type": "FeatureCollection","features": [';
@@ -516,13 +490,10 @@ class CompareController extends Controller
 					                $result_geojson_elev .= "},";
 					                // print_r($status_elevation);
 					            }
-					            // die;
 					            $result_geojson_elev         .= ']}';
 					            $result_data_elev             = substr($result_geojson_elev, 0, -3) . ' ]}';
 
-
 					            /* Land Peat Thickness */
-
 					            $get_thickness           = "SELECT b.scoredept as scoredept ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.scoredept;";
 					            $value_thickness         = Yii::$app->db->createCommand($get_thickness)->queryAll();      
 					            $result_geojson_thick     = '{"type": "FeatureCollection","features": [';
@@ -549,7 +520,6 @@ class CompareController extends Controller
 
 
 					            /* Land Peat Ripe */
-
 					            $get_ripening           = "SELECT b.scoreripe as scoreripe ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.scoreripe;";
 					            $value_ripening         = Yii::$app->db->createCommand($get_ripening)->queryAll();      
 					            $result_geojson_ripe     = '{"type": "FeatureCollection","features": [';
@@ -575,7 +545,6 @@ class CompareController extends Controller
 					            $result_data_ripe             = substr($result_geojson_ripe, 0, -3) . ' ]}';
 
 					            /* Accessibility Distance From Road */
-
 					            $get_road           = "SELECT b.score_road as score_road ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_road;";
 					            $value_road         = Yii::$app->db->createCommand($get_road)->queryAll();      
 					            $result_geojson_rod     = '{"type": "FeatureCollection","features": [';
@@ -601,7 +570,6 @@ class CompareController extends Controller
 					            $result_data_rod             = substr($result_geojson_rod, 0, -3) . ' ]}';
 
 					            /* Accessibility Distance From Mills */
-
 					            $get_mills           = "SELECT b.score_mill as score_mill ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_mill;";
 					            $value_mills         = Yii::$app->db->createCommand($get_mills)->queryAll();      
 					            $result_geojson_mls     = '{"type": "FeatureCollection","features": [';
@@ -627,7 +595,6 @@ class CompareController extends Controller
 					            $result_data_mls             = substr($result_geojson_mls, 0, -3) . ' ]}';
 
 					            /* Accessibility Distance From town */
-
 					            $get_town           = "SELECT b.score_town as score_town ,ST_AsGeojson(st_union(st_intersection(b.geom,ST_GeomFromText('".$_POST['Compare']['geom']."', 4326))))as geom from (select u.*, st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom)as touch from  kesesuaian as u where st_intersects(ST_GeomFromText('".$_POST['Compare']['geom']."', 4326),u.geom) = true) as b group by b.score_town;";
 					            $value_town         = Yii::$app->db->createCommand($get_town)->queryAll();      
 					            $result_geojson_twn     = '{"type": "FeatureCollection","features": [';
@@ -671,37 +638,28 @@ class CompareController extends Controller
             $data_st_area           = $result_geom_from_wkt[0]['st_area'];
 
             /* Intervensi POST with result */
-            
             $_POST['Compare']['data']       = $result_data;
             $_POST['Compare']['geom']       = $result_geom_from_wkt[0]['st_geomfromtext'];
             $_POST['Compare']['st_area']    = $data_st_area;
             $_POST['Compare']['data_rain']  = $result_data_rain;
             $_POST['Compare']['data_temp']  = $result_data_temp;
-            $_POST['Compare']['data_dm']  = $result_data_dm;
-            $_POST['Compare']['data_slope']  = $result_data_slp;
+            $_POST['Compare']['data_dm']    = $result_data_dm;
+            $_POST['Compare']['data_slope'] = $result_data_slp;
             $_POST['Compare']['data_text']  = $result_data_txt;
             $_POST['Compare']['data_elev']  = $result_data_elev;
-            $_POST['Compare']['data_thick']  = $result_data_thick;
+            $_POST['Compare']['data_thick'] = $result_data_thick;
             $_POST['Compare']['data_ripe']  = $result_data_ripe;
             $_POST['Compare']['data_road']  = $result_data_rod;
-            $_POST['Compare']['data_mills']  = $result_data_mls;
+            $_POST['Compare']['data_mills'] = $result_data_mls;
             $_POST['Compare']['data_town']  = $result_data_twn;
 
             if (!Yii::$app->user->isGuest) {
                 $_POST['Compare']['id_user']    = Yii::$app->user->identity->id;
             }
-            // print_r($result_data);
-            // die;
-
-
 
             if ($model->load($_POST) && $model->save()) {
-                // print_r($model->getErrors());
-                // die;
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
-                // print_r($model->getErrors());
-                // die;
                 echo "error";
             }
             
@@ -733,7 +691,8 @@ class CompareController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-public function actionCreateupload()
+
+    public function actionCreateupload()
     {
         $model = new Compare();
 
@@ -760,27 +719,20 @@ public function actionCreateupload()
 
             $_model->shp       = UploadedFile::getInstance($model, 'shp');
 
-
-
-            if (($_model->shp)) {
+            if ($_model->shp) {
 
                 /* create folder with name = $this->tanggal() */
                 $create_folder      = exec('mkdir ' .$pathData . '/uploads/shp/' . $prefix_dir);
-
-                // print_r($pathData.'/uploads/shp'.$prefix_dir.'/'.$_model->shp->baseName.'.'.$_model->shp->extension);
-                // die;
 
                 /* save .zip to path @app/tms/$this->tanggal()/filename.zip */
                 move_uploaded_file($_model->shp->tempName, $pathData. '/uploads/shp/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension);
 
                 /* ekstrak filename.zip to filename.shp */
-
                 $unzip                  = exec('unzip ' .Yii::getAlias('@webroot'). '/uploads/shp/' . $prefix_dir . '/' . $_model->shp->baseName . '.' . $_model->shp->extension . ' -d ' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . '/');
 
                 /* Get data file shp */
                 $find_file_shp               = exec('find ' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . '/*.shp', $file, $err);
-// print_r($file);
-// die;
+
                 if ($file[0]) {
 
                     $proj4script        = "gdalsrsinfo -o proj4 $file[0]";
@@ -792,76 +744,43 @@ public function actionCreateupload()
                     $getSrid            = Yii::$app->db->createCommand("SELECT srid FROM spatial_ref_sys WHERE proj4text like '%$proj4%'")->queryOne();
 
                     $epsg               = $getSrid['srid'];
-// print_r($getSrid);
-// die;
 
                     if($epsg !== null) {
-                        // $shp2pgsql      = exec('shp2pgsql -I -s $epsg:4326 -g the_geom '.$file[0].' upload.'.$prefix_dir.' >' .Yii::getAlias('@webroot'). '/uploads/extract/' . $prefix_dir . $_model->shp->baseName.'/.sql',$arr,$jj);
-                        // $shp2sql        =   
+                        
                         $shp2pgsql      = exec("shp2pgsql -I -s $epsg:4326 -g \"the_geom\" ".$file[0].' upload.'.$prefix_dir.' | psql -U '.$db_user.' -d '.$db_name,$arr,$jj);
-// print_r($arr[7]);
-// die;
-
 
                         if($jj == 0) {
 
-                            /* GET bounds */
-                            // $sqlGetBound    = "SELECT ST_ASGEOJSON(ST_Envelope(ST_ASTEXT(ST_Extent(ST_Transform(the_geom,4326))))) FROM upload.$prefix_dir";
-                            // $dataGetBound   = Yii::$app->db->createCommand($sqlGetBound)->queryOne();
-                            // $jadi_bound     = $dataGetBound['st_asgeojson'];
+                            /* Check geometry type */
+                            $sqlGetMarker   = "SELECT Geometrytype(the_geom) FROM upload.$prefix_dir limit 1";
+                            $dataGetMarker  = Yii::$app->db->createCommand($sqlGetMarker)->queryOne();
+                            $geom_type      = $dataGetMarker['geometrytype'];
 
+                            if ($geom_type == 'MULTIPOLYGON') {
+                                
+                                /* Convert MULTIPOLYGON to POLYGON */
+                                $sqlGetJson         = "SELECT st_astext((st_dump(the_geom)).geom)  from upload.$prefix_dir limit 1";
+                                $dataGetJson        = Yii::$app->db->createCommand($sqlGetJson)->queryOne();
+                                $geom_Json          = $dataGetJson['st_astext'];
 
-
-                            // /* Check geometry type */
-                            // $sqlGetMarker   = "SELECT Geometrytype(the_geom) FROM upload.$prefix_dir limit 1";
-                            // $dataGetMarker  = Yii::$app->db->createCommand($sqlGetMarker)->queryOne();
-                            // $geom_type      = $dataGetMarker['geometrytype'];
-
-                            // geom ftom table
-                            $sqlGetJson   = "SELECT ST_Asgeojson(st_astext((st_dump(the_geom)).geom))  from upload.$prefix_dir limit 1";
-                            $dataGetJson  = Yii::$app->db->createCommand($sqlGetJson)->queryOne();
-                            $geom_Json      = $dataGetJson['st_asgeojson'];
-
-                                $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."'))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."')), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom) = true and kesesuaian.ket_land = 'bukan gambut') as b;";
+                                /* Intersection Bukan Gambut */
+                                $get_intersection       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$geom_Json."',4326))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromText('".$geom_Json."',4326)), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$geom_Json."',4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$geom_Json."',4326),kesesuaian.geom) = true and kesesuaian.ket_land = 'bukan gambut') as b;";
                                 $value_intersections    = Yii::$app->db->createCommand($get_intersection)->queryAll();      
 
-                                $get_intersection_peat       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."'))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromGeojson('".$geom_Json."')), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromGeojson('".$geom_Json."'),kesesuaian.geom) = true and kesesuaian.ket_land = 'gambut') as b;";
-                                $value_intersections_peat    = Yii::$app->db->createCommand($get_intersection_peat)->queryAll();  
+                                /* Intersection Lahan Gambut */
+                                $get_intersection_peat       = "SELECT b.*, ST_AsGeojson(ST_intersection(b.geom,ST_GeomFromText('".$geom_Json."',4326))) as geom, (ST_Area(ST_Transform(ST_intersection(b.geom,ST_GeomFromText('".$geom_Json."',4326)), 32750)) * 0.0001) as luas from (select kesesuaian.*, st_intersects(ST_GeomFromText('".$geom_Json."',4326),kesesuaian.geom)as touch from kesesuaian where st_intersects(ST_GeomFromText('".$geom_Json."',4326),kesesuaian.geom) = true and kesesuaian.ket_land = 'gambut') as b;";
+                                $value_intersections_peat    = Yii::$app->db->createCommand($get_intersection_peat)->queryAll();
 
+                            }else{
 
+                                \Yii::$app->getSession()->setFlash('error', '<div class="alert alert-danger" role="alert">Your data spatial not valid (Not POLYGON)!</div>');
+                                return $this->render('createupload', [
+                                    'model' => $model,
+                                ]);
+                            }
+                            
+                            die();
 
-print_r($dataGetJson);
-die;
-
-
-
-
-                            /* Get Column Name */
-                            $sqlGetColumn   = "select column_name from information_schema.columns where table_name='".$prefix_dir."'";
-                            $dataGetColumn  = Yii::$app->db->createCommand($sqlGetColumn)->queryColumn();
-                            array_shift($dataGetColumn);
-                            array_pop($dataGetColumn);
-                            $string_column_name     = implode(',', $dataGetColumn);
-
-                            /* Save to model Data */
-                            $model->name                = $data_name;
-                            $model->description         = 'Description data shp ' . $tanggal;
-                            $model->extension           = 'shp';
-                            $model->table_name          = $prefix_dir;
-                            $model->type                = $geom_type;
-                            $model->bounds              = $jadi_bound;
-                            $model->path                = $file[0];
-                            $model->popup               = $string_column_name;
-                            $model->is_public           = TRUE;
-                            $model->id_user_created     = $id_user;
-
-                            // if ($model->save()) {
-                            //     $re_url             =  Url::to(['update','id'=>$model->id]);
-                            //     echo \yii\helpers\Json::encode(['output'=>$re_url, 'message'=>'']);
-                            // } else {
-                            //     /* if failed to save data */
-                            //     header("HTTP/1.0 500 Internal Server Error");
-                            // }
                         }
                     }
                 }
