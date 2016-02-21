@@ -324,13 +324,13 @@ $script .= '
     layercontrol.addOverlay(RendergeojsonDraw, "Area Of Interest");
 
     /** Legenda **/
-    var legend = L.control({position: "bottomright"});
+    var legend = L.control({position: "bottomleft"});
 
     legend.onAdd = function (map) {
         var div = L.DomUtil.create("div", "info legend"),
             grades = [0, 10, 20, 50, 100, 200, 500, 1000],
             labels = [];
-        div.innerHTML = \'<i style="background:#E31A1C"></i>Very Suitable<br><i style="background:#54ff00"></i>Suitable<br><i style="background:#fffc00"></i>Mostly Suitable<br><i style="background:#ff7a00"></i>Not Suitable<br>\';
+        div.innerHTML = \'<i style="background:#E31A1C">Very Suitable</i></br><i style="background:#54ff00">Suitable</i></br><i style="background:#fffc00">Mostly Suitable</i></br><i style="background:#ff7a00">Not Suitablez</i></br>\';
         return div;
     };
 
