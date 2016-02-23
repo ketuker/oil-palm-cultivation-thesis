@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     .legend {
         text-align: left;
-        line-height: 18px;
+        line-height: 20px;
         color: #555;
     }
     .legend i {
@@ -330,7 +330,7 @@ $script .= '
         var div = L.DomUtil.create("div", "info legend"),
             grades = [0, 10, 20, 50, 100, 200, 500, 1000],
             labels = [];
-        div.innerHTML = \'<i style="background:#E31A1C">Very Suitable</i></br><i style="background:#54ff00">Suitable</i></br><i style="background:#fffc00">Mostly Suitable</i></br><i style="background:#ff7a00">Not Suitablez</i></br>\';
+        div.innerHTML = \'<span><i style="background:#54ff00"> </i>  Very Suitable </span></br><span><i style="background:#fffc00"></i>Suitable </span> </br> <span> <i style="background:#ff7a00"></i> Mostly Suitable <span> </br> <span> <i style="background:#ff0000"></i> Not Suitable <span> </br>\';
         return div;
     };
 

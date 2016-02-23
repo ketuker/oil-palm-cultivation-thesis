@@ -17,6 +17,8 @@ use yii\widgets\ActiveForm;
 </style>
 <div class="compare-form">
 
+    <?= Yii::$app->session->getFlash('error'); ?>
+
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
