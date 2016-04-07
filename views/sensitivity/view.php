@@ -12,6 +12,33 @@ $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Area of Interest'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<style>
+    .info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .info h4 {
+        margin: 0 0 5px;
+        color: #777;
+    }
+
+    .legend {
+        text-align: left;
+        line-height: 20px;
+        color: #555;
+    }
+    .legend i {
+        width: 18px;
+        height: 18px;
+        float: left;
+        margin-right: 8px;
+        opacity: 0.7;
+    }
+</style>
 <div class="sensitivity-view">
 
     <div class="list-group-item"><h4 class="list-group-item-heading"><b><center><?= $model->title;?></center></b></h4></div>
@@ -54,16 +81,16 @@ $script .= '
     
     function getColor(d) {
         return d > 4  ? "#E31A1C" :
-               d > 3  ? "#FC4E2A" :
-               d > 2   ? "#FD8D3C" :
-               d > 1   ? "#FEB24C" :
-               d > 0   ? "#FED976" :
-                          "#FFEDA0";
+               d > 3  ? "#54ff00" :
+               d > 2   ? "#fffc00" :
+               d > 1   ? "#ff7a00" :
+               d > 0   ? "#ff0000" :
+                          "#ff0000";
     }
 
     function style(feature) {
         return {
-            fillColor: getColor(feature.properties.status_climate),
+            fillColor: getColor(feature.properties.kesesuaian),
             weight: 2,
             opacity: 1,
             color: "white",
@@ -83,7 +110,7 @@ $script .= '
 
     function style0(feature) {
         return {
-            fillColor: getColor0(feature.properties.status_climate),
+            fillColor: getColor0(feature.properties.status_suitability),
             weight: 2,
             opacity: 1,
             color: "white",
@@ -95,7 +122,34 @@ $script .= '
     function onEachFeature(feature, layer) {
         // does this feature have a property named popupContent?
         if (feature.properties) {
-            layer.bindPopup("Status : "+feature.properties.status_climate);
+            layer.bindPopup(
+                "<b>Suitability : </b>"+feature.properties.status_suitability
+                                        +"</br>"+"<b>Climate</b>"
+                                            +"</br>"+"Rainfall :"+feature.properties.ket_ch
+                                            +"</br>"+"Temperature :"+feature.properties.ket_suhu
+                                            +"</br>"+"Dry Month :"+feature.properties.ket_dm 
+                                        +"</br>"+"<b>Land</b>"
+                                            +"</br>"+"Slope :"+feature.properties.ket_lrg
+                                            +"</br>"+"Texture :"+feature.properties.ket_text
+                                            +"</br>"+"Elevation :"+feature.properties.ket_elev 
+                                            +"</br>"+"Ripening :"+feature.properties.ket_peat_ripe                                            
+                                            +"</br>"+"Thickness :"+feature.properties.ket_thick
+                                        +"</br>"+"<b>Accessibility</b>"
+                                            +"</br>"+"Road :"+feature.properties.distance_r
+                                            +"</br>"+"Mills :"+feature.properties.distance_m
+                                            +"</br>"+"Town :"+feature.properties.distance_k  
+                                        +"</br>"+"<b>Constraint</b>"
+                                            +"</br>"+"Forest Region :"+feature.properties.ket_kwsn
+                                            +"</br>"+"Spatial Map :"+feature.properties.ket_rtrw
+                                            +"</br>"+"River Banks :"+feature.properties.ket_cons_sung
+                                            +"</br>"+"Settlement :"+feature.properties.ket_mukim
+                                            +"</br>"+"PIPIB :"+feature.properties.ket_pipib       
+             
+                                        +"</br>"+"<b>Area : </b>"+feature.properties.luas
+
+
+            );
+
         }
     }
     function onEachFeatureRain(feature, layer) {
@@ -251,8 +305,6 @@ $script .= '
         style: style,
     }).addTo(map);
 
-
-
     map.fitBounds(RendergeojsonDraw.getBounds());
 
     layercontrol.addOverlay(RendergeojsonFeature, "Hasil");
@@ -269,6 +321,20 @@ $script .= '
     layercontrol.addOverlay(RendergeojsonFeatureTown, "Distance From Town");
 
     layercontrol.addOverlay(RendergeojsonDraw, "Area Of Interest");
+
+    /** Legenda **/
+    var legend = L.control({position: "bottomleft"});
+
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create("div", "info legend"),
+            grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+            labels = [];
+        div.innerHTML = \'<span><i style="background:#54ff00"> </i>  Very Suitable </span></br><span><i style="background:#fffc00"></i>Suitable </span> </br> <span> <i style="background:#ff7a00"></i> Mostly Suitable <span> </br> <span> <i style="background:#ff0000"></i> Not Suitable <span> </br>\';
+        return div;
+    };
+
+    legend.addTo(map);
+
 ';
 
 $this->registerJs($script, \yii\web\View::POS_END); ?>
