@@ -28,10 +28,11 @@ $this->title = 'My Yii Application';
         </div>
 
         <div class="col-md-5">
-        <h3>Kutai Kertanegara Regency</h3> </br>
-Kutai Kartanegara Regency is a regency in East Kalimantan Province, Indonesia. Regency has an area of 27,263.10 km² and the area waters approximately 4,097 km² which is divided in 18 districts and 225 villages, with a population reaching 540,994 people (2007) with population growth of 2.73%. Regency is geographically located between 1°18′40″S and 116°31′36″E.
+        <h3><?= Yii::t('app','Kutai Kertanegara Regency');?></h3> </br>
+<?= Yii::t('app','Kutai Kartanegara Regency is a regency in East Kalimantan Province, Indonesia. Regency has an area of 27,263.10 km² and the area waters approximately 4,097 km² which is divided in 18 districts and 225 villages, with a population reaching 540,994 people (2007) with population growth of 2.73%. Regency is geographically located between 1°18′40″S and 116°31′36″E. ');?>
 </br></br></br></br>
-For more details please read the
+<?= Yii::t('app','For more details please read the');?>
+
 <?=
 Html::a(Yii::t('app','documentation'), ["/../web/documentation"]);
 

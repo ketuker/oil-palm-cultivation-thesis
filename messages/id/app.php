@@ -216,6 +216,20 @@ return [
     'Factors Consistency Ratio' => 'Kosistensi Rasio Faktor',
 
     'Username' => 'Pengguna',
+    'Welcome to Web GIS Application' => 'Selamat Datang di Web GIS Aplikasi',
+    'for Selecting Oil Palm Plantation Site' => 'Pemilihan Lokasi Perkebunan Kelapa Sawit',
+    'Kutai Kertanegara Regency' => 'Kabupaten Kutai Kertanegara',
+    'Kutai Kartanegara Regency is a regency in East Kalimantan Province, Indonesia. Regency has an area of 27,263.10 km² and the area waters approximately 4,097 km² which is divided in 18 districts and 225 villages, with a population reaching 540,994 people (2007) with population growth of 2.73%. Regency is geographically located between 1°18′40″S and 116°31′36″E. '=> 'Kabupaten Kutai Kartanegara adalah kabupaten di Provinsi Kalimantan Timur, Indonesia. Kabupaten ini memiliki luas wilayah 27,263.10 km² dan wilayah perairan sekitar 4.097 km² yang terbagi di 18 kabupaten dan 225 desa, dengan jumlah penduduk mencapai 540.994 orang (2007) dengan pertumbuhan penduduk dari 2,73%. Kabupaten secara geografis terletak antara 1°18′40″LS dan 116°31′36″BT.',
+    'For more details please read the' =>'Untuk lebih lengkapnya silahkan baca',
+    'documentation' => 'dokumentasi',
+    'About the Application'=> 'Tentang Aplikasi',
+    'Background'=>'Latar Belakang',
+    'Objective'=> 'Tujuan',
+    'Scope'=> 'Batasan',
+    'Mostly of oil palm plantation already uses the land suitability analysis, but for the creation of suitability still manually process, not using various variables and the applicable regulation. Lack of information becomes one of the problems in determining the allocation of land in oil palm plantations. To minimize and solve this problem, an application that can identify the location suitable for oil palm plantations is needed. This application not only detects a suitable location but also accessible to the public by using Web GIS.'=>'Sebagian besar perkebunan kelapa sawit yang sudah menggunakan analisis kesesuaian lahan, tapi untuk menghasilkan kesesuaian masih dibuat secara manual, tidak menggunakan berbagai variabel dan peraturan yang berlaku. Kurangnya informasi menjadi salah satu masalah dalam menentukan alokasi lahan di perkebunan kelapa sawit. Untuk meminimalkan dan mengatasi masalah ini, sebuah aplikasi yang dapat mengidentifikasi lokasi yang cocok untuk perkebunan kelapa sawit diperlukan. Aplikasi ini tidak hanya mendeteksi lokasi yang cocok, tetapi juga dapat diakses oleh publik dengan menggunakan Web GIS.',
+    'The Web GIS application objective is guide stakeholders to determine the suitability of oil palm and can be used as a decision support in selecting potential oil palm plantations.'=> 'Tujuan aplikasi Web GIS adalah panduan untuk stakeholder dalam menentukan kesesuaian kelapa sawit dan dapat digunakan sebagai pendukung keputusan dalam memilih perkebunan kelapa sawit yang potensial.',
+    'The Web GIS application for land allocation suitability of oil palm has limitation. 1. First the study area just Kutai Kertanegara regency. 2. Factors that will be used to build the application are climate, land, accessibility, and use regulation as a constraint. 3. Suitability maps will be created using GIS MCE and weight will be calculated using the pairwise comparison method.' => 'Aplikasi Web GIS untuk kesesuaian alokasi lahan kelapa sawit memiliki keterbatasan. 1. Pertama daerah penelitian hanya Kabupaten Kutai Kartanegara. 2. Faktor-faktor yang akan digunakan untuk membangun aplikasi yang iklim, tanah, aksesibilitas, dan regulasi digunakan sebagai faktor pembatas. 3. peta Kesesuaian akan dibuat menggunakan MCE GIS dan bobot akan dihitung dengan menggunakan metode perbandingan berpasangan.',
+
 
 ];
 ?>

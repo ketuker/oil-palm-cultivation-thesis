@@ -104,7 +104,7 @@ use kartik\slider\Slider;
         <!-- Label Elevation -->
     <div class="col-md-2">
     <button type="button" class="btn btn-danger" >
-    <span ></span> Elevation 
+    <span ></span> <?= Yii::t('app','Elevation') ?>
     <span id="elev2" class="badge">1</span></button></div>
 
     <?= '<div class="col-md-7">'.Slider::widget([
